@@ -30,6 +30,8 @@ interface Register  {
 }
 
 function fromRegisterValue(register: Register, value: number) {
+    if (value >= 32768)
+        value -= 65536;
     if (register.scale)
         return value / register.scale;
     if (register.enum)
@@ -40,6 +42,8 @@ function fromRegisterValue(register: Register, value: number) {
 }
 
 function toRegisterValue(register: Register, value: any) {
+    if (value < 0)
+        value += 65536;
     if (register.scale)
         return Math.round(value * register.scale);
     if (register.enum)
