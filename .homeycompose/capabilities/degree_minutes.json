@@ -1,0 +1,16 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Degree minutes",
+    "sv": "Gradminuter"
+  },
+  "uiComponent": "sensor",
+  "chartType": "spline",
+  "getable": true,
+  "setable": false,
+  "units": {
+    "en": "°Cmin"
+  },
+  "icon": "/assets/images/degree_minutes.svg",
+  "insights": true
+}

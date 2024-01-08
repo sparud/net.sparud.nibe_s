@@ -1,0 +1,265 @@
+{
+  "id": "net.sparud.nibe_s",
+  "version": "1.0.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Nibe S-series"
+  },
+  "description": {
+    "en": "Measure and control Nibe S-series heaters "
+  },
+  "category": [
+    "climate"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Jan Sparud",
+    "email": "jan@sparud.net"
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "Nibe S-series"
+      },
+      "class": "other",
+      "capabilities": [
+        "measure_temperature.outside",
+        "measure_temperature.outside_avg",
+        "measure_string.priority",
+        "measure_temperature.hot_water",
+        "measure_temperature.heating_supply",
+        "measure_temperature.heating_return",
+        "measure_temperature.source_in",
+        "measure_temperature.source_out",
+        "measure_percentage.heating_pump",
+        "measure_percentage.source_pump",
+        "measure_temperature.degree_minutes",
+        "measure_temperature.calculated_supply",
+        "measure_power",
+        "meter_power_kwh.prod_heat_current_hour",
+        "meter_power_kwh.prod_water_current_hour",
+        "meter_power_kwh.prod_pool_current_hour",
+        "meter_power_kwh.prod_cool_current_hour",
+        "meter_power_kwh.used_heat_current_hour",
+        "meter_power_kwh.used_water_current_hour",
+        "meter_power_kwh.used_pool_current_hour",
+        "meter_power_kwh.used_cool_current_hour",
+        "meter_power_kwh.extra_heat_current_hour",
+        "meter_power_kwh.extra_water_current_hour",
+        "meter_power_kwh.extra_pool_current_hour",
+        "measure_power.current",
+        "measure_power.current_components"
+      ],
+      "capabilitiesOptions": {
+        "measure_temperature.outside": {
+          "title": {
+            "en": "Outside temperature",
+            "sv": "Utomhustemperatur",
+            "nl": "Buitentemperatuur"
+          }
+        },
+        "measure_temperature.outside_avg": {
+          "title": {
+            "en": "Average outside temperature",
+            "nl": "Gemiddelde buitentemperatuur"
+          }
+        },
+        "measure_temperature.source_in": {
+          "title": {
+            "en": "Groundsource medium - in",
+            "nl": "Bron in"
+          }
+        },
+        "measure_temperature.source_out": {
+          "title": {
+            "en": "Groundsource medium - out",
+            "nl": "Bron uit"
+          }
+        },
+        "measure_temperature.heating_supply": {
+          "title": {
+            "en": "Heating supply",
+            "nl": "CV aanvoer"
+          }
+        },
+        "measure_temperature.heating_return": {
+          "title": {
+            "en": "Heating return",
+            "nl": "CV retour"
+          }
+        },
+        "measure_temperature.degree_minutes": {
+          "title": {
+            "en": "Degree minutes",
+            "nl": "Graadminuten"
+          }
+        },
+        "measure_temperature.hot_water": {
+          "title": {
+            "en": "Hot water",
+            "nl": "Heet water"
+          }
+        },
+        "measure_temperature.calculated_supply": {
+          "title": {
+            "en": "Calculated supply",
+            "nl": "Berekende aanvoer"
+          }
+        },
+        "measure_percentage.heating_pump": {
+          "title": {
+            "en": "Heating pump",
+            "nl": "CV Pomp"
+          }
+        },
+        "measure_percentage.source_pump": {
+          "title": {
+            "en": "Source pump",
+            "nl": "Bron pomp"
+          }
+        },
+        "measure_string.priority": {
+          "title": {
+            "en": "Priority",
+            "nl": "Prioriteit"
+          }
+        },
+        "meter_power_kwh.prod_heat_current_hour": {
+          "title": {
+            "en": "Energy produced for heat during current hour"
+          }
+        },
+        "meter_power_kwh.prod_water_current_hour": {
+          "title": {
+            "en": "Energy produced for hot water during current hour"
+          }
+        },
+        "meter_power_kwh.prod_pool_current_hour": {
+          "title": {
+            "en": "Energy produced for pool during current hour"
+          }
+        },
+        "meter_power_kwh.prod_cool_current_hour": {
+          "title": {
+            "en": "Energy produced for cooling during current hour"
+          }
+        },
+        "meter_power_kwh.used_heat_current_hour": {
+          "title": {
+            "en": "Energy used for heat during current hour"
+          }
+        },
+        "meter_power_kwh.used_water_current_hour": {
+          "title": {
+            "en": "Energy used for hot water during current hour"
+          }
+        },
+        "meter_power_kwh.used_pool_current_hour": {
+          "title": {
+            "en": "Energy used for pool during current hour"
+          }
+        },
+        "meter_power_kwh.used_cool_current_hour": {
+          "title": {
+            "en": "Energy used for coolin during current hour"
+          }
+        },
+        "meter_power_kwh.extra_heat_current_hour": {
+          "title": {
+            "en": "Energy used by additional heater for heat during current hour"
+          }
+        },
+        "meter_power_kwh.extra_water_current_hour": {
+          "title": {
+            "en": "Energy used by additional heater for hot water during current hour"
+          }
+        },
+        "meter_power_kwh.extra_pool_current_hour": {
+          "title": {
+            "en": "Energy used by additional heater for pool during current hour"
+          }
+        },
+        "measure_power.current": {
+          "title": {
+            "en": "Current power consumption"
+          }
+        },
+        "measure_power.current_components": {
+          "title": {
+            "en": "Current power consumption, components"
+          }
+        }
+      },
+      "images": {
+        "small": "/drivers/s-series/assets/images/small.png",
+        "large": "/drivers/s-series/assets/images/large.png",
+        "xlarge": "/drivers/s-series/assets/images/xlarge.png"
+      },
+      "discovery": "nibe-mdns",
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "nibe_s"
+    }
+  ],
+  "capabilities": {
+    "measure_percentage": {
+      "type": "number",
+      "title": {
+        "en": "Measure Percentage"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "%"
+      },
+      "insights": true,
+      "chartType": "spline",
+      "icon": "/assets/images/pump.svg"
+    },
+    "measure_string": {
+      "type": "string",
+      "title": {
+        "en": "Measure String"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": ""
+      },
+      "insights": true,
+      "chartType": "spline"
+    }
+  },
+  "discovery": {
+    "nibe-mdns": {
+      "type": "mdns-sd",
+      "mdns-sd": {
+        "name": "nibejpi-restapi",
+        "protocol": "tcp"
+      },
+      "id": "{{txt.serialnumber}}"
+    }
+  }
+}

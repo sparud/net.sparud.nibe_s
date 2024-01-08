@@ -104,7 +104,6 @@ class NibeSDevice extends Device {
             this.readRegister(register).then((resp: any) => {
                 return fromRegisterValue(register, resp.response.body.values[0])}
             ).catch((reason: any) => {
-                //console.log("Fel", register, reason)
                 return undefined;
             })));
     }
@@ -119,15 +118,12 @@ class NibeSDevice extends Device {
     }
 
     onDiscoveryResult(discoveryResult: DiscoveryResult) {
-    // Return a truthy value here if the discovery result matches your device.
+        // Return a truthy value here if the discovery result matches your device.
         return discoveryResult.id === this.getData().id;
     }
     async onDiscoveryAvailable(discoveryResult: DiscoveryResult) {
         // This method will be executed once when the device has been found (onDiscoveryResult returned true)
         this.setAvailable();
-        this.log('in onDiscoAvailable, IP =', this.getSettings().address);
-        //this.log('host =', this.host);
-        //this.log('discoveryResult = ', discoveryResult.address);
         this.log(discoveryResult);
         this.setSettings({
           //address: discoveryResult.address,
@@ -137,7 +133,6 @@ class NibeSDevice extends Device {
     onDiscoveryAddressChanged(discoveryResult: DiscoveryResult) {
         // Update your connection details here, reconnect when the device is offline
         this.log('in onDiscoAddrChange, IP =', this.getSettings().address);
-        //this.log('discoveryResult = ', discoveryResult.address);
         this.log(discoveryResult);
         this.setSettings({
           //address: discoveryResult.address,
@@ -146,8 +141,6 @@ class NibeSDevice extends Device {
 
     onDiscoveryLastSeenChanged(discoveryResult: DiscoveryResult) {
         // When the device is offline, try to reconnect here
-        this.log('in onDiscoLastSeenChanged, IP =', this.getSettings().address)
-        //this.log('discoveryResult = ', discoveryResult.address);
         this.log(discoveryResult);
         this.setSettings({
           //address: discoveryResult.address,
@@ -185,21 +178,18 @@ class NibeSDevice extends Device {
         this.client = new ModbusTCPClient(socket, 1, 5000);
         socket.connect({port: 502, host: this.getSettings().address});
         socket.on('connect', () => {
-            this.log('Connected ...');
             if (!this.getAvailable()) {
                 this.setAvailable();
             }
 
             // Start the polling interval
             this.pollInterval = setInterval(() => {
-                this.log("Polling");
                 this.readRegisters().then((results: any) => {
                     this.log("Got results");
                     for (let i = 0; i < registers.length; ++i)
                         if (results[i] !== undefined)
                             this.setCapabilityValue(registers[i].name, results[i]);
                 }).catch((error) => {
-                    this.log("Bad");
                     this.log(error);
                     socket.end();
                     this.setUnavailable();
@@ -210,7 +200,6 @@ class NibeSDevice extends Device {
 
         // Failure handling
         socket.on('error', (error) => {
-            this.log("Bad 2");
             this.log(error);
             if (!socket.closed)
                 socket.end();
@@ -241,7 +230,7 @@ class NibeSDevice extends Device {
         newSettings: { [key: string]: boolean | string | number | undefined | null };
         changedKeys: string[];
     }): Promise<string | void> {
-        this.log('Nibe S-series settings where changed');
+        this.log('Nibe S-series settings were changed');
     }
 
     async onDeleted() {
