@@ -2,6 +2,7 @@ import {Device, DiscoveryResult} from 'homey';
 import net, {SocketConnectOpts, TcpSocketConnectOpts} from 'net';
 import modbus, {ModbusTCPClient} from 'jsmodbus';
 
+
 const socket = new net.Socket();
 
 const Input = "input";
