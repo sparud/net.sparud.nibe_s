@@ -18,6 +18,20 @@
     "degree_minutes",
     "measure_temperature.calculated_supply",
     "measure_power",
+    "meter_count.compressor_starts",
+    "meter_power.used_compressor",
+    "measure_temperature.inverter",
+    "measure_water.flow_bf1",
+    "speaker_duration.compressor_total",
+    "speaker_duration.compressor_total_hotwater",
+    "speaker_duration.additive",
+    "meter_power.internal_additive",
+    "speaker_duration.aditive_hotwater",
+    "meter_count.additive_heat_steps",
+    "measure_frequency.compressor",
+    "measure_temperature.warmwater_top_bt7",
+    "measure_temperature.return_air_az10_bt20",
+    "measure_temperature.supply_air_az10_bt21",
     "meter_power.prod_heat_current_hour",
     "meter_power.prod_water_current_hour",
     "meter_power.prod_pool_current_hour",
@@ -207,6 +221,90 @@
       "title": {
         "en": "Pool heating activated",
         "sv": "Poolvärme på"
+      }
+    },
+    "measure_temperature.inverter": {
+      "title": {
+        "en": "Inverter temperature",
+        "sv": "Invertertemperatur"
+      }
+    },
+    "measure_temperature.room_1": {
+      "title": {
+        "en": "Room sensor 1-1",
+        "sv": "Rum 1-1"
+      }
+    },
+    "meter_count.compressor_starts": {
+      "title": {
+        "en": "Compressor starts",
+        "sv": "Kompressorstarter"
+      }
+    },
+    "meter_power.used_compressor": {
+      "title": {
+        "en": "Compressor supplied power",
+        "sv": "Kompressor tillförd effekt"
+      }
+    },
+    "measure_water.flow_bf1": {
+      "title": {
+        "en": "Flow sensor BF1",
+        "sv": "Flödesgivare BF1"
+      }
+    },
+    "speaker_duration.compressor_total": {
+      "title": {
+        "en": "Total compressor duration",
+        "sv": "Total drifttid kompressor"
+      }
+    },
+    "speaker_duration.compressor_total_hotwater": {
+      "title": {
+        "en": "Total compressor duration hotwater",
+        "sv": "Total drifttid kompressor varmvatten"
+      }
+    },
+    "speaker_duration.additive": {
+      "title": {
+        "en": "Total additive duration",
+        "sv": "Total drifttid tillsats"
+      }
+    },
+    "speaker_duration.compressor_total_hotwater": {
+      "title": {
+        "en": "Total compressor duration hotwater",
+        "sv": "Total drifttid kompressor varmvatten"
+      }
+    },
+    "meter_count.additive_heat_steps": {
+      "title": {
+        "en": "Mode internal additive",
+        "sv": "Driftläge intern tillsats"
+      }
+    },
+    "measure_frequency.compressor": {
+      "title": {
+        "en": "Compressor frequency",
+        "sv": "Kompressorfrekvens"
+      }
+    },
+    "measure_temperature.warmwater_top_bt7": {
+      "title": {
+        "en": "Hotwater top BT7",
+        "sv": "Varmvatten topp BT7"
+      }
+    },
+    "measure_temperature.return_air_az10_bt20": {
+      "title": {
+        "en": "Return air AZ10-BT20",
+        "sv": "Frånluft AZ10-BT20"
+      }
+    },
+    "measure_temperature.supply_air_az10_bt21": {
+      "title": {
+        "en": "Supply air AZ10-BT21",
+        "sv": "Tilluft AZ10-BT21"
       }
     }
   },

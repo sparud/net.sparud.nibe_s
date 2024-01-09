@@ -7,7 +7,7 @@
     "local"
   ],
   "name": {
-    "en": "Nibe S-series"
+    "en": "Nibe S-series xxx"
   },
   "description": {
     "en": "Measure and control Nibe S-series heaters "
@@ -28,7 +28,7 @@
   "drivers": [
     {
       "name": {
-        "en": "Nibe S-series"
+        "en": "Nibe S-series xxx"
       },
       "class": "other",
       "capabilities": [
@@ -45,17 +45,30 @@
         "measure_temperature.degree_minutes",
         "measure_temperature.calculated_supply",
         "measure_power",
-        "meter_power_kwh.prod_heat_current_hour",
-        "meter_power_kwh.prod_water_current_hour",
-        "meter_power_kwh.prod_pool_current_hour",
-        "meter_power_kwh.prod_cool_current_hour",
-        "meter_power_kwh.used_heat_current_hour",
-        "meter_power_kwh.used_water_current_hour",
-        "meter_power_kwh.used_pool_current_hour",
-        "meter_power_kwh.used_cool_current_hour",
-        "meter_power_kwh.extra_heat_current_hour",
-        "meter_power_kwh.extra_water_current_hour",
-        "meter_power_kwh.extra_pool_current_hour",
+        "meter_power.used_compressor",
+        "measure_temperature.inverter",
+        "measure_water.flow_bf1",
+        "speaker_duration.compressor_total",
+        "speaker_duration.compressor_total_hotwater",
+        "speaker_duration.additive",
+        "meter_power.internal_additive",
+        "speaker_duration.aditive_hotwater",
+        "meter_count.additive_heat_steps",
+        "measure_frequency.compressor",
+        "measure_temperature.warmwater_top_bt7",
+        "measure_temperature.exhaust_air_az10_bt20",
+        "measure_temperature.supply_air_az10_bt21",
+        "meter_power.prod_heat_current_hour",
+        "meter_power.prod_water_current_hour",
+        "meter_power.prod_pool_current_hour",
+        "meter_power.prod_cool_current_hour",
+        "meter_power.used_heat_current_hour",
+        "meter_power.used_water_current_hour",
+        "meter_power.used_pool_current_hour",
+        "meter_power.used_cool_current_hour",
+        "meter_power.extra_heat_current_hour",
+        "meter_power.extra_water_current_hour",
+        "meter_power.extra_pool_current_hour",
         "measure_power.current",
         "measure_power.current_components"
       ],
@@ -133,57 +146,141 @@
             "nl": "Prioriteit"
           }
         },
-        "meter_power_kwh.prod_heat_current_hour": {
+        "measure_temperature.inverter": {
+          "title": {
+            "en": "Inverter temperature",
+            "sv": "Invertertemperatur"
+          }
+        },
+        "measure_temperature.room_1": {
+          "title": {
+            "en": "Room sensor 1-1",
+            "sv": "Rum 1-1"
+          }
+        },
+        "meter_count.compressor_starts": {
+          "title": {
+            "en": "Compressor starts",
+            "sv": "Kompressorstarter"
+          }
+        },
+        "meter_power.used_compressor": {
+          "title": {
+            "en": "Compressor supplied power",
+            "sv": "Kompressor tillförd effekt"
+          }
+        },
+        "measure_water.flow_bf1": {
+          "title": {
+            "en": "Flow sensor BF1",
+            "sv": "Flödesgivare BF1"
+          }
+        },
+        "speaker_duration.compressor_total": {
+          "title": {
+            "en": "Total compressor duration",
+            "sv": "Total drifttid kompressor"
+          }
+        },
+        "speaker_duration.compressor_total_hotwater": {
+          "title": {
+            "en": "Total compressor duration hotwater",
+            "sv": "Total drifttid kompressor varmvatten"
+          }
+        },
+        "speaker_duration.additive": {
+          "title": {
+            "en": "Total additive duration",
+            "sv": "Total drifttid tillsats"
+          }
+        },
+        "speaker_duration.compressor_total_hotwater": {
+          "title": {
+            "en": "Total compressor duration hotwater",
+            "sv": "Total drifttid kompressor varmvatten"
+          }
+        },
+        "meter_count.additive_heat_steps": {
+          "title": {
+            "en": "Mode internal additive",
+            "sv": "Driftläge intern tillsats"
+          }
+        },
+        "measure_frequency.compressor": {
+          "title": {
+            "en": "Compressor frequency",
+            "sv": "Kompressorfrekvens"
+          }
+        },
+        "measure_temperature.warmwater_top_bt7": {
+          "title": {
+            "en": "Hotwater top BT7",
+            "sv": "Varmvatten topp BT7"
+          }
+        },
+        "measure_temperature.exhaust_air_az10_bt20": {
+          "title": {
+            "en": "Exhaust air AZ10-BT20",
+            "sv": "Frånluft AZ10-BT20"
+          }
+        },
+        "measure_temperature.supply_air_az10_bt21": {
+          "title": {
+            "en": "Supply air AZ10-BT21",
+            "sv": "Tilluft AZ10-BT21"
+          }
+        },
+        "meter_power.prod_heat_current_hour": {
           "title": {
             "en": "Energy produced for heat during current hour"
           }
         },
-        "meter_power_kwh.prod_water_current_hour": {
+        "meter_power.prod_water_current_hour": {
           "title": {
             "en": "Energy produced for hot water during current hour"
           }
         },
-        "meter_power_kwh.prod_pool_current_hour": {
+        "meter_power.prod_pool_current_hour": {
           "title": {
             "en": "Energy produced for pool during current hour"
           }
         },
-        "meter_power_kwh.prod_cool_current_hour": {
+        "meter_power.prod_cool_current_hour": {
           "title": {
             "en": "Energy produced for cooling during current hour"
           }
         },
-        "meter_power_kwh.used_heat_current_hour": {
+        "meter_power.used_heat_current_hour": {
           "title": {
             "en": "Energy used for heat during current hour"
           }
         },
-        "meter_power_kwh.used_water_current_hour": {
+        "meter_power.used_water_current_hour": {
           "title": {
             "en": "Energy used for hot water during current hour"
           }
         },
-        "meter_power_kwh.used_pool_current_hour": {
+        "meter_power.used_pool_current_hour": {
           "title": {
             "en": "Energy used for pool during current hour"
           }
         },
-        "meter_power_kwh.used_cool_current_hour": {
+        "meter_power.used_cool_current_hour": {
           "title": {
-            "en": "Energy used for coolin during current hour"
+            "en": "Energy used for cooling during current hour"
           }
         },
-        "meter_power_kwh.extra_heat_current_hour": {
+        "meter_power.extra_heat_current_hour": {
           "title": {
             "en": "Energy used by additional heater for heat during current hour"
           }
         },
-        "meter_power_kwh.extra_water_current_hour": {
+        "meter_power.extra_water_current_hour": {
           "title": {
             "en": "Energy used by additional heater for hot water during current hour"
           }
         },
-        "meter_power_kwh.extra_pool_current_hour": {
+        "meter_power.extra_pool_current_hour": {
           "title": {
             "en": "Energy used by additional heater for pool during current hour"
           }
@@ -248,6 +345,26 @@
       "units": {
         "en": ""
       },
+      "insights": true,
+      "chartType": "spline"
+    },
+    "meter_count": {
+      "type": "number",
+      "title": { "en": "Meter Count" },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": { "en": ""},
+      "insights": true,
+      "chartType": "spline"
+    },
+    "measure_frequency": {
+      "type": "number",
+      "title": { "en": "Measure Frequency" },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": { "en": "Hz"},
       "insights": true,
       "chartType": "spline"
     }

@@ -73,7 +73,22 @@ const registers: Register[] = [
     {address: 1102, name: "measure_percentage.heating_pump",       direction: Dir.In},
     {address: 1104, name: "measure_percentage.source_pump",        direction: Dir.In},
     {address: 1028, name: "measure_string.priority",               direction: Dir.In,  enum: priorityMap },
+    {address: 1047, name: "measure_temperature.inverter",          direction: Dir.In,  scale: 10}, //
     {address: 2166, name: "measure_power",                         direction: Dir.In},
+    {address:   26, name: "measure_temperature.room_1",            direction: Dir.In, scale: 10}, //
+    {address: 1083, name: "meter_count.compressor_starts",         direction: Dir.In,  scale: 1}, //
+    {address: 1048, name: "meter_power.used_compressor",           direction: Dir.In,  scale: 1}, //
+    {address:   40, name: "measure_water.flow_bf1",                direction: Dir.In,  scale: 10}, //
+    {address: 1087, name: "speaker_duration.compressor_total",     direction: Dir.In,  scale: 1}, //
+    {address: 1091, name: "speaker_duration.compressor_total_hotwater", direction: Dir.In,  scale: 1}, //
+    {address: 1025, name: "speaker_duration.additive",             direction: Dir.In,  scale: 10}, //
+    {address: 1027, name: "meter_power.internal_additive",         direction: Dir.In,  scale: 100}, //
+    {address: 1069, name: "speaker_duration.aditive_hotwater",     direction: Dir.In,  scale: 10}, //
+    {address: 1029, name: "meter_count.additive_heat_steps",       direction: Dir.In,  scale: 1}, //
+    {address: 1046, name: "measure_frequency.compressor",          direction: Dir.In,  scale: 10}, //
+    {address:    8, name: "measure_temperature.warmwater_top_bt7", direction: Dir.In,  scale: 10}, //
+    {address:   19, name: "measure_temperature.return_air_az10_bt20", direction: Dir.In,  scale: 10}, //
+    {address:   20, name: "measure_temperature.supply_air_az10_bt21", direction: Dir.In,  scale: 10}, //
     {address: 2283, name: "meter_power.prod_heat_current_hour",    direction: Dir.In,  scale: 100},
     {address: 2285, name: "meter_power.prod_water_current_hour",   direction: Dir.In,  scale: 100},
     {address: 2287, name: "meter_power.prod_pool_current_hour",    direction: Dir.In,  scale: 100},
@@ -182,17 +197,13 @@ class NibeSDevice extends Device {
         this.client = new ModbusTCPClient(socket, 1, 5000);
         socket.connect({port: 502, host: this.getSettings().address});
         socket.on('connect', () => {
-            if (!this.getAvailable()) {
-                this.setAvailable();
-            }
-
             // Start the polling interval
             this.pollInterval = setInterval(() => {
                 this.readRegisters().then((results: any) => {
-                    this.log("Got results");
+                    this.log(`Got ${registers.length} results`);
                     for (let i = 0; i < registers.length; ++i)
                         if (results[i] !== undefined)
-                            this.setCapabilityValue(registers[i].name, results[i]);
+                            this.setCapabilityValue(registers[i].name, results[i])
                 }).catch((error) => {
                     this.log(error);
                     socket.end();
@@ -200,6 +211,7 @@ class NibeSDevice extends Device {
                 })
                 // Close the polling interval
             }, 15000);
+            this.setAvailable();
         });
 
         // Failure handling
