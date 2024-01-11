@@ -1,43 +1,32 @@
 import Homey, {Driver} from 'homey';
+import PairSession from "homey/lib/PairSession";
+import net from "net";
 
 class NibeSDriver extends Driver {
   async onInit() {
     this.log('Nibe S-Series driver has been initialized');
   }
 
-  async onPairListDevices() {
-    this.log("Pairing");
-    return [
-      // Example device data, note that `store` is optional
-      {
+  async onPair(session: PairSession): Promise<void> {
+    session.setHandler('ip_address_entered', async (data) => {
+      this.log('onPair: ip_address_entered:', data);
+      const ipAddress = data.ipaddress;
+
+      if (!net.isIP(ipAddress)) {
+        throw new Error(this.homey.__('pair.valid_ip_address'));
+      }
+
+      return {
         name: 'Nibe S-Series',
         data: {
-          id: 'Nibe S-Series-002',
+          id: ipAddress,
         },
         settings: {
-          address: "192.168.1.204"
-        }
-      }
-    ];
-  }
-
-  async xxx() {
-    const discoveryStrategy = this.getDiscoveryStrategy();
-    const discoveryResults = discoveryStrategy.getDiscoveryResults();
-    const devices = Object.values(discoveryResults).map(discoveryResult => {
-      return {
-        name: (discoveryResult as any).name,
-        data: {
-          id: discoveryResult.id,
-        },
-        settings: {
-          address: discoveryResult.address,
+          address: ipAddress
         }
       };
     });
-    this.log(discoveryResults);
-    return devices;
-  }
+  };
 }
 
 module.exports = NibeSDriver;

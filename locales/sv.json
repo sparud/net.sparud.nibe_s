@@ -1,0 +1,14 @@
+{
+  "Off": "Av",
+  "Hot water": "Varmvatten",
+  "Heating": "Värmer",
+  "Pool": "Pool",
+  "Cooling": "Kyler",
+  "pair": {
+    "title": "Nibe S konfiguration",
+    "ok": "OK",
+    "ipaddress": "IP-adress",
+    "valid_ip_address": "Mata in en giltig IP-adress (xxx.xxx.xxx.xxx)",
+    "invalid_ipaddress": "Ogiltig IP-adress"
+  }
+}
