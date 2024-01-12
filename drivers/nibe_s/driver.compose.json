@@ -309,8 +309,8 @@
     }
   },
   "images": {
-    "small": "/assets/images/nibe.png",
-    "large": "/assets/images/nibe.png"
+    "small": "/assets/images/nibe_small.png",
+    "large": "/assets/images/nibe_large.png"
   },
   "pair": [
     {

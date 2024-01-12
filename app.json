@@ -19,9 +19,10 @@
     "climate"
   ],
   "permissions": [],
+  "brandColor": "#DD1111",
   "images": {
-    "small": "/assets/images/nibe.png",
-    "large": "/assets/images/nibe.png"
+    "small": "/assets/images/nibe_app_small.jpg",
+    "large": "/assets/images/nibe_app_large.jpg"
   },
   "author": {
     "name": "Jan Sparud",
@@ -371,8 +372,8 @@
         }
       },
       "images": {
-        "small": "/assets/images/nibe.png",
-        "large": "/assets/images/nibe.png"
+        "small": "/assets/images/nibe_small.png",
+        "large": "/assets/images/nibe_large.png"
       },
       "pair": [
         {
