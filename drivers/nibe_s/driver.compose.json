@@ -46,7 +46,8 @@
     "measure_temperature.pool",
     "target_temperature.pool_start",
     "target_temperature.pool_stop",
-    "onoff.pool_active"
+    "onoff.pool_active",
+    "onoff.pool_circulation"
   ],
   "capabilitiesOptions": {
     "measure_temperature.outside": {
@@ -131,6 +132,12 @@
         "en": "Priority",
         "sv": "Prioritet",
         "nl": "Prioriteit"
+      }
+    },
+    "target_percentage.returnair_normal": {
+      "title": {
+        "en": "Return air fan speed normal",
+        "sv": "Frånluftsfläktshastighet normal"
       }
     },
     "meter_power.prod_heat_current_hour": {
@@ -221,6 +228,12 @@
       "title": {
         "en": "Pool heating activated",
         "sv": "Poolvärme på"
+      }
+    },
+    "onoff.pool_circulation": {
+      "title": {
+        "en": "Pool circulation on",
+        "sv": "Poolcirkulation på"
       }
     },
     "measure_temperature.inverter": {

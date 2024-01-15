@@ -1,0 +1,80 @@
+{
+  "actions": [
+    {
+      "id": "pool_activate",
+      "title": {
+        "en": "Enable pool heating",
+        "sv": "Aktivera poolvärme"
+      }
+    },
+    {
+      "id": "pool_deactivate",
+      "title": {
+        "en": "Disable pool heating",
+        "sv": "Stäng av poolvärme"
+      }
+    },
+    {
+      "id": "set_pool_start_temperature",
+      "title": {
+        "en": "Set start temperature for pool heating to ...",
+        "sv": "Ställ in starttemperatur för poolvärmning till ..."
+      },
+      "titleFormatted": {
+        "en": "Set start temperature for pool heating to [[temp]]",
+        "sv": "Ställ in starttemperatur för poolvärmning till [[temp]]"
+      },
+      "args": [
+        {
+          "name": "temp",
+          "type": "number",
+          "title": {
+            "en": "Temperature",
+            "sv": "Temperatur"
+          },
+          "placeholder": {
+            "en": "Celsius degrees",
+            "sv": "I grader Celsius"
+          },
+          "min": 10,
+          "max": 35
+        }
+      ]
+    },
+    {
+      "id": "set_pool_stop_temperature",
+      "title": {
+        "en": "Set stop temperature for pool heating to ...",
+        "sv": "Ställ in stopptemperatur för poolvärmning till..."
+      },
+      "titleFormatted": {
+        "en": "Set stop temperature for pool heating to [[temp]]",
+        "sv": "Ställ in stopptemperatur för poolvärmning till [[temp]]"
+      },
+      "args": [
+        {
+          "name": "temp",
+          "type": "number",
+          "title": {
+            "en": "Temperature",
+            "sv": "Temperatur"
+          },
+          "placeholder": {
+            "en": "Celsius degrees",
+            "sv": "Grader Celsius"
+          },
+          "min": 10,
+          "max": 35
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "id": "too_low_target",
+      "title": {
+        "en": "Pool start temperature too low."
+      }
+    }
+  ]
+}

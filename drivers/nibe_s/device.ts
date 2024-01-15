@@ -29,13 +29,6 @@ interface Register  {
     bool?: boolean;
 }
 
-const poolStartTemperature: Register =
-    {address: 687, name: "target_temperature.pool_start", scale: 10, direction: Dir.Out};
-const poolStopTemperature: Register =
-    {address: 689, name: "target_temperature.pool_stop", scale: 10, direction: Dir.Out};
-const poolActivation: Register =
-    {address: 691, name: "onoff.pool_active", bool: true, direction: Dir.Out}
-
 const registers: Register[] = [
     {address:    1, name: "measure_temperature.outside",              direction: Dir.In,  scale: 10},
     {address:   37, name: "measure_temperature.outside_avg",          direction: Dir.In,  scale: 10},
@@ -49,6 +42,7 @@ const registers: Register[] = [
     {address: 1102, name: "measure_percentage.heating_pump",          direction: Dir.In},
     {address: 1104, name: "measure_percentage.source_pump",           direction: Dir.In},
     {address: 1028, name: "select.priority",                          direction: Dir.In,  enum: priorityMap },
+    {address:  109, name: "target_percentage.returnair_normal",       direction: Dir.Out, scale:1 },
     {address: 1047, name: "measure_temperature.inverter",             direction: Dir.In,  scale: 10}, //
     {address: 2166, name: "measure_power",                            direction: Dir.In},
     {address:   26, name: "measure_temperature.room_1",               direction: Dir.In, scale: 10}, //
@@ -78,10 +72,13 @@ const registers: Register[] = [
     {address: 2303, name: "meter_power.extra_pool_current_hour",      direction: Dir.In,  scale: 100},
     {address:   27, name: "measure_temperature.pool",                 direction: Dir.In,  scale: 10},
     {address: 1828, name: "onoff.pool_circulation",                   direction: Dir.In,  bool: true},
-    poolStartTemperature,
-    poolStopTemperature,
-    poolActivation
+    {address: 687, name: "target_temperature.pool_start",             direction: Dir.Out, scale: 10},
+    {address: 689, name: "target_temperature.pool_stop",              direction: Dir.Out, scale: 10},
+    {address: 691, name: "onoff.pool_active",                         direction: Dir.Out, bool: true}
 ];
+
+const registerByName=
+    Object.fromEntries(registers.map((register: Register) => [register.name, register]));
 
 class NibeSDevice extends Device {
     private pollInterval: NodeJS.Timeout | null = null;
@@ -113,19 +110,20 @@ class NibeSDevice extends Device {
     }
 
     private async readRegister(register: Register) {
-        if (register.direction === Dir.In)
-            return await this.client!.readInputRegisters(register.address, 1);
-        else
-            return await this.client!.readHoldingRegisters(register.address, 1);
+        return await ((register.direction === Dir.In)
+            ? this.client!.readInputRegisters(register.address, 1)
+            : this.client!.readHoldingRegisters(register.address, 1))
+        .then((resp) =>
+            this.fromRegisterValue(register, resp.response.body.values[0]))
+        .catch((reason: any) => {
+            return undefined;
+        });
     }
 
     private async readRegisters() {
         return await Promise.all(registers.map((register) =>
-            this.readRegister(register).then((resp: any) => {
-                return this.fromRegisterValue(register, resp.response.body.values[0])}
-            ).catch((reason: any) => {
-                return undefined;
-            })));
+            this.readRegister(register))
+        );
     }
 
     private async writeRegister(register: Register, value: any) {
@@ -135,32 +133,6 @@ class NibeSDevice extends Device {
             }).catch((reason: any) => {
                 this.log("Error writing to register", reason);
             });
-    }
-
-    onDiscoveryResult(discoveryResult: DiscoveryResult) {
-        return discoveryResult.id === this.getData().id;
-    }
-    async onDiscoveryAvailable(discoveryResult: DiscoveryResult) {
-        this.setAvailable();
-        this.log(discoveryResult);
-        this.setSettings({
-          //address: discoveryResult.address,
-        });
-    }
-
-    onDiscoveryAddressChanged(discoveryResult: DiscoveryResult) {
-        this.log('in onDiscoAddrChange, IP =', this.getSettings().address);
-        this.log(discoveryResult);
-        this.setSettings({
-          //address: discoveryResult.address,
-        });
-    }
-
-    onDiscoveryLastSeenChanged(discoveryResult: DiscoveryResult) {
-        this.log(discoveryResult);
-        this.setSettings({
-          //address: discoveryResult.address,
-        });
     }
 
     async registerRegisterCapabilityListener(register: Register) {
@@ -190,19 +162,31 @@ class NibeSDevice extends Device {
             if (!this.hasCapability(register.name)) {
                 await this.addCapability(register.name);
             }
+            if (register.direction == Dir.Out) {
+                await this.registerRegisterCapabilityListener(register);
+            }
         }));
-
-        await this.registerRegisterCapabilityListener(poolStartTemperature);
-        await this.registerRegisterCapabilityListener(poolStopTemperature);
-        await this.registerRegisterCapabilityListener(poolActivation);
 
         // Action flow cards
         this.homey.flow.getActionCard('pool_activate').registerRunListener(async (args, state) => {
-            await this.writeRegister(poolActivation, true);
+            await this.writeRegister(registerByName["onoff.pool_active"], true);
         });
 
         this.homey.flow.getActionCard('pool_deactivate').registerRunListener(async (args, state) => {
-            await this.writeRegister(poolActivation, false);
+            this.log("Deactivating pool");
+            await this.writeRegister(registerByName["onoff.pool_active"], false);
+        });
+
+        this.homey.flow.getActionCard('set_pool_start_temperature').registerRunListener(async (args, state) => {
+            await this.writeRegister(registerByName["target_temperature.pool_start"], args.temp);
+        });
+
+        this.homey.flow.getActionCard('set_pool_stop_temperature').registerRunListener(async (args, state) => {
+            await this.writeRegister(registerByName["target_temperature.pool_stop"], args.temp);
+        });
+
+        this.homey.flow.getConditionCard('too_low_target').registerRunListener(async (args, state) => {
+            return (await this.readRegister(registerByName["target_temperature.pool_start"]) as number) < 20;
         });
 
         this.client = new ModbusTCPClient(socket, 1, 5000);
