@@ -10,5 +10,10 @@
     "ipaddress": "IP address",
     "valid_ip_address": "Enter a valid IP address (xxx.xxx.xxx.xxx)",
     "invalid_ipaddress": "Invalid IP address"
-  }
+  },
+  "Normal": "Normal",
+  "Speed 1": "Speed 1",
+  "Speed 2": "Speed 2",
+  "Speed 3": "Speed 3",
+  "Speed 4": "Speed 4"
 }

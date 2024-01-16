@@ -1,6 +1,6 @@
 {
   "type": "string",
-  "title": { "en": "Measure String" },
+  "title": { "en": "Measure enum" },
   "uiComponent": "sensor",
   "getable": true,
   "setable": false,

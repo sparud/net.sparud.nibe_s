@@ -20,6 +20,14 @@ const priorityMap = Object({
     60: "Cooling"
 });
 
+const returnAirMap = Object({
+    0: "Normal",
+    1: "Speed 1",
+    2: "Speed 2",
+    3: "Speed 3",
+    4: "Speed 4"
+});
+
 interface Register  {
     address: number;
     name: string;
@@ -27,6 +35,7 @@ interface Register  {
     scale?: number
     enum?: Record<number, string>
     bool?: boolean;
+    additional_name?: string;
 }
 
 const registers: Register[] = [
@@ -41,43 +50,46 @@ const registers: Register[] = [
     {address: 1017, name: "measure_temperature.calculated_supply",    direction: Dir.In,  scale: 10},
     {address: 1102, name: "measure_percentage.heating_pump",          direction: Dir.In},
     {address: 1104, name: "measure_percentage.source_pump",           direction: Dir.In},
-    {address: 1028, name: "select.priority",                          direction: Dir.In,  enum: priorityMap },
-    {address:  109, name: "target_percentage.returnair_normal",       direction: Dir.Out, scale:1 },
-    {address: 1047, name: "measure_temperature.inverter",             direction: Dir.In,  scale: 10}, //
+    {address: 1028, name: "measure_enum.priority",                    direction: Dir.In,  enum: priorityMap },
+    {address: 1047, name: "measure_temperature.inverter",             direction: Dir.In,  scale: 10},
     {address: 2166, name: "measure_power",                            direction: Dir.In},
-    {address:   26, name: "measure_temperature.room_1",               direction: Dir.In, scale: 10}, //
-    {address: 1083, name: "meter_count.compressor_starts",            direction: Dir.In,  scale: 1}, //
-    {address: 1048, name: "measure_power.compressor_add_power",       direction: Dir.In,  scale: 1}, //
-    {address:   40, name: "measure_water.flow_bf1",                   direction: Dir.In,  scale: 10}, //
-    {address: 1087, name: "measure_hour.compressor_total",            direction: Dir.In,  scale: 1}, //
-    {address: 1091, name: "measure_hour.compressor_total_hotwater",   direction: Dir.In,  scale: 1}, //
-    {address: 1025, name: "measure_hour.additive",                    direction: Dir.In,  scale: 10}, //
-    {address: 1027, name: "meter_power.internal_additive",            direction: Dir.In,  scale: 100}, //
-    {address: 1069, name: "measure_hour.additive_hotwater",           direction: Dir.In,  scale: 10}, //
-    {address: 1029, name: "meter_count.additive_heat_steps",          direction: Dir.In,  scale: 1}, //
-    {address: 1046, name: "measure_frequency.compressor",             direction: Dir.In,  scale: 10}, //
-    {address:    8, name: "measure_temperature.warmwater_top_bt7",    direction: Dir.In,  scale: 10}, //
-    {address:   19, name: "measure_temperature.return_air_az10_bt20", direction: Dir.In,  scale: 10}, //
-    {address:   20, name: "measure_temperature.supply_air_az10_bt21", direction: Dir.In,  scale: 10}, //
+    {address:   26, name: "measure_temperature.room_1",               direction: Dir.In, scale: 10},
+    {address: 1083, name: "meter_count.compressor_starts",            direction: Dir.In,  scale: 1},
+    {address: 1048, name: "measure_power.compressor_add_power",       direction: Dir.In,  scale: 1},
+    {address:   40, name: "measure_water.flow_bf1",                   direction: Dir.In,  scale: 10},
+    {address: 1087, name: "measure_hour.compressor_total",            direction: Dir.In,  scale: 1},
+    {address: 1091, name: "measure_hour.compressor_total_hotwater",   direction: Dir.In,  scale: 1},
+    {address: 1025, name: "measure_hour.additive",                    direction: Dir.In,  scale: 10},
+    {address: 1027, name: "meter_power.internal_additive",            direction: Dir.In,  scale: 100},
+    {address: 1069, name: "measure_hour.additive_hotwater",           direction: Dir.In,  scale: 10},
+    {address: 1029, name: "meter_count.additive_heat_steps",          direction: Dir.In,  scale: 1},
+    {address: 1046, name: "measure_frequency.compressor",             direction: Dir.In,  scale: 10},
+    {address:    8, name: "measure_temperature.warmwater_top_bt7",    direction: Dir.In,  scale: 10},
+    {address:   19, name: "measure_temperature.return_air_az10_bt20", direction: Dir.In,  scale: 10},
+    {address:   20, name: "measure_temperature.supply_air_az10_bt21", direction: Dir.In,  scale: 10},
     {address: 2283, name: "meter_power.prod_heat_current_hour",       direction: Dir.In,  scale: 100},
     {address: 2285, name: "meter_power.prod_water_current_hour",      direction: Dir.In,  scale: 100},
     {address: 2287, name: "meter_power.prod_pool_current_hour",       direction: Dir.In,  scale: 100},
-    //{address: 2289, name: "meter_power.prod_cool_current_hour",    direction: Dir.In,  scale: 100},
+    {address: 2289, name: "meter_power.prod_cool_current_hour",       direction: Dir.In,  scale: 100},
     {address: 2291, name: "meter_power.used_heat_current_hour",       direction: Dir.In,  scale: 100},
     {address: 2293, name: "meter_power.used_water_current_hour",      direction: Dir.In,  scale: 100},
     {address: 2295, name: "meter_power.used_pool_current_hour",       direction: Dir.In,  scale: 100},
-    //{address: 2297, name: "meter_power.used_cool_current_hour",    direction: Dir.In,  scale: 100},
+    {address: 2297, name: "meter_power.used_cool_current_hour",       direction: Dir.In,  scale: 100},
     {address: 2299, name: "meter_power.extra_heat_current_hour",      direction: Dir.In,  scale: 100},
     {address: 2301, name: "meter_power.extra_water_current_hour",     direction: Dir.In,  scale: 100},
     {address: 2303, name: "meter_power.extra_pool_current_hour",      direction: Dir.In,  scale: 100},
     {address:   27, name: "measure_temperature.pool",                 direction: Dir.In,  scale: 10},
     {address: 1828, name: "onoff.pool_circulation",                   direction: Dir.In,  bool: true},
-    {address: 687, name: "target_temperature.pool_start",             direction: Dir.Out, scale: 10},
-    {address: 689, name: "target_temperature.pool_stop",              direction: Dir.Out, scale: 10},
-    {address: 691, name: "onoff.pool_active",                         direction: Dir.Out, bool: true}
+    {address:  687, name: "target_temperature.pool_start",            direction: Dir.Out, scale: 10},
+    {address:  689, name: "target_temperature.pool_stop",             direction: Dir.Out, scale: 10},
+    {address:  691, name: "onoff.pool_active",                        direction: Dir.Out, bool: true},
+    {address:  227, name: "onoff.nattsvalka",                         direction: Dir.Out, bool: true},
+    {address: 1037, name: "measure_enum.return_fan_step",             direction: Dir.In,  enum: returnAirMap },
+    {address:  109, name: "target_percentage.returnair_normal",       direction: Dir.Out, scale: 1,
+         additional_name: "measure_percentage.returnair_normal"}
 ];
 
-const registerByName=
+const registerByName =
     Object.fromEntries(registers.map((register: Register) => [register.name, register]));
 
 class NibeSDevice extends Device {
@@ -135,19 +147,16 @@ class NibeSDevice extends Device {
             });
     }
 
-    async registerRegisterCapabilityListener(register: Register) {
-        this.registerCapabilityListener(register.name, async (value) => {
-            await this.writeRegister(register, value);
-        });
-    }
-
     private poll() {
         this.log("Polling");
         this.readRegisters().then((results: any) => {
             this.log(`Got ${registers.length} results`);
             for (let i = 0; i < registers.length; ++i)
-                if (results[i] !== undefined)
-                    this.setCapabilityValue(registers[i].name, results[i])
+                if (results[i] !== undefined) {
+                    this.setCapabilityValue(registers[i].name, results[i]);
+                    if (registers[i].additional_name)
+                        this.setCapabilityValue(registers[i].additional_name!, results[i]);
+                }
         }).catch((error) => {
             this.log(error);
             socket.end();
@@ -159,11 +168,14 @@ class NibeSDevice extends Device {
         this.log('NibeSDevice has been initialized');
 
         await Promise.all(registers.map(async (register: Register) => {
-            if (!this.hasCapability(register.name)) {
+            if (!this.hasCapability(register.name))
                 await this.addCapability(register.name);
-            }
+            if (register.additional_name && !this.hasCapability(register.additional_name))
+                await this.addCapability(register.additional_name);
             if (register.direction == Dir.Out) {
-                await this.registerRegisterCapabilityListener(register);
+                this.registerCapabilityListener(register.name, async (value) => {
+                    await this.writeRegister(register, value);
+                });
             }
         }));
 
@@ -185,8 +197,13 @@ class NibeSDevice extends Device {
             await this.writeRegister(registerByName["target_temperature.pool_stop"], args.temp);
         });
 
-        this.homey.flow.getConditionCard('too_low_target').registerRunListener(async (args, state) => {
-            return (await this.readRegister(registerByName["target_temperature.pool_start"]) as number) < 20;
+        this.homey.flow.getActionCard('set_returnair_normal_speed').registerRunListener(async (args, state) => {
+            await this.writeRegister(registerByName["target_percentage.returnair_normal"], args.speed);
+        });
+
+        // Condition flow cards
+        this.homey.flow.getConditionCard('nightchill_is_active').registerRunListener(async (args, state) => {
+            return (await this.readRegister(registerByName["onoff.nightchill"]) as boolean) ;
         });
 
         this.client = new ModbusTCPClient(socket, 1, 5000);

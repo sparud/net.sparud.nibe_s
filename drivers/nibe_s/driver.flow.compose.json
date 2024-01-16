@@ -1,6 +1,20 @@
 {
   "actions": [
     {
+      "id": "nightchill_activate",
+      "title": {
+        "en": "Enable night chill",
+        "sv": "Aktivera nattsvalka"
+      }
+    },
+    {
+      "id": "nightchill_deactivate",
+      "title": {
+        "en": "Disable night chill",
+        "sv": "Stäng av nattsvalka"
+      }
+    },
+    {
       "id": "pool_activate",
       "title": {
         "en": "Enable pool heating",
@@ -42,6 +56,36 @@
       ]
     },
     {
+      "id": "set_returnair_normal_speed",
+      "title": {
+        "en": "Set normal fan speed to ...",
+        "sv": "Sätt normal fläkthastighet till ..."
+      },
+      "titleFormatted": {
+        "en": "Set normal fan speed to [[speed]]",
+        "sv": "Sätt normal fläkthastighet till [[speed]]"
+      },
+      "args": [
+        {
+          "name": "speed",
+          "type": "range",
+          "title": {
+            "en": "Speed",
+            "sv": "Hastighet"
+          },
+          "placeholder": {
+            "en": "%",
+            "sv": "%"
+          },
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "label": "%",
+          "labelDecimals": 0
+        }
+      ]
+    },
+    {
       "id": "set_pool_stop_temperature",
       "title": {
         "en": "Set stop temperature for pool heating to ...",
@@ -71,9 +115,14 @@
   ],
   "conditions": [
     {
-      "id": "too_low_target",
+      "id": "nightchill_is_active",
       "title": {
-        "en": "Pool start temperature too low."
+        "en": "Night chill !{{On|Off}}",
+        "sv": "Nattsvalka !{{På|Av}}"
+      },
+      "hint": {
+        "en": "Night chill is on",
+        "sv": "Om nattsvalka är på"
       }
     }
   ]
