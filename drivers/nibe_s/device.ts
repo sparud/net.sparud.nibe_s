@@ -83,7 +83,7 @@ const registers: Register[] = [
     // Rad 14 Kompressor utomhus temp avg
     {address: 1083, name: "measure_count.i1083_compressor_starts",         direction: Dir.In,  scale:   1}, // Kompressorstarter
     {address:   37, name: "measure_temperature.i37_outside_avg",           direction: Dir.In,  scale:  10}, // BT1 - Average outside temperature -Medeltemperatur (BT1)
-    // Rad 15 Kompressor statestik
+    // Rad 15 Kompressor statistik
     {address: 1087, name: "measure_hour.i1087_compressor_usage_total",     direction: Dir.In,  scale:   1}, // Total drifttid kompressor
     {address: 1091, name: "measure_hour.i1091_compressor_usage_hotwater",  direction: Dir.In,  scale:   1}, // Total drifttid kompressor varmvatten
 
@@ -199,7 +199,7 @@ class NibeSDevice extends Device {
 
     private checkConfig() {
         for (let i = 0; i < registers.length; ++i) {
-            if (registers[i].name != capabilities[i]) {
+            if (registers[i].name != capabilities[i] && (!registers[i].additional_name || registers[i].additional_name! != capabilities[i])) {
                 this.log(`Config mismatch: register[${i}](${registers[i].name}) != capabilities[${i}](${capabilities[i]}) `)
             }
             const option: any = (capabilitiesOptions as any)[registers[i].name];
@@ -234,37 +234,37 @@ class NibeSDevice extends Device {
 
         // Action flow cards
         this.homey.flow.getActionCard('pool_activate').registerRunListener(async (args, state) => {
-            await this.writeRegister(registerByName["onoff.pool_active"], true);
+            await this.writeRegister(registerByName["onoff.h691_pool_active"], true);
         });
 
         this.homey.flow.getActionCard('pool_deactivate').registerRunListener(async (args, state) => {
             this.log("Deactivating pool");
-            await this.writeRegister(registerByName["onoff.pool_active"], false);
+            await this.writeRegister(registerByName["onoff.h691_pool_active"], false);
         });
 
         this.homey.flow.getActionCard('nightchill_activate').registerRunListener(async (args, state) => {
-            await this.writeRegister(registerByName["onoff.nightchill"], true);
+            await this.writeRegister(registerByName["onoff.h227_nightchill"], true);
         });
 
         this.homey.flow.getActionCard('nightchill_deactivate').registerRunListener(async (args, state) => {
-            await this.writeRegister(registerByName["onoff.nightchill"], false);
+            await this.writeRegister(registerByName["onoff.h227_nightchill"], false);
         });
 
         this.homey.flow.getActionCard('set_pool_start_temperature').registerRunListener(async (args, state) => {
-            await this.writeRegister(registerByName["target_temperature.pool_start"], args.temp);
+            await this.writeRegister(registerByName["target_temperature.h687_pool_start"], args.temp);
         });
 
         this.homey.flow.getActionCard('set_pool_stop_temperature').registerRunListener(async (args, state) => {
-            await this.writeRegister(registerByName["target_temperature.pool_stop"], args.temp);
+            await this.writeRegister(registerByName["target_temperature.h689_pool_stop"], args.temp);
         });
 
         this.homey.flow.getActionCard('set_returnair_normal_speed').registerRunListener(async (args, state) => {
-            await this.writeRegister(registerByName["target_percentage.returnair_normal"], args.speed);
+            await this.writeRegister(registerByName["target_percentage.h109_returnair_normal"], args.speed);
         });
 
         // Condition flow cards
         this.homey.flow.getConditionCard('nightchill_is_active').registerRunListener(async (args, state) => {
-            return (await this.readRegister(registerByName["onoff.nightchill"]) as boolean) ;
+            return (await this.readRegister(registerByName["onoff.h227_nightchill"]) as boolean) ;
         });
 
         this.client = new ModbusTCPClient(socket, 1, 5000);
