@@ -1,6 +1,7 @@
 import {Device, DiscoveryResult} from 'homey';
 import net, {SocketConnectOpts, TcpSocketConnectOpts} from 'net';
 import modbus, {ModbusTCPClient} from 'jsmodbus';
+import {capabilities, capabilitiesOptions} from './driver.compose.json';
 
 const socket = new net.Socket();
 
@@ -39,54 +40,86 @@ interface Register  {
 }
 
 const registers: Register[] = [
-    {address:    1, name: "measure_temperature.outside",              direction: Dir.In,  scale: 10},
-    {address:   37, name: "measure_temperature.outside_avg",          direction: Dir.In,  scale: 10},
-    {address:   10, name: "measure_temperature.source_in",            direction: Dir.In,  scale: 10},
-    {address:   11, name: "measure_temperature.source_out",           direction: Dir.In,  scale: 10},
-    {address:    5, name: "measure_temperature.heating_supply",       direction: Dir.In,  scale: 10},
-    {address:    7, name: "measure_temperature.heating_return",       direction: Dir.In,  scale: 10},
-    {address:   11, name: "degree_minutes",                           direction: Dir.Out, scale: 10},
-    {address:    9, name: "measure_temperature.hot_water",            direction: Dir.In,  scale: 10},
-    {address: 1017, name: "measure_temperature.calculated_supply",    direction: Dir.In,  scale: 10},
-    {address: 1102, name: "measure_percentage.heating_pump",          direction: Dir.In},
-    {address: 1104, name: "measure_percentage.source_pump",           direction: Dir.In},
-    {address: 1028, name: "measure_enum.priority",                    direction: Dir.In,  enum: priorityMap },
-    {address: 1047, name: "measure_temperature.inverter",             direction: Dir.In,  scale: 10},
-    {address: 2166, name: "measure_power",                            direction: Dir.In},
-    {address:   26, name: "measure_temperature.room_1",               direction: Dir.In, scale: 10},
-    {address: 1083, name: "meter_count.compressor_starts",            direction: Dir.In,  scale: 1},
-    {address: 1048, name: "measure_power.compressor_add_power",       direction: Dir.In,  scale: 1},
-    {address:   40, name: "measure_water.flow_bf1",                   direction: Dir.In,  scale: 10},
-    {address: 1087, name: "measure_hour.compressor_total",            direction: Dir.In,  scale: 1},
-    {address: 1091, name: "measure_hour.compressor_total_hotwater",   direction: Dir.In,  scale: 1},
-    {address: 1025, name: "measure_hour.additive",                    direction: Dir.In,  scale: 10},
-    {address: 1027, name: "meter_power.internal_additive",            direction: Dir.In,  scale: 100},
-    {address: 1069, name: "measure_hour.additive_hotwater",           direction: Dir.In,  scale: 10},
-    {address: 1029, name: "meter_count.additive_heat_steps",          direction: Dir.In,  scale: 1},
-    {address: 1046, name: "measure_frequency.compressor",             direction: Dir.In,  scale: 10},
-    {address:    8, name: "measure_temperature.warmwater_top_bt7",    direction: Dir.In,  scale: 10},
-    {address:   19, name: "measure_temperature.return_air_az10_bt20", direction: Dir.In,  scale: 10},
-    {address:   20, name: "measure_temperature.supply_air_az10_bt21", direction: Dir.In,  scale: 10},
-    {address: 2283, name: "meter_power.prod_heat_current_hour",       direction: Dir.In,  scale: 100},
-    {address: 2285, name: "meter_power.prod_water_current_hour",      direction: Dir.In,  scale: 100},
-    {address: 2287, name: "meter_power.prod_pool_current_hour",       direction: Dir.In,  scale: 100},
-    {address: 2289, name: "meter_power.prod_cool_current_hour",       direction: Dir.In,  scale: 100},
-    {address: 2291, name: "meter_power.used_heat_current_hour",       direction: Dir.In,  scale: 100},
-    {address: 2293, name: "meter_power.used_water_current_hour",      direction: Dir.In,  scale: 100},
-    {address: 2295, name: "meter_power.used_pool_current_hour",       direction: Dir.In,  scale: 100},
-    {address: 2297, name: "meter_power.used_cool_current_hour",       direction: Dir.In,  scale: 100},
-    {address: 2299, name: "meter_power.extra_heat_current_hour",      direction: Dir.In,  scale: 100},
-    {address: 2301, name: "meter_power.extra_water_current_hour",     direction: Dir.In,  scale: 100},
-    {address: 2303, name: "meter_power.extra_pool_current_hour",      direction: Dir.In,  scale: 100},
-    {address:   27, name: "measure_temperature.pool",                 direction: Dir.In,  scale: 10},
-    {address: 1828, name: "onoff.pool_circulation",                   direction: Dir.In,  bool: true},
-    {address:  687, name: "target_temperature.pool_start",            direction: Dir.Out, scale: 10},
-    {address:  689, name: "target_temperature.pool_stop",             direction: Dir.Out, scale: 10},
-    {address:  691, name: "onoff.pool_active",                        direction: Dir.Out, bool: true},
-    {address:  227, name: "onoff.nattsvalka",                         direction: Dir.Out, bool: true},
-    {address: 1037, name: "measure_enum.return_fan_step",             direction: Dir.In,  enum: returnAirMap },
-    {address:  109, name: "target_percentage.returnair_normal",       direction: Dir.Out, scale: 1,
-         additional_name: "measure_percentage.returnair_normal"}
+    // Rad 1 Temp
+    {address:    1, name: "measure_temperature.i1_outside",                direction: Dir.In,  scale:  10}, // Aktuell utetemperatur (BT1)
+    {address:   26, name: "measure_temperature.i26_inside",                direction: Dir.In,  scale:  10}, // Rumsensor 1 ionomhus
+    // Rad 2 Framledning
+    {address: 1017, name: "measure_temperature.i1017_calculated_supply",   direction: Dir.In,  scale:  10}, // Beräknad framledning klimatsystem 1
+    {address:    5, name: "measure_temperature.i5_heating_supply",         direction: Dir.In,  scale:  10}, // Framledning (BT2)
+    // Rad 3
+    {address:   11, name: "measure_degree_minutes.h11_degree_minutes",     direction: Dir.Out, scale:  10}, // Gradminuter
+    {address:    7, name: "measure_temperature.i7_heating_return",         direction: Dir.In,  scale:  10}, // Returledning (BT3)
+    // Rad 4
+    {address: 1102, name: "measure_percentage.i1102_heating_pump",         direction: Dir.In,  scale:   1}, // Värmebärarpumphastighet (GP1)
+    {address: 1104, name: "measure_percentage.i1104_source_pump",          direction: Dir.In,  scale:   1}, // Köldbärarpumphastighet (GP2)
+    // Rad 5
+    {address:   10, name: "measure_temperature.i10_source_in",             direction: Dir.In,  scale:  10}, // Köldbärare in (BT10)
+    {address:   11, name: "measure_temperature.i11_source_out",            direction: Dir.In,  scale:  10}, // Köldbärare ut (BT11)
+    // Rad 6
+    {address: 1028, name: "measure_enum.i1028_priority",                   direction: Dir.In,  enum: priorityMap}, // Prio
+    {address:   40, name: "measure_water.i40_flow_sensor",                 direction: Dir.In,  scale:  10}, // Flödesgivare (BF1)
+    // Rad 7
+    {address: 1048, name: "measure_power.i1048_compressor_add_power",      direction: Dir.In,  scale:   1}, // Kompressor tillförd effekt
+    {address: 2166, name: "measure_power.i2166_energy_usage",              direction: Dir.In,  scale:   1}, // Momentan använd effekt
+    // Rad 8
+    {address: 1047, name: "measure_temperature.i1047_inverter",            direction: Dir.In,  scale:  10}, // Invertertemperatur
+    {address: 1046, name: "measure_frequency.i1046_compressor",            direction: Dir.In,  scale:  10}, // Kompressorfrekvens, aktuell
+    // Rad 9
+    {address:    8, name: "measure_temperature.i8_warmwater_top",          direction: Dir.In,  scale:  10}, // Varmvatten topp (BT7)
+    {address:    9, name: "measure_temperature.i9_hot_water",              direction: Dir.In,  scale:  10}, // Varmvatten laddning (BT6)
+    // Rad 10 Frånluft
+    {address:   19, name: "measure_temperature.i19_return_air",            direction: Dir.In,  scale:  10}, // Frånluft (AZ10-BT20)
+    {address:   20, name: "measure_temperature.i20_supply_air",            direction: Dir.In,  scale:  10}, // Avluft (AZ10-BT21)
+    // Rad 11 Frånluft status
+    {address:  109, name: "target_percentage.h109_returnair_normal",       direction: Dir.Out, scale:   1,  // Frånluft fläkthastighet normal
+        additional_name: "measure_percentage.h109_returnair_normal"},
+    {address: 1037, name: "measure_enum.i1037_return_fan_step",            direction: Dir.In,  enum: returnAirMap }, // Fläktläge 1 0-Normal Övrigt 1-4
+    // Rad 12 Eltillsats
+    {address: 1029, name: "measure_count.i1029_additive_heat_steps",       direction: Dir.In,  scale:   1}, // Driftläge intern tillsats
+    {address: 1027, name: "meter_power.i1027_additive_effect",             direction: Dir.In,  scale: 100}, // Effekt intern tillsats
+    // Rad 13 Eltillsats statestik
+    {address: 1025, name: "measure_hour.i1025_additive_usage_total",       direction: Dir.In,  scale:  10}, // Total drifttid tillsats
+    {address: 1069, name: "measure_hour.i1069_additive_usage_hotwater",    direction: Dir.In,  scale:  10}, // Total varmvatten drifttid tillsats
+    // Rad 14 Kompressor utomhus temp avg
+    {address: 1083, name: "measure_count.i1083_compressor_starts",         direction: Dir.In,  scale:   1}, // Kompressorstarter
+    {address:   37, name: "measure_temperature.i37_outside_avg",           direction: Dir.In,  scale:  10}, // BT1 - Average outside temperature -Medeltemperatur (BT1)
+    // Rad 15 Kompressor statestik
+    {address: 1087, name: "measure_hour.i1087_compressor_usage_total",     direction: Dir.In,  scale:   1}, // Total drifttid kompressor
+    {address: 1091, name: "measure_hour.i1091_compressor_usage_hotwater",  direction: Dir.In,  scale:   1}, // Total drifttid kompressor varmvatten
+
+    // {address:  106, name: "target_percentage.h106_franluft_3",          direction: Dir.Out, scale:    1}, // Frånluft fläkthastighet 3
+    // {address:  107, name: "target_percentage.h107_franluft_2",          direction: Dir.Out, scale:    1}, // Frånluft fläkthastighet 2
+
+    // Statistics
+    {address: 2283, name: "meter_power.i2283_prod_heat_current_hour",     direction: Dir.In,  scale: 100}, // Energilogg - Producerad energi för värme under senaste timmen
+    {address: 2285, name: "meter_power.i2285_prod_water_current_hour",    direction: Dir.In,  scale: 100}, // Energilogg - Producerad energi för varmvatten under senaste timmen
+
+    {address: 2287, name: "meter_power.i2287_prod_pool_current_hour",      direction: Dir.In,  scale: 100}, //
+    {address: 2289, name: "meter_power.i2289_prod_cool_current_hour",      direction: Dir.In,  scale: 100}, //
+
+    {address: 2291, name: "meter_power.i2291_used_heat_current_hour",     direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi för värme under senaste timmen
+    {address: 2293, name: "meter_power.i2293_used_water_current_hour",    direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi för varmvatten under senaste timmen
+
+    {address: 2295, name: "meter_power.i2295_used_pool_current_hour",      direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi för pool under senaste timmen
+    {address: 2297, name: "meter_power.i2297_used_cool_current_hour",      direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi för kylning under senaste timmen
+
+    {address: 2299, name: "meter_power.i2299_extra_heat_current_hour",    direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi av tillsatsvärmaren för värme under senaste timmen
+    {address: 2301, name: "meter_power.i2301_extra_water_current_hour",   direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi av tillsatsvärmaren för varmvatten under senaste timmen
+
+    {address: 2303, name: "meter_power.i2303_extra_pool_current_hour",     direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi av tillsatsvärmaren för pool under senaste timmen
+    {address:   27, name: "measure_temperature.i27_pool",                  direction: Dir.In,  scale:  10}, //
+
+    // Ej på värdesdelen av appen
+
+    // Poolvärme inställningar temp
+    {address:  687, name: "target_temperature.h687_pool_start",            direction: Dir.Out, scale:  10}, //
+    {address:  689, name: "target_temperature.h689_pool_stop",             direction: Dir.Out, scale:  10}, //
+
+    // On / Off delar på kortet
+    {address: 1828, name: "onoff.i1828_pool_circulation",                  direction: Dir.In,  bool: true}, // Pool 1 pump status
+    {address:  691, name: "onoff.h691_pool_active",                        direction: Dir.Out, bool: true}, //
+
+    {address:  227, name: "onoff.h227_nightchill",                         direction: Dir.Out, bool: true}  // Nattsvalka 1
 ];
 
 const registerByName =
@@ -164,8 +197,28 @@ class NibeSDevice extends Device {
         });
     }
 
+    private checkConfig() {
+        for (let i = 0; i < registers.length; ++i) {
+            if (registers[i].name != capabilities[i]) {
+                this.log(`Config mismatch: register[${i}](${registers[i].name}) != capabilities[${i}](${capabilities[i]}) `)
+            }
+            const option: any = (capabilitiesOptions as any)[registers[i].name];
+            if (!option) {
+                this.log(`No options for ${registers[i].name}`);
+            }
+            if (registers[i].additional_name) {
+                const option: any = (capabilitiesOptions as any)[registers[i].additional_name!];
+                if (!option) {
+                    this.log(`No options for ${registers[i].additional_name}`);
+                }
+            }
+        }
+    }
+
     async onInit() {
         this.log('NibeSDevice has been initialized');
+
+        this.checkConfig();
 
         await Promise.all(registers.map(async (register: Register) => {
             if (!this.hasCapability(register.name))
@@ -187,6 +240,14 @@ class NibeSDevice extends Device {
         this.homey.flow.getActionCard('pool_deactivate').registerRunListener(async (args, state) => {
             this.log("Deactivating pool");
             await this.writeRegister(registerByName["onoff.pool_active"], false);
+        });
+
+        this.homey.flow.getActionCard('nightchill_activate').registerRunListener(async (args, state) => {
+            await this.writeRegister(registerByName["onoff.nightchill"], true);
+        });
+
+        this.homey.flow.getActionCard('nightchill_deactivate').registerRunListener(async (args, state) => {
+            await this.writeRegister(registerByName["onoff.nightchill"], false);
         });
 
         this.homey.flow.getActionCard('set_pool_start_temperature').registerRunListener(async (args, state) => {

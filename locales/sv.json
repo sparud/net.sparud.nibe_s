@@ -10,5 +10,10 @@
     "ipaddress": "IP-adress",
     "valid_ip_address": "Mata in en giltig IP-adress (xxx.xxx.xxx.xxx)",
     "invalid_ipaddress": "Ogiltig IP-adress"
-  }
+  },
+  "Normal": "Normal",
+  "Speed 1": "Steg 1",
+  "Speed 2": "Steg 2",
+  "Speed 3": "Steg 3",
+  "Speed 4": "Steg 4"
 }
