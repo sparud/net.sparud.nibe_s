@@ -41,73 +41,76 @@ interface Register  {
 
 const registers: Register[] = [
     // Rad 1 Temp
-    {address:    1, name: "measure_temperature.i1_outside",                direction: Dir.In,  scale:  10}, // Aktuell utetemperatur (BT1)
-    {address:   26, name: "measure_temperature.i26_inside",                direction: Dir.In,  scale:  10}, // Rumsensor 1 ionomhus
+    {address:    1, name: "2023_measure_temperature.i1_outside",              direction: Dir.In,  scale:  10}, // Aktuell utetemperatur (BT1)
+    {address:   26, name: "2023_measure_temperature.i26_inside",              direction: Dir.In,  scale:  10}, // Rumsensor 1 ionomhus
     // Rad 2 Framledning
-    {address: 1017, name: "measure_temperature.i1017_calculated_supply",   direction: Dir.In,  scale:  10}, // Beräknad framledning klimatsystem 1
-    {address:    5, name: "measure_temperature.i5_heating_supply",         direction: Dir.In,  scale:  10}, // Framledning (BT2)
+    {address: 1017, name: "2023_measure_temperature.i1017_calculated_supply", direction: Dir.In,  scale:  10}, // Beräknad framledning klimatsystem 1
+    {address:    5, name: "2023_measure_temperature.i5_heating_supply",       direction: Dir.In,  scale:  10}, // Framledning (BT2)
     // Rad 3
-    {address:   11, name: "measure_degree_minutes.h11_degree_minutes",     direction: Dir.Out, scale:  10}, // Gradminuter
-    {address:    7, name: "measure_temperature.i7_heating_return",         direction: Dir.In,  scale:  10}, // Returledning (BT3)
+    {address:   11, name: "measure_degree_minutes.h11_degree_minutes",        direction: Dir.Out, scale:  10}, // Gradminuter
+    {address:    7, name: "2023_measure_temperature.i7_heating_return",       direction: Dir.In,  scale:  10}, // Returledning (BT3)
     // Rad 4
-    {address: 1102, name: "measure_percentage.i1102_heating_pump",         direction: Dir.In,  scale:   1}, // Värmebärarpumphastighet (GP1)
-    {address: 1104, name: "measure_percentage.i1104_source_pump",          direction: Dir.In,  scale:   1}, // Köldbärarpumphastighet (GP2)
+    {address: 1102, name: "measure_percentage.i1102_heating_pump",            direction: Dir.In,  scale:   1}, // Värmebärarpumphastighet (GP1)
+    {address: 1104, name: "measure_percentage.i1104_source_pump",             direction: Dir.In,  scale:   1}, // Köldbärarpumphastighet (GP2)
     // Rad 5
-    {address:   10, name: "measure_temperature.i10_source_in",             direction: Dir.In,  scale:  10}, // Köldbärare in (BT10)
-    {address:   11, name: "measure_temperature.i11_source_out",            direction: Dir.In,  scale:  10}, // Köldbärare ut (BT11)
+    {address:   10, name: "2023_measure_temperature.i10_source_in",           direction: Dir.In,  scale:  10}, // Köldbärare in (BT10)
+    {address:   11, name: "2023_measure_temperature.i11_source_out",          direction: Dir.In,  scale:  10}, // Köldbärare ut (BT11)
     // Rad 6
-    {address: 1028, name: "measure_enum.i1028_priority",                   direction: Dir.In,  enum: priorityMap}, // Prio
-    {address:   40, name: "measure_water.i40_flow_sensor",                 direction: Dir.In,  scale:  10}, // Flödesgivare (BF1)
+    {address: 1028, name: "measure_enum.i1028_priority",                      direction: Dir.In,  enum: priorityMap}, // Prio
+    {address:   40, name: "2023_measure_water.i40_flow_sensor",               direction: Dir.In,  scale:  10}, // Flödesgivare (BF1)
     // Rad 7
-    {address: 1048, name: "measure_power.i1048_compressor_add_power",      direction: Dir.In,  scale:   1}, // Kompressor tillförd effekt
-    {address: 2166, name: "measure_power.i2166_energy_usage",              direction: Dir.In,  scale:   1}, // Momentan använd effekt
+    {address: 1048, name: "2023_measure_power.i1048_compressor_add_power",    direction: Dir.In,  scale:   1}, // Kompressor tillförd effekt
+    {address: 2166, name: "2023_measure_power.i2166_energy_usage",            direction: Dir.In,  scale:   1}, // Momentan använd effekt
     // Rad 8
-    {address: 1047, name: "measure_temperature.i1047_inverter",            direction: Dir.In,  scale:  10}, // Invertertemperatur
-    {address: 1046, name: "measure_frequency.i1046_compressor",            direction: Dir.In,  scale:  10}, // Kompressorfrekvens, aktuell
+    {address: 1047, name: "2023_measure_temperature.i1047_inverter",          direction: Dir.In,  scale:  10}, // Invertertemperatur
+    {address: 1046, name: "measure_frequency.i1046_compressor",               direction: Dir.In,  scale:  10}, // Kompressorfrekvens, aktuell
     // Rad 9
-    {address:    8, name: "measure_temperature.i8_warmwater_top",          direction: Dir.In,  scale:  10}, // Varmvatten topp (BT7)
-    {address:    9, name: "measure_temperature.i9_hot_water",              direction: Dir.In,  scale:  10}, // Varmvatten laddning (BT6)
+    {address:    8, name: "2023_measure_temperature.i8_warmwater_top",        direction: Dir.In,  scale:  10}, // Varmvatten topp (BT7)
+    {address:    9, name: "2023_measure_temperature.i9_hot_water",            direction: Dir.In,  scale:  10}, // Varmvatten laddning (BT6)
     // Rad 10 Frånluft
-    {address:   19, name: "measure_temperature.i19_return_air",            direction: Dir.In,  scale:  10}, // Frånluft (AZ10-BT20)
-    {address:   20, name: "measure_temperature.i20_supply_air",            direction: Dir.In,  scale:  10}, // Avluft (AZ10-BT21)
+    {address:   19, name: "2023_measure_temperature.i19_return_air",          direction: Dir.In,  scale:  10}, // Frånluft (AZ10-BT20)
+    {address:   20, name: "2023_measure_temperature.i20_supply_air",          direction: Dir.In,  scale:  10}, // Avluft (AZ10-BT21)
     // Rad 11 Frånluft status
-    {address:  109, name: "target_percentage.h109_returnair_normal",       direction: Dir.Out, scale:   1,  // Frånluft fläkthastighet normal
-        additional_name: "measure_percentage.h109_returnair_normal"},
-    {address: 1037, name: "measure_enum.i1037_return_fan_step",            direction: Dir.In,  enum: returnAirMap }, // Fläktläge 1 0-Normal Övrigt 1-4
+    {address:  109, name: "target_percentage.h109_returnair_normal",          direction: Dir.Out, scale:   1,  // Frånluft fläkthastighet normal
+         additional_name: "measure_percentage.h109_returnair_normal"},
+    {address: 1037, name: "measure_enum.i1037_return_fan_step",               direction: Dir.In,  enum: returnAirMap }, // Fläktläge 1 0-Normal Övrigt 1-4
     // Rad 12 Eltillsats
-    {address: 1029, name: "measure_count.i1029_additive_heat_steps",       direction: Dir.In,  scale:   1}, // Driftläge intern tillsats
-    {address: 1027, name: "meter_power.i1027_additive_effect",             direction: Dir.In,  scale: 100}, // Effekt intern tillsats
-    // Rad 13 Eltillsats statestik
-    {address: 1025, name: "measure_hour.i1025_additive_usage_total",       direction: Dir.In,  scale:  10}, // Total drifttid tillsats
-    {address: 1069, name: "measure_hour.i1069_additive_usage_hotwater",    direction: Dir.In,  scale:  10}, // Total varmvatten drifttid tillsats
+    {address: 1029, name: "measure_count.i1029_additive_heat_steps",          direction: Dir.In,  scale:   1}, // Driftläge intern tillsats
+    {address: 1027, name: "2023_meter_power.i1027_additive_effect",           direction: Dir.In,  scale: 100}, // Effekt intern tillsats
+    // Rad 13 Eltillsats statistik
+    {address: 1025, name: "measure_hour.i1025_additive_usage_total",          direction: Dir.In,  scale:  10}, // Total drifttid tillsats
+    {address: 1069, name: "measure_hour.i1069_additive_usage_hotwater",       direction: Dir.In,  scale:  10}, // Total varmvatten drifttid tillsats
     // Rad 14 Kompressor utomhus temp avg
-    {address: 1083, name: "measure_count.i1083_compressor_starts",         direction: Dir.In,  scale:   1}, // Kompressorstarter
-    {address:   37, name: "measure_temperature.i37_outside_avg",           direction: Dir.In,  scale:  10}, // BT1 - Average outside temperature -Medeltemperatur (BT1)
-    // Rad 15 Kompressor statistik
-    {address: 1087, name: "measure_hour.i1087_compressor_usage_total",     direction: Dir.In,  scale:   1}, // Total drifttid kompressor
-    {address: 1091, name: "measure_hour.i1091_compressor_usage_hotwater",  direction: Dir.In,  scale:   1}, // Total drifttid kompressor varmvatten
+    {address: 1083, name: "measure_count.i1083_compressor_starts",            direction: Dir.In,  scale:   1}, // Kompressorstarter
+    {address:   37, name: "2023_measure_temperature.i37_outside_avg",         direction: Dir.In,  scale:  10}, // BT1 - Average outside temperature -Medeltemperatur (BT1)
+    // Rad 15 Värmekurvor
+    {address:   26, name: "measure_count.h26_heat_curve",                     direction: Dir.Out, scale:   1}, // Värmekurva klimatsystem 1
+    {address:   30, name: "measure_count.h30_heat_curve_adjustment",          direction: Dir.Out, scale:   1}, // Värmeförskjutning klimatsystem 1
+    // Rad 16 Kompressor statistik
+    {address: 1087, name: "measure_hour.i1087_compressor_usage_total",        direction: Dir.In,  scale:   1}, // Total drifttid kompressor
+    {address: 1091, name: "measure_hour.i1091_compressor_usage_hotwater",     direction: Dir.In,  scale:   1}, // Total drifttid kompressor varmvatten
 
     // {address:  106, name: "target_percentage.h106_franluft_3",          direction: Dir.Out, scale:    1}, // Frånluft fläkthastighet 3
     // {address:  107, name: "target_percentage.h107_franluft_2",          direction: Dir.Out, scale:    1}, // Frånluft fläkthastighet 2
 
     // Statistics
-    {address: 2283, name: "meter_power.i2283_prod_heat_current_hour",     direction: Dir.In,  scale: 100}, // Energilogg - Producerad energi för värme under senaste timmen
-    {address: 2285, name: "meter_power.i2285_prod_water_current_hour",    direction: Dir.In,  scale: 100}, // Energilogg - Producerad energi för varmvatten under senaste timmen
+    {address: 2283, name: "meter_power.i2283_prod_heat_current_hour",         direction: Dir.In,  scale: 100}, // Energilogg - Producerad energi för värme under senaste timmen
+    {address: 2285, name: "meter_power.i2285_prod_water_current_hour",        direction: Dir.In,  scale: 100}, // Energilogg - Producerad energi för varmvatten under senaste timmen
 
-    {address: 2287, name: "meter_power.i2287_prod_pool_current_hour",      direction: Dir.In,  scale: 100}, //
-    {address: 2289, name: "meter_power.i2289_prod_cool_current_hour",      direction: Dir.In,  scale: 100}, //
+    {address: 2287, name: "meter_power.i2287_prod_pool_current_hour",         direction: Dir.In,  scale: 100}, //
+    {address: 2289, name: "meter_power.i2289_prod_cool_current_hour",         direction: Dir.In,  scale: 100}, //
 
-    {address: 2291, name: "meter_power.i2291_used_heat_current_hour",     direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi för värme under senaste timmen
-    {address: 2293, name: "meter_power.i2293_used_water_current_hour",    direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi för varmvatten under senaste timmen
+    {address: 2291, name: "meter_power.i2291_used_heat_current_hour",         direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi för värme under senaste timmen
+    {address: 2293, name: "meter_power.i2293_used_water_current_hour",        direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi för varmvatten under senaste timmen
 
-    {address: 2295, name: "meter_power.i2295_used_pool_current_hour",      direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi för pool under senaste timmen
-    {address: 2297, name: "meter_power.i2297_used_cool_current_hour",      direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi för kylning under senaste timmen
+    {address: 2295, name: "meter_power.i2295_used_pool_current_hour",         direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi för pool under senaste timmen
+    {address: 2297, name: "meter_power.i2297_used_cool_current_hour",         direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi för kylning under senaste timmen
 
-    {address: 2299, name: "meter_power.i2299_extra_heat_current_hour",    direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi av tillsatsvärmaren för värme under senaste timmen
-    {address: 2301, name: "meter_power.i2301_extra_water_current_hour",   direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi av tillsatsvärmaren för varmvatten under senaste timmen
+    {address: 2299, name: "meter_power.i2299_extra_heat_current_hour",        direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi av tillsatsvärmaren för värme under senaste timmen
+    {address: 2301, name: "meter_power.i2301_extra_water_current_hour",       direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi av tillsatsvärmaren för varmvatten under senaste timmen
 
-    {address: 2303, name: "meter_power.i2303_extra_pool_current_hour",     direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi av tillsatsvärmaren för pool under senaste timmen
-    {address:   27, name: "measure_temperature.i27_pool",                  direction: Dir.In,  scale:  10}, //
+    {address: 2303, name: "meter_power.i2303_extra_pool_current_hour",        direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi av tillsatsvärmaren för pool under senaste timmen
+    {address:   27, name: "2023_measure_temperature.i27_pool",                direction: Dir.In,  scale:  10}, //
 
     // Ej på värdesdelen av appen
 

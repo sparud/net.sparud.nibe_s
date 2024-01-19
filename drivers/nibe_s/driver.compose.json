@@ -5,47 +5,50 @@
   },
   "class": "other",
   "capabilities": [
-    "measure_temperature.i1_outside",
-    "measure_temperature.i26_inside",
+    "2023_measure_temperature.i1_outside",
+    "2023_measure_temperature.i26_inside",
 
-    "measure_temperature.i1017_calculated_supply",
-    "measure_temperature.i5_heating_supply",
+    "2023_measure_temperature.i1017_calculated_supply",
+    "2023_measure_temperature.i5_heating_supply",
 
     "measure_degree_minutes.h11_degree_minutes",
-    "measure_temperature.i7_heating_return",
+    "2023_measure_temperature.i7_heating_return",
 
     "measure_percentage.i1102_heating_pump",
     "measure_percentage.i1104_source_pump",
 
-    "measure_temperature.i10_source_in",
-    "measure_temperature.i11_source_out",
+    "2023_measure_temperature.i10_source_in",
+    "2023_measure_temperature.i11_source_out",
 
     "measure_enum.i1028_priority",
-    "measure_water.i40_flow_sensor",
+    "2023_measure_water.i40_flow_sensor",
 
-    "measure_power.i1048_compressor_add_power",
-    "measure_power.i2166_energy_usage",
+    "2023_measure_power.i1048_compressor_add_power",
+    "2023_measure_power.i2166_energy_usage",
 
-    "measure_temperature.i1047_inverter",
+    "2023_measure_temperature.i1047_inverter",
     "measure_frequency.i1046_compressor",
 
-    "measure_temperature.i8_warmwater_top",
-    "measure_temperature.i9_hot_water",
+    "2023_measure_temperature.i8_warmwater_top",
+    "2023_measure_temperature.i9_hot_water",
 
-    "measure_temperature.i19_return_air",
-    "measure_temperature.i20_supply_air",
+    "2023_measure_temperature.i19_return_air",
+    "2023_measure_temperature.i20_supply_air",
 
     "measure_percentage.h109_returnair_normal",
     "measure_enum.i1037_return_fan_step",
 
     "measure_count.i1029_additive_heat_steps",
-    "meter_power.i1027_additive_effect",
+    "2023_meter_power.i1027_additive_effect",
 
     "measure_hour.i1025_additive_usage_total",
     "measure_hour.i1069_additive_usage_hotwater",
 
     "measure_count.i1083_compressor_starts",
-    "measure_temperature.i37_outside_avg",
+    "2023_measure_temperature.i37_outside_avg",
+
+    "measure_count.h26_heat_curve",
+    "measure_count.h30_heat_curve_adjustment",
 
     "measure_hour.i1087_compressor_usage_total",
     "measure_hour.i1091_compressor_usage_hotwater",
@@ -66,10 +69,11 @@
     "meter_power.i2301_extra_water_current_hour",
 
     "meter_power.i2303_extra_pool_current_hour",
-    "measure_temperature.i27_pool",
+    "2023_measure_temperature.i27_pool",
 
     "target_temperature.h687_pool_start",
     "target_temperature.h689_pool_stop",
+
     "onoff.i1828_pool_circulation",
     "onoff.h691_pool_active",
     "onoff.h227_nightchill",
@@ -84,27 +88,36 @@
         "nl": "N/A"
       }
     },
+    "measure_count.h26_heat_curve": {
+      "title": {
+        "en": "Heatcurve",
+        "sv": "Värmekurva"
+      }
+    },
+    "measure_count.h30_heat_curve_adjustment": {
+      "title": {
+        "en": "Heatcurve adjustment",
+        "sv": "Värmeförskjutning"
+      }
+    },
 
     "measure_degree_minutes.h11_degree_minutes": {
       "title": {
         "en": "Degree minutes",
-        "sv": "Gradminuter",
-        "nl": "Graadminuten"
+        "sv": "Gradminuter"
       }
     },
 
     "measure_enum.i1028_priority": {
       "title": {
         "en": "Priority",
-        "sv": "Driftprioritering",
-        "nl": "Prioriteit"
+        "sv": "Driftprioritering"
       }
     },
     "measure_enum.i1037_return_fan_step": {
       "title": {
         "en": "Return fan step",
-        "sv": "Frånluft fläkthastighet",
-        "nl": "N/A"
+        "sv": "Frånluft fläkthastighet"
       }
     },
 
@@ -124,8 +137,7 @@
     "measure_hour.i1069_additive_usage_hotwater": {
       "title": {
         "en": "N/A",
-        "sv": "Varmvatten drifttid tillsats",
-        "nl": "N/A"
+        "sv": "Varmvatten drifttid tillsats"
       }
     },
     "measure_hour.i1087_compressor_usage_total": {
@@ -144,22 +156,19 @@
     "measure_percentage.i1102_heating_pump": {
       "title": {
         "en": "Heating pump",
-        "sv": "Värme-pumphastighet GP1",
-        "nl": "CV Pomp"
+        "sv": "Värme-pumphastighet GP1"
       }
     },
     "measure_percentage.i1104_source_pump": {
       "title": {
         "en": "Source pump",
-        "sv": "Köld-pumphastighet GP2",
-        "nl": "Bron pomp"
+        "sv": "Köld-pumphastighet GP2"
       }
     },
     "measure_percentage.h109_returnair_normal": {
       "title": {
         "en": "N/A",
-        "sv": "Frånluft fläkthastighet normal",
-        "nl": "N/A"
+        "sv": "Frånluft fläkthastighet normal"
       }
     },
 
@@ -170,113 +179,105 @@
       }
     },
 
-    "meter_power.i1027_additive_effect": {
+    "2023_meter_power.i1027_additive_effect": {
       "title": {
         "en": "Mode internal additive",
         "sv": "Effekt tillsats"
       }
     },
-    "measure_power.i1048_compressor_add_power": {
+    "2023_measure_power.i1048_compressor_add_power": {
       "title": {
         "en": "Compressor supplied power",
         "sv": "Kompressor tillförd W"
       }
     },
-    "measure_power.i2166_energy_usage": {
+    "2023_measure_power.i2166_energy_usage": {
       "title": {
         "en": "N/A",
         "sv": "Mom.effekt"
       }
     },
 
-    "measure_temperature.i1_outside": {
+    "2023_measure_temperature.i1_outside": {
       "title": {
         "en": "Outside temperature",
-        "sv": "Utetemperatur BT1",
-        "nl": "Buitentemperatuur"
+        "sv": "Utetemperatur BT1"
       }
     },
-    "measure_temperature.i5_heating_supply": {
+    "2023_measure_temperature.i5_heating_supply": {
       "title": {
         "en": "Heating supply",
-        "sv": "Framledningstemp.BT2",
-        "nl": "CV aanvoer"
+        "sv": "Framledningstemp.BT2"
       }
     },
-    "measure_temperature.i7_heating_return": {
+    "2023_measure_temperature.i7_heating_return": {
       "title": {
         "en": "Heating return",
-        "sv": "Returledningstemp.BT3",
-        "nl": "CV retour"
+        "sv": "Returledningstemp.BT3"
       }
     },
-    "measure_temperature.i8_warmwater_top": {
+    "2023_measure_temperature.i8_warmwater_top": {
       "title": {
         "en": "Hotwater top BT7",
         "sv": "Varmvatten topp BT7"
       }
     },
-    "measure_temperature.i9_hot_water": {
+    "2023_measure_temperature.i9_hot_water": {
       "title": {
         "en": "Hot water",
-        "sv": "Varmvatten laddning BT6",
-        "nl": "Heet water"
+        "sv": "Varmvatten laddning BT6"
       }
     },
-    "measure_temperature.i10_source_in": {
+    "2023_measure_temperature.i10_source_in": {
       "title": {
         "en": "Groundsource medium - in",
-        "sv": "Köldbärare in BT10",
-        "nl": "Bron in"
+        "sv": "Köldbärare in BT10"
       }
     },
-    "measure_temperature.i11_source_out": {
+    "2023_measure_temperature.i11_source_out": {
       "title": {
         "en": "Groundsource medium - out",
-        "sv": "Köldbärare ut BT11",
-        "nl": "Bron uit"
+        "sv": "Köldbärare ut BT11"
       }
     },
-    "measure_temperature.i19_return_air": {
+    "2023_measure_temperature.i19_return_air": {
       "title": {
         "en": "N/A",
         "sv": "Frånluft BT20"
       }
     },
-    "measure_temperature.i20_supply_air": {
+    "2023_measure_temperature.i20_supply_air": {
       "title": {
         "en": "N/A",
         "sv": "Avluft BT21"
       }
     },
-    "measure_temperature.i26_inside": {
+    "2023_measure_temperature.i26_inside": {
       "title": {
         "en": "Room sensor BT50",
         "sv": "Rumstemperatur 1 (BT50)"
       }
     },
-    "measure_temperature.i37_outside_avg": {
+    "2023_measure_temperature.i37_outside_avg": {
       "title": {
         "en": "Average outside temperature",
-        "sv": "Medeltemp.BT1",
-        "nl": "Gemiddelde buitentemperatuur"
+        "sv": "Medeltemp.BT1"
       }
     },
-    "measure_temperature.i1017_calculated_supply": {
+    "2023_measure_temperature.i1017_calculated_supply": {
       "title": {
         "en": "Calculated supply",
-        "sv": "Beräknad framledning",
-        "nl": "Berekende aanvoer"
+        "sv": "Beräknad framledning"
       }
     },
-    "measure_temperature.i1047_inverter": {
+    "2023_measure_temperature.i1047_inverter": {
       "title": {
         "en": "Inverter temperature",
         "sv": "Invertertemperatur"
       }
     },
 
-    "measure_water.i40_flow_sensor": {
+    "2023_measure_water.i40_flow_sensor": {
       "title": {
         "en": "Flow sensor BF1",
         "sv": "Flödesgivare BF1"
@@ -357,7 +358,7 @@
       }
     },
 
-    "measure_temperature.i27_pool": {
+    "2023_measure_temperature.i27_pool": {
       "title": {
         "en": "Pool temperature",
         "sv": "Pooltemperatur"

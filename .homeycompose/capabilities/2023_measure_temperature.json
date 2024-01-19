@@ -1,0 +1,20 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Temperature",
+    "sv": "Temperatur"
+  },
+  "units": {
+    "en": "°C" },
+  "insights": true,
+  "desc": {
+    "en": "Temperature in degrees Celsius (°C)",
+    "sv": "Temperatur i grader Celsius (°C)"
+  },
+  "decimals": 2,
+  "chartType": "spline",
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/images/temperature.svg"
+}

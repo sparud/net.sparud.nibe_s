@@ -1,0 +1,16 @@
+{
+  "type": "number",
+  "title": { "en": "Power" },
+  "units": { "en": "W" },
+  "insights": true,
+  "desc": {
+    "en": "Power in watt (W)",
+    "sv": "Effekt i watt (W)"
+  },
+  "chartType": "stepLine",
+  "decimals": 2,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/images/power.svg"
+}

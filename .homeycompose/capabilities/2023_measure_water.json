@@ -1,0 +1,20 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Water flow",
+    "sv": "Vattenflöde"
+  },
+  "units": {
+    "en": "L/min" },
+  "desc": {
+    "en": "Water flow in liters per minute (L/min)",
+    "sv": "Vattenflöde i liter per minut (L/min)"
+  },
+  "insights": true,
+  "chartType": "stepLine",
+  "decimals": 2,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/images/water.svg"
+}
