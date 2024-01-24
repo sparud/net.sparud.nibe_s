@@ -3,11 +3,54 @@
     "en": "Heatcurve displacement",
     "sv": "Ställ in kurvförskjutning"
   },
-  "type": "number",
-  "min": -5,
-  "max": 5,
-  "decimals": 0,
+  "type": "enum",
+  "values": [
+    {
+      "id": "-5",
+      "title": {"en":  "-5"}
+    },
+    {
+      "id": "-4",
+      "title": {"en":  "-4"}
+    },
+    {
+      "id": "-3",
+      "title": {"en":  "-3"}
+    },
+    {
+      "id": "-2",
+      "title": {"en":  "-2"}
+    },
+    {
+      "id": "-1",
+      "title": {"en":  "-1"}
+    },
+    {
+      "id": "0",
+      "title": {"en":  "0"}
+    },
+    {
+      "id": "1",
+      "title": {"en":  "1"}
+    },
+    {
+      "id": "2",
+      "title": {"en":  "2"}
+    },
+    {
+      "id": "3",
+      "title": {"en":  "3"}
+    },
+    {
+      "id": "4",
+      "title": {"en":  "4"}
+    },
+    {
+      "id": "5",
+      "title": {"en":  "5"}
+    }
+  ],
   "getable": true,
   "setable": true,
-  "uiComponent": "slider"
+  "uiComponent": "picker"
 }

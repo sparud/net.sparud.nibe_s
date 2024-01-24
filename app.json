@@ -61,6 +61,42 @@
             "filter": "driver_id=nibe_s"
           }
         ]
+      },
+      {
+        "id": "poolheater_is_active",
+        "title": {
+          "en": "Pool heating !{{On|Off}}",
+          "sv": "Poolvärme !{{På|Av}}"
+        },
+        "hint": {
+          "en": "Pool heating is activated",
+          "sv": "Poolvärme aktiverad"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nibe_s"
+          }
+        ]
+      },
+      {
+        "id": "poolcirculation_is_active",
+        "title": {
+          "en": "Pool circulation !{{On|Off}}",
+          "sv": "Poolcirkulation !{{På|Av}}"
+        },
+        "hint": {
+          "en": "Pool circulation is activated",
+          "sv": "Poolcirkulation aktiverad"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nibe_s"
+          }
+        ]
       }
     ],
     "actions": [
@@ -316,7 +352,7 @@
             "sv": "Värmekurva"
           }
         },
-        "measure_count.h30_heat_curve_adjustment": {
+        "measure_count.h30_heat_curve_displacement": {
           "title": {
             "en": "Heatcurve adjustment",
             "sv": "Värmeförskjutning"
@@ -677,26 +713,156 @@
         "en": "Heatcurve displacement",
         "sv": "Ställ in kurvförskjutning"
       },
-      "type": "number",
-      "min": -5,
-      "max": 5,
-      "decimals": 0,
+      "type": "enum",
+      "values": [
+        {
+          "id": "-5",
+          "title": {
+            "en": "-5"
+          }
+        },
+        {
+          "id": "-4",
+          "title": {
+            "en": "-4"
+          }
+        },
+        {
+          "id": "-3",
+          "title": {
+            "en": "-3"
+          }
+        },
+        {
+          "id": "-2",
+          "title": {
+            "en": "-2"
+          }
+        },
+        {
+          "id": "-1",
+          "title": {
+            "en": "-1"
+          }
+        },
+        {
+          "id": "0",
+          "title": {
+            "en": "0"
+          }
+        },
+        {
+          "id": "1",
+          "title": {
+            "en": "1"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "2"
+          }
+        },
+        {
+          "id": "3",
+          "title": {
+            "en": "3"
+          }
+        },
+        {
+          "id": "4",
+          "title": {
+            "en": "4"
+          }
+        },
+        {
+          "id": "5",
+          "title": {
+            "en": "5"
+          }
+        }
+      ],
       "getable": true,
       "setable": true,
-      "uiComponent": "slider"
+      "uiComponent": "picker"
     },
     "2023_curve_mode": {
       "title": {
         "en": "Heatcurve set",
         "sv": "Ställ in värmekurva"
       },
-      "type": "number",
-      "min": 0,
-      "max": 10,
-      "decimals": 0,
+      "type": "enum",
+      "values": [
+        {
+          "id": "0",
+          "title": {
+            "en": "0"
+          }
+        },
+        {
+          "id": "1",
+          "title": {
+            "en": "1"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "2"
+          }
+        },
+        {
+          "id": "3",
+          "title": {
+            "en": "3"
+          }
+        },
+        {
+          "id": "4",
+          "title": {
+            "en": "4"
+          }
+        },
+        {
+          "id": "5",
+          "title": {
+            "en": "5"
+          }
+        },
+        {
+          "id": "6",
+          "title": {
+            "en": "6"
+          }
+        },
+        {
+          "id": "7",
+          "title": {
+            "en": "7"
+          }
+        },
+        {
+          "id": "8",
+          "title": {
+            "en": "8"
+          }
+        },
+        {
+          "id": "9",
+          "title": {
+            "en": "9"
+          }
+        },
+        {
+          "id": "10",
+          "title": {
+            "en": "10"
+          }
+        }
+      ],
       "getable": true,
       "setable": true,
-      "uiComponent": "slider"
+      "uiComponent": "picker"
     },
     "2023_measure_power": {
       "type": "number",
@@ -767,6 +933,26 @@
         "sv": "Energi"
       },
       "decimals": 2,
+      "units": {
+        "en": "kWh"
+      },
+      "desc": {
+        "en": "Energy usage in kilowatt-hour (kWh)",
+        "sv": "Energianvändning i kilowattimmar (kWh)"
+      },
+      "chartType": "spline",
+      "insights": true,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/images/power.svg"
+    },
+    "2023_picker": {
+      "type": "string",
+      "title": {
+        "en": "Energy",
+        "sv": "Energi"
+      },
       "units": {
         "en": "kWh"
       },

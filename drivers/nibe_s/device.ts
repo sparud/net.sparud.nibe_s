@@ -66,6 +66,7 @@ interface Register  {
     scale?: number
     enum?: Record<number, string>
     bool?: boolean;
+    picker?: boolean;
     additional_name?: string;
 }
 
@@ -101,8 +102,7 @@ const registers: Register[] = [
     {address:   19, name: "2023_measure_temperature.i19_return_air",          direction: Dir.In,  scale:  10}, // Frånluft (AZ10-BT20)
     {address:   20, name: "2023_measure_temperature.i20_supply_air",          direction: Dir.In,  scale:  10}, // Avluft (AZ10-BT21)
     // Rad 11 Frånluft status
-    {address:  109, name: "target_percentage.h109_returnair_normal",          direction: Dir.Out, scale:   1,  // Frånluft fläkthastighet normal
-         additional_name: "measure_percentage.h109_returnair_normal"},
+    {address:  109, name: "measure_percentage.h109_returnair_normal",         direction: Dir.Out, scale:   1},  // Frånluft fläkthastighet normal
     {address: 1037, name: "measure_enum.i1037_return_fan_step",               direction: Dir.In,  enum: returnAirMap }, // Fläktläge 1 0-Normal Övrigt 1-4
     // Rad 12 Eltillsats
     {address: 1029, name: "measure_count.i1029_additive_heat_steps",          direction: Dir.In,  scale:   1}, // Driftläge intern tillsats
@@ -117,10 +117,8 @@ const registers: Register[] = [
     {address: 1087, name: "measure_hour.i1087_compressor_usage_total",        direction: Dir.In,  scale:   1}, // Total drifttid kompressor
     {address: 1091, name: "measure_hour.i1091_compressor_usage_hotwater",     direction: Dir.In,  scale:   1}, // Total drifttid kompressor varmvatten
     // Rad 16 Värmekurvor
-    {address:   26, name: "measure_count.h26_heat_curve",                     direction: Dir.Out, scale:   1,  // Värmekurva klimatsystem 1
-        additional_name: "2023_curve_mode.h26_heat_curve"},
-    {address:   30, name: "measure_count.h30_heat_curve_displacement",        direction: Dir.Out, scale:   1,  // Värmeförskjutning klimatsystem 1 RW
-        additional_name: "2023_curve_displacement.h30_heat_curve_displacement"},
+    {address:   26, name: "measure_count.h26_heat_curve",                     direction: Dir.Out},  // Värmekurva klimatsystem 1
+    {address:   30, name: "measure_count.h30_heat_curve_displacement",        direction: Dir.Out},  // Värmeförskjutning klimatsystem 1 RW
     // Rad 17 Varmvatten
     {address:   56, name: "measure_enum.h56_hotwater_demand_mode",            direction: Dir.Out, enum: hotwaterMap}, // Varmvatten behovsläge RW
         // lägg till för att styra/skriva till registret h56 ** 0 = small, 1 = medium, 2 = large, 3 = not in use, 4 = Smart control
@@ -154,21 +152,24 @@ const registers: Register[] = [
     {address: 2303, name: "meter_power.i2303_extra_pool_current_hour",        direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi av tillsatsvärmaren för pool under senaste timmen
 
     {address:   27, name: "2023_measure_temperature.i27_pool",                direction: Dir.In,  scale:  10}, //
-    {address:  237, name: "measure_count.hixx_test",                           direction: Dir.Out,  scale:   1}, // test olika register
+    {address:  237, name: "measure_count.hixx_test",                          direction: Dir.Out,  scale:   1}, // test olika register
 
     // Ej på värdesdelen av appen
 
     // Poolvärme inställningar temp
-    {address:  687, name: "target_temperature.h687_pool_start",            direction: Dir.Out, scale:  10}, //
-    {address:  689, name: "target_temperature.h689_pool_stop",             direction: Dir.Out, scale:  10}, //
+    {address:  687, name: "target_temperature.h687_pool_start",               direction: Dir.Out, scale:  10}, //
+    {address:  689, name: "target_temperature.h689_pool_stop",                direction: Dir.Out, scale:  10}, //
 
     // On / Off delar på kortet
-    {address: 1828, name: "onoff.i1828_pool_circulation",                  direction: Dir.In,  bool: true}, // Pool 1 pump status
-    {address:  691, name: "onoff.h691_pool_active",                        direction: Dir.Out, bool: true}, //
+    {address: 1828, name: "onoff.i1828_pool_circulation",                     direction: Dir.In,  bool: true}, // Pool 1 pump status
+    {address:  691, name: "onoff.h691_pool_active",                           direction: Dir.Out, bool: true}, //
 
     {address:  227, name: "onoff.h227_nightchill",                            direction: Dir.Out, bool: true}, // Nattsvalka 1
 
     {address:  65, name: "onoff.h65_Periodic_hotwater",                       direction: Dir.Out, bool: true}, // Periodisk varmvatten
+    {address:  26, name: "2023_curve_mode.h26_heat_curve",                    direction: Dir.Out, picker: true},  // Värmekurva klimatsystem 1
+    {address:  30, name: "2023_curve_displacement.h30_heat_curve_displacement", direction: Dir.Out, picker: true},  // Värmeförskjutning klimatsystem 1 RW
+    {address:  109, name: "target_percentage.h109_returnair_normal",          direction: Dir.Out, scale:   1},  // Frånluft fläkthastighet normal
 
         // Systeminställningar
     // *** Läggtill h26 Värmekurva klimatsystem 1 0 - 10
@@ -194,13 +195,17 @@ class NibeSDevice extends Device {
         if (register.scale)
             return value / register.scale;
         if (register.enum)
-            return this.homey.__(register.enum[value]);
+            return this.homey.__(register.enum[value]) || register.enum[value];
+        if (register.picker)
+            return ""+ value;
         if (register.bool)
             return value === 1;
         return value;
     }
 
     private toRegisterValue(register: Register, value: any) {
+        if (register.picker)
+            value = parseInt(value);
         if (value < 0)
             value += 65536;
         if (register.scale)
