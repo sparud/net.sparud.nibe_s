@@ -13,6 +13,14 @@ enum Dir {
     Out
 }
 
+const returnAirMap = Object({
+    0: "Normal",
+    1: "Speed 1",
+    2: "Speed 2",
+    3: "Speed 3",
+    4: "Speed 4"
+});
+
 const priorityMap = Object({
     10: "Off",
     20: "Hot water",
@@ -21,12 +29,34 @@ const priorityMap = Object({
     60: "Cooling"
 });
 
-const returnAirMap = Object({
-    0: "Normal",
-    1: "Speed 1",
-    2: "Speed 2",
-    3: "Speed 3",
-    4: "Speed 4"
+const hotwaterMap = Object({
+    0: "Small",
+    1: "Medium",
+    2: "Large",
+    3: "Not in use",
+    4: "Smart control"
+});
+
+const onetimeincreaseMap = Object({
+    0: "Off",
+    2: "One-time increase 1h",
+    3: "One-time increase 3h",
+    6: "One-time increase 6h",
+    12: "One-time increase 12h",
+    24: "One-time increase 24h",
+    48: "One-time increase 48h"
+
+});
+
+const booleanMap = Object({
+    0: "Off",
+    1: "On"
+});
+
+const modeMap = Object({
+    0: "Auto",
+    1: "Manual",
+    2: "Add.heat only"
 });
 
 interface Register  {
@@ -83,15 +113,27 @@ const registers: Register[] = [
     // Rad 14 Kompressor utomhus temp avg
     {address: 1083, name: "measure_count.i1083_compressor_starts",            direction: Dir.In,  scale:   1}, // Kompressorstarter
     {address:   37, name: "2023_measure_temperature.i37_outside_avg",         direction: Dir.In,  scale:  10}, // BT1 - Average outside temperature -Medeltemperatur (BT1)
-    // Rad 15 Värmekurvor
-    {address:   26, name: "measure_count.h26_heat_curve",                     direction: Dir.Out, scale:   1}, // Värmekurva klimatsystem 1
-    {address:   30, name: "measure_count.h30_heat_curve_adjustment",          direction: Dir.Out, scale:   1}, // Värmeförskjutning klimatsystem 1
-    // Rad 16 Kompressor statistik
+    // Rad 15 Kompressor statistik
     {address: 1087, name: "measure_hour.i1087_compressor_usage_total",        direction: Dir.In,  scale:   1}, // Total drifttid kompressor
     {address: 1091, name: "measure_hour.i1091_compressor_usage_hotwater",     direction: Dir.In,  scale:   1}, // Total drifttid kompressor varmvatten
-
-    // {address:  106, name: "target_percentage.h106_franluft_3",          direction: Dir.Out, scale:    1}, // Frånluft fläkthastighet 3
-    // {address:  107, name: "target_percentage.h107_franluft_2",          direction: Dir.Out, scale:    1}, // Frånluft fläkthastighet 2
+    // Rad 16 Värmekurvor
+    {address:   26, name: "measure_count.h26_heat_curve",                     direction: Dir.Out, scale:   1,  // Värmekurva klimatsystem 1
+        additional_name: "2023_curve_mode.h26_heat_curve"},
+    {address:   30, name: "measure_count.h30_heat_curve_displacement",        direction: Dir.Out, scale:   1,  // Värmeförskjutning klimatsystem 1 RW
+        additional_name: "2023_curve_displacement.h30_heat_curve_displacement"},
+    // Rad 17 Varmvatten
+    {address:   56, name: "measure_enum.h56_hotwater_demand_mode",            direction: Dir.Out, enum: hotwaterMap}, // Varmvatten behovsläge RW
+        // lägg till för att styra/skriva till registret h56 ** 0 = small, 1 = medium, 2 = large, 3 = not in use, 4 = Smart control
+    {address:  697, name: "measure_enum.h697_onetimeincrease_hotwater",       direction: Dir.Out,  enum: onetimeincreaseMap}, // Mer varmvatten engångshöjning 
+        // lägg till för att styra/skriva till registret h697 ** 0 = Från, 2 = Engångshöjning, 3 = 3 timmar, 6 = 6 timmar, 12 = 12 timmar, 24 = timmar, 48 = 48 Timma
+    // Rad 18 Periodisk varmvatten höjning
+    {address:  65, name: "measure_enum.h65_periodic_hotwater",                direction: Dir.Out,  enum: booleanMap}, // Periodisk varmvatten
+    {address:  66, name: "measure_day.h66_periodic_hotwater_interval",        direction: Dir.Out,  scale:   1},  // Periodiskt varmvatten intervall i dagar
+    // Rad 19 Periodisk varmvatten höjning fortsättning
+    {address:  67, name: "measure_count.h67_periodic_hotwater_start",         direction: Dir.Out,  scale:   1},  // Periodiskt varmvatten start klockan ** nu returneras sekunder från 00.00 hur visar man tid??
+    {address:  92, name: "measure_minute.h92_Periodtime hotwater",            direction: Dir.Out,  scale:   1},  // Periodtid varmvatten minuter
+    // Rad 20 Driftläge
+    {address: 237, name: "measure_enum.h237_operating_mode",                  direction: Dir.Out,  enum: modeMap}, // Driftläge
 
     // Statistics
     {address: 2283, name: "meter_power.i2283_prod_heat_current_hour",         direction: Dir.In,  scale: 100}, // Energilogg - Producerad energi för värme under senaste timmen
@@ -110,7 +152,9 @@ const registers: Register[] = [
     {address: 2301, name: "meter_power.i2301_extra_water_current_hour",       direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi av tillsatsvärmaren för varmvatten under senaste timmen
 
     {address: 2303, name: "meter_power.i2303_extra_pool_current_hour",        direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi av tillsatsvärmaren för pool under senaste timmen
+
     {address:   27, name: "2023_measure_temperature.i27_pool",                direction: Dir.In,  scale:  10}, //
+    {address:  237, name: "measure_count.hixx_test",                           direction: Dir.Out,  scale:   1}, // test olika register
 
     // Ej på värdesdelen av appen
 
@@ -122,7 +166,18 @@ const registers: Register[] = [
     {address: 1828, name: "onoff.i1828_pool_circulation",                  direction: Dir.In,  bool: true}, // Pool 1 pump status
     {address:  691, name: "onoff.h691_pool_active",                        direction: Dir.Out, bool: true}, //
 
-    {address:  227, name: "onoff.h227_nightchill",                         direction: Dir.Out, bool: true}  // Nattsvalka 1
+    {address:  227, name: "onoff.h227_nightchill",                            direction: Dir.Out, bool: true}, // Nattsvalka 1
+
+    {address:  65, name: "onoff.h65_Periodic_hotwater",                       direction: Dir.Out, bool: true}, // Periodisk varmvatten
+
+        // Systeminställningar
+    // *** Läggtill h26 Värmekurva klimatsystem 1 0 - 10
+    //{address:   26, name: "2023_curve_mode.h26_heat_curve",                   direction: Dir.Out, scale:   1}, // *** Fungerar dåligt visar % vid slider
+    // *** Lägg till h30 Värmeförskjutning klimatsystem -5 -- +5
+    //{address:   30, name: "2023_curve_displacement.h30_heat_curve_displacement",  direction: Dir.Out, scale:   1}, // *** Fungerar dåligt visar % vid slider
+    // *** Lägg till h66 Periodiskt varmvatten intervall i dagar
+    // *** Lägg till h67 Periodiskt varmvatten startid
+    // *** Lägg till h92 Periodtid varmvatten minuter
 ];
 
 const registerByName =
@@ -235,7 +290,9 @@ class NibeSDevice extends Device {
             }
         }));
 
-        // Action flow cards
+        // *** Action flow cards ***
+
+        // Pool aktivering
         this.homey.flow.getActionCard('pool_activate').registerRunListener(async (args, state) => {
             await this.writeRegister(registerByName["onoff.h691_pool_active"], true);
         });
@@ -244,15 +301,26 @@ class NibeSDevice extends Device {
             this.log("Deactivating pool");
             await this.writeRegister(registerByName["onoff.h691_pool_active"], false);
         });
+        // Pool cirkulation
+        //this.homey.flow.getActionCard('poolcirculation_activate').registerRunListener(async (args, state) => {
+        //    await this.writeRegister(registerByName["onoff.i1828_pool_circulation"], true);
+        //});
 
+        //this.homey.flow.getActionCard('poolcirculation_deactivate').registerRunListener(async (args, state) => {
+        //    this.log("Deactivating pool");
+        //    await this.writeRegister(registerByName["onoff.i1828_pool_circulation"], false);
+        //});
+        // Nattsvalka
         this.homey.flow.getActionCard('nightchill_activate').registerRunListener(async (args, state) => {
             await this.writeRegister(registerByName["onoff.h227_nightchill"], true);
         });
 
         this.homey.flow.getActionCard('nightchill_deactivate').registerRunListener(async (args, state) => {
+            this.log("Deactivating nattsvalka");
             await this.writeRegister(registerByName["onoff.h227_nightchill"], false);
         });
 
+        // Sätt pooltemperatur
         this.homey.flow.getActionCard('set_pool_start_temperature').registerRunListener(async (args, state) => {
             await this.writeRegister(registerByName["target_temperature.h687_pool_start"], args.temp);
         });
@@ -260,14 +328,24 @@ class NibeSDevice extends Device {
         this.homey.flow.getActionCard('set_pool_stop_temperature').registerRunListener(async (args, state) => {
             await this.writeRegister(registerByName["target_temperature.h689_pool_stop"], args.temp);
         });
-
+        // Sätt frånluftshastighet
         this.homey.flow.getActionCard('set_returnair_normal_speed').registerRunListener(async (args, state) => {
             await this.writeRegister(registerByName["target_percentage.h109_returnair_normal"], args.speed);
         });
 
-        // Condition flow cards
+        // *** Condition flow cards ***
+
+        // Är nattsvalka aktiv
         this.homey.flow.getConditionCard('nightchill_is_active').registerRunListener(async (args, state) => {
             return (await this.readRegister(registerByName["onoff.h227_nightchill"]) as boolean) ;
+        });
+        // Är poolcirkulation aktiv
+        this.homey.flow.getConditionCard('poolcirculation_is_active').registerRunListener(async (args, state) => {
+            return (await this.readRegister(registerByName["onoff.i1828_pool_circulation"]) as boolean) ;
+        });
+         // Är poolvärme aktiv
+         this.homey.flow.getConditionCard('poolheater_is_active').registerRunListener(async (args, state) => {
+            return (await this.readRegister(registerByName["onoff.h691_pool_active"]) as boolean) ;
         });
 
         this.client = new ModbusTCPClient(socket, 1, 5000);

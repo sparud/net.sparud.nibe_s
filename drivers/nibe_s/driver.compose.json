@@ -47,11 +47,22 @@
     "measure_count.i1083_compressor_starts",
     "2023_measure_temperature.i37_outside_avg",
 
-    "measure_count.h26_heat_curve",
-    "measure_count.h30_heat_curve_adjustment",
-
     "measure_hour.i1087_compressor_usage_total",
     "measure_hour.i1091_compressor_usage_hotwater",
+
+    "measure_count.h26_heat_curve",
+    "measure_count.h30_heat_curve_displacement",
+
+    "measure_enum.h56_hotwater_demand_mode",
+    "measure_enum.h697_onetimeincrease_hotwater",
+
+    "measure_enum.h65_periodic_hotwater",
+    "measure_day.h66_periodic_hotwater_interval",
+
+    "measure_count.h67_periodic_hotwater_start",
+    "measure_minute.h92_Periodtime hotwater",
+
+    "measure_enum.h237_operating_mode",
 
     "meter_power.i2283_prod_heat_current_hour",
     "meter_power.i2285_prod_water_current_hour",
@@ -71,33 +82,67 @@
     "meter_power.i2303_extra_pool_current_hour",
     "2023_measure_temperature.i27_pool",
 
+    "measure_count.hixx_test",
     "target_temperature.h687_pool_start",
     "target_temperature.h689_pool_stop",
 
     "onoff.i1828_pool_circulation",
     "onoff.h691_pool_active",
     "onoff.h227_nightchill",
+
+    "onoff.h65_Periodic_hotwater",
+
+    "2023_curve_mode.h26_heat_curve",
+    "2023_curve_displacement.h30_heat_curve_displacement",
+
     "target_percentage.h109_returnair_normal"
   ],
   "capabilitiesOptions": {
 
+    "measure_count.hixx_test": {
+      "title": {
+        "en": "P--TEST--",
+        "sv": "**TEST** h 237 driftläge--"
+      }
+    },
+
     "measure_count.i1029_additive_heat_steps": {
       "title": {
         "en": "N/A",
-        "sv": "Driftläge tillsats",
-        "nl": "N/A"
+        "sv": "Driftläge tillsats"
       }
     },
+    "measure_count.i1083_compressor_starts": {
+      "title": {
+        "en": "Compressor starts",
+        "sv": "Kompressorstarter"
+      }
+    },
+
+
     "measure_count.h26_heat_curve": {
       "title": {
         "en": "Heatcurve",
         "sv": "Värmekurva"
       }
     },
-    "measure_count.h30_heat_curve_adjustment": {
+    "measure_count.h30_heat_curve_displacement": {
       "title": {
         "en": "Heatcurve adjustment",
         "sv": "Värmeförskjutning"
+      }
+    },
+    "measure_count.h67_periodic_hotwater_start": {
+      "title": {
+        "en": "Periodic hotwater start time",
+        "sv": "Periodiskt varmvatten starttid"
+      }
+    },
+
+    "measure_day.h66_periodic_hotwater_interval": {
+      "title": {
+        "en": "Periodic hotwater interval",
+        "sv": "Periodiskt varmvatten intervall"
       }
     },
 
@@ -118,6 +163,30 @@
       "title": {
         "en": "Return fan step",
         "sv": "Frånluft fläkthastighet"
+      }
+    },
+    "measure_enum.h56_hotwater_demand_mode": {
+      "title": {
+        "en": "Hotwaterdemand",
+        "sv": "Varmvattenbehov"
+      }
+    },
+    "measure_enum.h65_periodic_hotwater": {
+      "title": {
+        "en": "Periodic hot water",
+        "sv": "Periodisk varmvatten"
+      }
+    },
+    "measure_enum.h237_operating_mode": {
+      "title": {
+        "en": "Operating mode",
+        "sv": "Driftläge"
+      }
+    },
+    "measure_enum.h697_onetimeincrease_hotwater": {
+      "title": {
+        "en": "One-time increase h",
+        "sv": "Engångshöjning h"
       }
     },
 
@@ -153,6 +222,13 @@
       }
     },
 
+    "measure_minute.h92_Periodtime hotwater": {
+      "title": {
+        "en": "Period time hotwater",
+        "sv": "Periodtid varmvatten"
+      }
+    },
+
     "measure_percentage.i1102_heating_pump": {
       "title": {
         "en": "Heating pump",
@@ -169,13 +245,6 @@
       "title": {
         "en": "N/A",
         "sv": "Frånluft fläkthastighet normal"
-      }
-    },
-
-    "measure_count.i1083_compressor_starts": {
-      "title": {
-        "en": "Compressor starts",
-        "sv": "Kompressorstarter"
       }
     },
 
@@ -384,6 +453,12 @@
         "sv": "Poolcirkulation på"
       }
     },
+    "onoff.h65_Periodic_hotwater": {
+      "title": {
+        "en": "Periodic hotwater on",
+        "sv": "Periodisk varmvatten på"
+      }
+    },
     "onoff.h227_nightchill": {
       "title": {
         "en": "Nightchill on",
@@ -394,6 +469,20 @@
       "title": {
         "en": "Pool heating activated",
         "sv": "Poolvärme på"
+      }
+    },
+
+    "2023_curve_mode.h26_heat_curve": {
+      "title": {
+        "en": "Heatcurve 0-10",
+        "sv": "Värmekurva 0-10"
+      }
+    },
+
+    "2023_curve_displacement.h30_heat_curve_displacement": {
+      "title": {
+        "en": "Displacement -5 - +5",
+        "sv": "Kurvförskjutning -5 - +5"
       }
     }
 

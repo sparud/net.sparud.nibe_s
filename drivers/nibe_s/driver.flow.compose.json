@@ -124,6 +124,28 @@
         "en": "Night chill is on",
         "sv": "Om nattsvalka är på"
       }
+    },
+    {
+      "id": "poolheater_is_active",
+      "title": {
+        "en": "Pool heating !{{On|Off}}",
+        "sv": "Poolvärme !{{På|Av}}"
+      },
+      "hint": {
+        "en": "Pool heating is activated",
+        "sv": "Poolvärme aktiverad"
+      }
+    },
+    {
+      "id": "poolcirculation_is_active",
+      "title": {
+        "en": "Pool circulation !{{On|Off}}",
+        "sv": "Poolcirkulation !{{På|Av}}"
+      },
+      "hint": {
+        "en": "Pool circulation is activated",
+        "sv": "Poolcirkulation aktiverad"
+      }
     }
   ]
 }

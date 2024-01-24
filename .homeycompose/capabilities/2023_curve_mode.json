@@ -1,0 +1,13 @@
+{
+  "title": {
+    "en": "Heatcurve set",
+    "sv": "Ställ in värmekurva"
+  },
+  "type": "number",
+  "min": 0,
+  "max": 10,
+  "decimals": 0,
+  "getable": true,
+  "setable": true,
+  "uiComponent": "slider"
+}

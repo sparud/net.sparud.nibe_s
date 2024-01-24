@@ -1,0 +1,13 @@
+{
+  "title": {
+    "en": "Heatcurve displacement",
+    "sv": "Ställ in kurvförskjutning"
+  },
+  "type": "number",
+  "min": -5,
+  "max": 5,
+  "decimals": 0,
+  "getable": true,
+  "setable": true,
+  "uiComponent": "slider"
+}
