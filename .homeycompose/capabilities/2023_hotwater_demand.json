@@ -1,0 +1,42 @@
+{
+
+  "title": {
+    "en": "Hotwater demand set",
+    "sv": "Ställ in varmvattenbehov"
+  },
+  "type": "enum",
+  "values": [
+    {
+      "id": "0",
+      "title": {
+        "en":  "0 = Small",
+        "sv":  "0 = Litet"
+      }
+    },
+    {
+      "id": "1",
+      "title": {
+        "en":  "1 = Medium",
+        "sv":  "1 = Medel"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en":  "2 = Large",
+        "sv":  "2 = Stort"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en":  "4 = Smart control",
+        "sv":  "4 = Smart kontroll"
+
+      }
+    }
+  ],
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker"
+}

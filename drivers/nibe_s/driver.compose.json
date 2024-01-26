@@ -60,7 +60,7 @@
     "measure_day.h66_periodic_hotwater_interval",
 
     "measure_count.h67_periodic_hotwater_start",
-    "measure_minute.h92_Periodtime hotwater",
+    "measure_minute.h92_periodtime hotwater",
 
     "measure_enum.h237_operating_mode",
 
@@ -86,16 +86,20 @@
     "target_temperature.h687_pool_start",
     "target_temperature.h689_pool_stop",
 
+    "onoff.h227_nightchill",
+    "onoff.h65_periodic_hotwater",
+
     "onoff.i1828_pool_circulation",
     "onoff.h691_pool_active",
-    "onoff.h227_nightchill",
 
-    "onoff.h65_Periodic_hotwater",
+    "target_percentage.h109_returnair_normal",
 
     "2023_curve_mode.h26_heat_curve",
     "2023_curve_displacement.h30_heat_curve_displacement",
 
-    "target_percentage.h109_returnair_normal"
+    "2023_hotwater_demand.h56_hotwater_demand_mode",
+    "2023_hotwater_increase.h697_onetimeincrease_hotwater"
+
   ],
   "capabilitiesOptions": {
 
@@ -118,8 +122,6 @@
         "sv": "Kompressorstarter"
       }
     },
-
-
     "measure_count.h26_heat_curve": {
       "title": {
         "en": "Heatcurve",
@@ -128,7 +130,7 @@
     },
     "measure_count.h30_heat_curve_displacement": {
       "title": {
-        "en": "Heatcurve adjustment",
+        "en": "Heatcurve displacement",
         "sv": "Värmeförskjutning"
       }
     },
@@ -222,7 +224,7 @@
       }
     },
 
-    "measure_minute.h92_Periodtime hotwater": {
+    "measure_minute.h92_periodtime hotwater": {
       "title": {
         "en": "Period time hotwater",
         "sv": "Periodtid varmvatten"
@@ -453,7 +455,7 @@
         "sv": "Poolcirkulation på"
       }
     },
-    "onoff.h65_Periodic_hotwater": {
+    "onoff.h65_periodic_hotwater": {
       "title": {
         "en": "Periodic hotwater on",
         "sv": "Periodisk varmvatten på"
@@ -483,6 +485,18 @@
       "title": {
         "en": "Displacement -5 - +5",
         "sv": "Kurvförskjutning -5 - +5"
+      }
+    },
+    "2023_hotwater_demand.h56_hotwater_demand_mode": {
+      "title": {
+        "en": "Hotwater demand",
+        "sv": "Varmvatten behov"
+      }
+    },
+    "2023_hotwater_increase.h697_onetimeincrease_hotwater": {
+      "title": {
+        "en": "Hotwater onetime increase",
+        "sv": "Varmvatten engångshöjning"
       }
     }
 

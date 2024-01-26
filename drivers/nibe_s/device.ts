@@ -129,7 +129,7 @@ const registers: Register[] = [
     {address:  66, name: "measure_day.h66_periodic_hotwater_interval",        direction: Dir.Out,  scale:   1},  // Periodiskt varmvatten intervall i dagar
     // Rad 19 Periodisk varmvatten höjning fortsättning
     {address:  67, name: "measure_count.h67_periodic_hotwater_start",         direction: Dir.Out,  scale:   1},  // Periodiskt varmvatten start klockan ** nu returneras sekunder från 00.00 hur visar man tid??
-    {address:  92, name: "measure_minute.h92_Periodtime hotwater",            direction: Dir.Out,  scale:   1},  // Periodtid varmvatten minuter
+    {address:  92, name: "measure_minute.h92_periodtime hotwater",            direction: Dir.Out,  scale:   1},  // Periodtid varmvatten minuter
     // Rad 20 Driftläge
     {address: 237, name: "measure_enum.h237_operating_mode",                  direction: Dir.Out,  enum: modeMap}, // Driftläge
 
@@ -161,17 +161,22 @@ const registers: Register[] = [
     {address:  689, name: "target_temperature.h689_pool_stop",                direction: Dir.Out, scale:  10}, //
 
     // On / Off delar på kortet
+    {address:  227, name: "onoff.h227_nightchill",                            direction: Dir.Out, bool: true}, // Nattsvalka 1
+    // On / Off Periodiskt varmvatten
+    {address:   65, name: "onoff.h65_periodic_hotwater",                      direction: Dir.Out, bool: true}, // Periodisk varmvatten
+    // On / Off delar på kortet
     {address: 1828, name: "onoff.i1828_pool_circulation",                     direction: Dir.In,  bool: true}, // Pool 1 pump status
     {address:  691, name: "onoff.h691_pool_active",                           direction: Dir.Out, bool: true}, //
-
-    {address:  227, name: "onoff.h227_nightchill",                            direction: Dir.Out, bool: true}, // Nattsvalka 1
-
-    {address:  65, name: "onoff.h65_Periodic_hotwater",                       direction: Dir.Out, bool: true}, // Periodisk varmvatten
+    // Inställning Frånluftshastighet
+    {address:  109, name: "target_percentage.h109_returnair_normal",          direction: Dir.Out, scale:   1},  // Frånluft fläkthastighet normal
+    // Inställning värmekurva
     {address:  26, name: "2023_curve_mode.h26_heat_curve",                    direction: Dir.Out, picker: true},  // Värmekurva klimatsystem 1
     {address:  30, name: "2023_curve_displacement.h30_heat_curve_displacement", direction: Dir.Out, picker: true},  // Värmeförskjutning klimatsystem 1 RW
-    {address:  109, name: "target_percentage.h109_returnair_normal",          direction: Dir.Out, scale:   1},  // Frånluft fläkthastighet normal
+    // Inställning varmvatten
+    {address:   56, name: "2023_hotwater_demand.h56_hotwater_demand_mode",    direction: Dir.Out, picker: true}, // Varmvatten behovsläge RW 0 = small, 1 = medium, 2 = large, 3 = not in use, 4 = Smart control
+    {address:  697, name: "2023_hotwater_increase.h697_onetimeincrease_hotwater",direction: Dir.Out, picker: true} // Mer varmvatten engångshöjning 0 = Från, 2 = Engångshöjning, 3 = 3 timmar, 6 = 6 timmar, 12 = 12 timmar, 24 = timmar, 48 = 48 Timmar
 
-        // Systeminställningar
+    // Systeminställningar
     // *** Läggtill h26 Värmekurva klimatsystem 1 0 - 10
     //{address:   26, name: "2023_curve_mode.h26_heat_curve",                   direction: Dir.Out, scale:   1}, // *** Fungerar dåligt visar % vid slider
     // *** Lägg till h30 Värmeförskjutning klimatsystem -5 -- +5
@@ -223,9 +228,9 @@ class NibeSDevice extends Device {
             : this.client!.readHoldingRegisters(register.address, 1))
         .then((resp) =>
             this.fromRegisterValue(register, resp.response.body.values[0]))
-        .catch((reason: any) => {
-            return undefined;
-        });
+        .catch((reason: any) =>
+            undefined
+        );
     }
 
     private async readRegisters() {
