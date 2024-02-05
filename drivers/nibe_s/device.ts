@@ -117,21 +117,25 @@ const registers: Register[] = [
     {address: 1087, name: "measure_hour.i1087_compressor_usage_total",        direction: Dir.In,  scale:   1}, // Total drifttid kompressor
     {address: 1091, name: "measure_hour.i1091_compressor_usage_hotwater",     direction: Dir.In,  scale:   1}, // Total drifttid kompressor varmvatten
     // Rad 16 Värmekurvor
-    {address:   26, name: "measure_count.h26_heat_curve",                     direction: Dir.Out},  // Värmekurva klimatsystem 1
-    {address:   30, name: "measure_count.h30_heat_curve_displacement",        direction: Dir.Out},  // Värmeförskjutning klimatsystem 1 RW
+    {address:   26, name: "measure_count.h26_heat_curve",                     direction: Dir.Out, scale:   1}, // Värmekurva klimatsystem 1
+    {address:   30, name: "measure_count.h30_heat_curve_displacement",        direction: Dir.Out, scale:   1}, // Värmeförskjutning klimatsystem 1 RW
     // Rad 17 Varmvatten
     {address:   56, name: "measure_enum.h56_hotwater_demand_mode",            direction: Dir.Out, enum: hotwaterMap}, // Varmvatten behovsläge RW
-        // lägg till för att styra/skriva till registret h56 ** 0 = small, 1 = medium, 2 = large, 3 = not in use, 4 = Smart control
-    {address:  697, name: "measure_enum.h697_onetimeincrease_hotwater",       direction: Dir.Out,  enum: onetimeincreaseMap}, // Mer varmvatten engångshöjning 
-        // lägg till för att styra/skriva till registret h697 ** 0 = Från, 2 = Engångshöjning, 3 = 3 timmar, 6 = 6 timmar, 12 = 12 timmar, 24 = timmar, 48 = 48 Timma
+    {address:  697, name: "measure_enum.h697_onetimeincrease_hotwater",       direction: Dir.Out,  enum: onetimeincreaseMap}, // Mer varmvatten engångshöjning
     // Rad 18 Periodisk varmvatten höjning
     {address:  65, name: "measure_enum.h65_periodic_hotwater",                direction: Dir.Out,  enum: booleanMap}, // Periodisk varmvatten
     {address:  66, name: "measure_day.h66_periodic_hotwater_interval",        direction: Dir.Out,  scale:   1},  // Periodiskt varmvatten intervall i dagar
     // Rad 19 Periodisk varmvatten höjning fortsättning
     {address:  67, name: "measure_count.h67_periodic_hotwater_start",         direction: Dir.Out,  scale:   1},  // Periodiskt varmvatten start klockan ** nu returneras sekunder från 00.00 hur visar man tid??
     {address:  92, name: "measure_minute.h92_periodtime hotwater",            direction: Dir.Out,  scale:   1},  // Periodtid varmvatten minuter
-    // Rad 20 Driftläge
+    // Rad 20 Strömförbrukning
+    {address: 103, name: "2023_measure_current.h103_fuse",                    direction: Dir.Out,  scale:   1},  // Säkring inkommande
+    {address:  50, name: "2023_measure_current.i50_sensor",                   direction: Dir.In,   scale:  10},  // Strömavkänare BE1 -L1
+    {address:  48, name: "2023_measure_current.i48_sensor",                   direction: Dir.In,   scale:  10},  // Strömavkänare BE2 -L2
+    {address:  46, name: "2023_measure_current.i46_sensor",                   direction: Dir.In,   scale:  10},  // Strömavkänare BE3 -L3
+    // Rad 21 Driftläge / pool
     {address: 237, name: "measure_enum.h237_operating_mode",                  direction: Dir.Out,  enum: modeMap}, // Driftläge
+    {address:  27, name: "2023_measure_temperature.i27_pool",                 direction: Dir.In,   scale:  10},  // Pooltemperatur
 
     // Statistics
     {address: 2283, name: "meter_power.i2283_prod_heat_current_hour",         direction: Dir.In,  scale: 100}, // Energilogg - Producerad energi för värme under senaste timmen
@@ -151,22 +155,21 @@ const registers: Register[] = [
 
     {address: 2303, name: "meter_power.i2303_extra_pool_current_hour",        direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi av tillsatsvärmaren för pool under senaste timmen
 
-    {address:   27, name: "2023_measure_temperature.i27_pool",                direction: Dir.In,  scale:  10}, //
-    {address:  237, name: "measure_count.hixx_test",                          direction: Dir.Out,  scale:   1}, // test olika register
-
     // Ej på värdesdelen av appen
 
     // Poolvärme inställningar temp
     {address:  687, name: "target_temperature.h687_pool_start",               direction: Dir.Out, scale:  10}, //
     {address:  689, name: "target_temperature.h689_pool_stop",                direction: Dir.Out, scale:  10}, //
 
-    // On / Off delar på kortet
+    // On / Off Nattsvalka
     {address:  227, name: "onoff.h227_nightchill",                            direction: Dir.Out, bool: true}, // Nattsvalka 1
     // On / Off Periodiskt varmvatten
     {address:   65, name: "onoff.h65_periodic_hotwater",                      direction: Dir.Out, bool: true}, // Periodisk varmvatten
+
     // On / Off delar på kortet
     {address: 1828, name: "onoff.i1828_pool_circulation",                     direction: Dir.In,  bool: true}, // Pool 1 pump status
     {address:  691, name: "onoff.h691_pool_active",                           direction: Dir.Out, bool: true}, //
+
     // Inställning Frånluftshastighet
     {address:  109, name: "target_percentage.h109_returnair_normal",          direction: Dir.Out, scale:   1},  // Frånluft fläkthastighet normal
     // Inställning värmekurva
@@ -174,16 +177,15 @@ const registers: Register[] = [
     {address:  30, name: "2023_curve_displacement.h30_heat_curve_displacement", direction: Dir.Out, picker: true},  // Värmeförskjutning klimatsystem 1 RW
     // Inställning varmvatten
     {address:   56, name: "2023_hotwater_demand.h56_hotwater_demand_mode",    direction: Dir.Out, picker: true}, // Varmvatten behovsläge RW 0 = small, 1 = medium, 2 = large, 3 = not in use, 4 = Smart control
-    {address:  697, name: "2023_hotwater_increase.h697_onetimeincrease_hotwater",direction: Dir.Out, picker: true} // Mer varmvatten engångshöjning 0 = Från, 2 = Engångshöjning, 3 = 3 timmar, 6 = 6 timmar, 12 = 12 timmar, 24 = timmar, 48 = 48 Timmar
+    {address:  697, name: "2023_hotwater_increase.h697_onetimeincrease_hotwater",direction: Dir.Out, picker: true}, // Mer varmvatten engångshöjning 0 = Från, 2 = Engångshöjning, 3 = 3 timmar, 6 = 6 timmar, 12 = 12 timmar, 24 = timmar, 48 = 48 Timmar
+        // Inställning Periodiskt varmvatten
+    {address:   66, name: "2023_hotwater_periodic_interval.h66_periodic_hw_interval", direction: Dir.Out, picker: true},  // Periodiskt varmvatten intervall i dagar
+    {address:   92, name: "2023_hotwater_periodtime.h92_periodtime hotwater", direction: Dir.Out, picker: true}  // Periodiskt varmvatten längd i minuter
+
 
     // Systeminställningar
-    // *** Läggtill h26 Värmekurva klimatsystem 1 0 - 10
-    //{address:   26, name: "2023_curve_mode.h26_heat_curve",                   direction: Dir.Out, scale:   1}, // *** Fungerar dåligt visar % vid slider
-    // *** Lägg till h30 Värmeförskjutning klimatsystem -5 -- +5
-    //{address:   30, name: "2023_curve_displacement.h30_heat_curve_displacement",  direction: Dir.Out, scale:   1}, // *** Fungerar dåligt visar % vid slider
-    // *** Lägg till h66 Periodiskt varmvatten intervall i dagar
     // *** Lägg till h67 Periodiskt varmvatten startid
-    // *** Lägg till h92 Periodtid varmvatten minuter
+    //{address:   67, name: "time_of_day.h67_periodic_starttime",               direction: Dir.Out, picker: true}
 ];
 
 const registerByName =

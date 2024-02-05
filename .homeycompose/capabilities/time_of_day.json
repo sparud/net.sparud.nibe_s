@@ -1,0 +1,66 @@
+{
+  "title": {
+    "en": "Time of day",
+    "sv": "Klockslag"
+  },
+  "type": "enum",
+  "values": [
+    {
+      "id": "0",
+      "title": {
+        "en": "00:00"
+      }
+    },
+    {
+      "id": "900",
+      "title": {
+        "en": "00:15"
+      }
+    },
+    {
+      "id": "1800",
+      "title": {
+        "en": "00:30"
+      }
+    },
+    {
+      "id": "2700",
+      "title": {
+        "en": "00:45"
+      }
+    },
+    {
+      "id": "3600",
+      "title": {
+        "en": "01:00"
+      }
+    },
+    {
+      "id": "4500",
+      "title": {
+        "en": "01:15"
+      }
+    },
+    {
+      "id": "5400",
+      "title": {
+        "en": "01:35"
+      }
+    },
+    {
+      "id": "6300",
+      "title": {
+        "en": "01:45"
+      }
+    },
+    {
+      "id": "7200",
+      "title": {
+        "en": "02:00"
+      }
+    }
+  ],
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker"
+}

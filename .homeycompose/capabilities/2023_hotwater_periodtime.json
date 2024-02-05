@@ -1,0 +1,40 @@
+{
+  "title": {
+    "en": "Periodic hotwater length set",
+    "sv": "Ställ in längd periodiskt varmvatten"
+  },
+  "type": "enum",
+  "values": [
+    {
+      "id": "30",
+      "title": {
+        "en":  "30 = Minutes",
+        "sv":  "30 = Minuter"
+      }
+    },
+    {
+      "id": "45",
+      "title": {
+        "en":  "45 = Minutes",
+        "sv":  "45 = Minuter"
+      }
+    },
+    {
+      "id": "60",
+      "title": {
+        "en":  "60 = Minutes",
+        "sv":  "60 = Minuter"
+      }
+    },
+    {
+      "id": "120",
+      "title": {
+        "en":  "120 = Minutes",
+        "sv":  "120 = Minuter"
+      }
+    }
+  ],
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker"
+}

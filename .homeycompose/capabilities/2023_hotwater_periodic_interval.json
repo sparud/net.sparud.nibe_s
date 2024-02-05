@@ -1,0 +1,40 @@
+{
+  "title": {
+    "en": "Periodic hotwater interval set",
+    "sv": "Ställ in intervall periodiskt varmvatten"
+  },
+  "type": "enum",
+  "values": [
+    {
+      "id": "7",
+      "title": {
+        "en":  "7 = Days",
+        "sv":  "7 = Dagar"
+      }
+    },
+    {
+      "id": "14",
+      "title": {
+        "en":  "14 = Days",
+        "sv":  "14 = Dagar"
+      }
+    },
+    {
+      "id": "21",
+      "title": {
+        "en":  "21 = Days",
+        "sv":  "21 = Dagar"
+      }
+    },
+    {
+      "id": "28",
+      "title": {
+        "en":  "28 = Days",
+        "sv":  "28 = Dagar"
+      }
+    }
+  ],
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker"
+}

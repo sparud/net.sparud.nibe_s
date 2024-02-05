@@ -302,8 +302,13 @@
         "measure_enum.h65_periodic_hotwater",
         "measure_day.h66_periodic_hotwater_interval",
         "measure_count.h67_periodic_hotwater_start",
-        "measure_minute.h92_Periodtime hotwater",
+        "measure_minute.h92_periodtime hotwater",
+        "2023_measure_current.h103_fuse",
+        "2023_measure_current.i50_sensor",
+        "2023_measure_current.i48_sensor",
+        "2023_measure_current.i46_sensor",
         "measure_enum.h237_operating_mode",
+        "2023_measure_temperature.i27_pool",
         "meter_power.i2283_prod_heat_current_hour",
         "meter_power.i2285_prod_water_current_hour",
         "meter_power.i2287_prod_pool_current_hour",
@@ -315,25 +320,21 @@
         "meter_power.i2299_extra_heat_current_hour",
         "meter_power.i2301_extra_water_current_hour",
         "meter_power.i2303_extra_pool_current_hour",
-        "2023_measure_temperature.i27_pool",
-        "measure_count.hixx_test",
         "target_temperature.h687_pool_start",
         "target_temperature.h689_pool_stop",
+        "onoff.h227_nightchill",
+        "onoff.h65_periodic_hotwater",
         "onoff.i1828_pool_circulation",
         "onoff.h691_pool_active",
-        "onoff.h227_nightchill",
-        "onoff.h65_Periodic_hotwater",
+        "target_percentage.h109_returnair_normal",
         "2023_curve_mode.h26_heat_curve",
         "2023_curve_displacement.h30_heat_curve_displacement",
-        "target_percentage.h109_returnair_normal"
+        "2023_hotwater_demand.h56_hotwater_demand_mode",
+        "2023_hotwater_increase.h697_onetimeincrease_hotwater",
+        "2023_hotwater_periodic_interval.h66_periodic_hw_interval",
+        "2023_hotwater_periodtime.h92_periodtime hotwater"
       ],
       "capabilitiesOptions": {
-        "measure_count.hixx_test": {
-          "title": {
-            "en": "P--TEST--",
-            "sv": "**TEST** h 237 driftläge--"
-          }
-        },
         "measure_count.i1029_additive_heat_steps": {
           "title": {
             "en": "N/A",
@@ -354,7 +355,7 @@
         },
         "measure_count.h30_heat_curve_displacement": {
           "title": {
-            "en": "Heatcurve adjustment",
+            "en": "Heatcurve displacement",
             "sv": "Värmeförskjutning"
           }
         },
@@ -362,6 +363,30 @@
           "title": {
             "en": "Periodic hotwater start time",
             "sv": "Periodiskt varmvatten starttid"
+          }
+        },
+        "2023_measure_current.i46_sensor": {
+          "title": {
+            "en": "Current sensor BE3 -L3",
+            "sv": "Strömsensor BE3 -L3"
+          }
+        },
+        "2023_measure_current.i48_sensor": {
+          "title": {
+            "en": "Current sensor BE2 -L2",
+            "sv": "Strömsensor BE2 -L2"
+          }
+        },
+        "2023_measure_current.i50_sensor": {
+          "title": {
+            "en": "Current sensor BE1 -L1",
+            "sv": "Strömsensor BE1 -L1"
+          }
+        },
+        "2023_measure_current.h103_fuse": {
+          "title": {
+            "en": "Fuse incoming",
+            "sv": "Inkommande säkring"
           }
         },
         "measure_day.h66_periodic_hotwater_interval": {
@@ -397,7 +422,7 @@
         "measure_enum.h65_periodic_hotwater": {
           "title": {
             "en": "Periodic hot water",
-            "sv": "Periodisk varmvatten"
+            "sv": "Periodiskt varmvatten"
           }
         },
         "measure_enum.h237_operating_mode": {
@@ -442,7 +467,7 @@
             "sv": "Total timmar värme"
           }
         },
-        "measure_minute.h92_Periodtime hotwater": {
+        "measure_minute.h92_periodtime hotwater": {
           "title": {
             "en": "Period time hotwater",
             "sv": "Periodtid varmvatten"
@@ -466,6 +491,42 @@
             "sv": "Frånluft fläkthastighet normal"
           }
         },
+        "2023_curve_mode.h26_heat_curve": {
+          "title": {
+            "en": "Heatcurve 0-10",
+            "sv": "Värmekurva 0-10"
+          }
+        },
+        "2023_curve_displacement.h30_heat_curve_displacement": {
+          "title": {
+            "en": "Displacement -5 - +5",
+            "sv": "Kurvförskjutning -5 - +5"
+          }
+        },
+        "2023_hotwater_demand.h56_hotwater_demand_mode": {
+          "title": {
+            "en": "Hotwater demand",
+            "sv": "Varmvatten behov"
+          }
+        },
+        "2023_hotwater_increase.h697_onetimeincrease_hotwater": {
+          "title": {
+            "en": "Hotwater onetime increase",
+            "sv": "Varmvatten engångshöjning"
+          }
+        },
+        "2023_hotwater_periodtime.h92_periodtime hotwater": {
+          "title": {
+            "en": "Periodic hotwater length",
+            "sv": "Periodiskt varmvatten längd"
+          }
+        },
+        "2023_hotwater_periodic_interval.h66_periodic_hw_interval": {
+          "title": {
+            "en": "Periodic hotwater interval",
+            "sv": "Periodiskt varmvatten intervall"
+          }
+        },
         "2023_meter_power.i1027_additive_effect": {
           "title": {
             "en": "Mode internal additive",
@@ -480,8 +541,8 @@
         },
         "2023_measure_power.i2166_energy_usage": {
           "title": {
-            "en": "N/A",
-            "sv": "Mom.effekt"
+            "en": "Current power",
+            "sv": "Momentan effekt"
           }
         },
         "2023_measure_temperature.i1_outside": {
@@ -542,6 +603,12 @@
           "title": {
             "en": "Room sensor BT50",
             "sv": "Rumstemperatur 1 (BT50)"
+          }
+        },
+        "2023_measure_temperature.i27_pool": {
+          "title": {
+            "en": "Pool temperature",
+            "sv": "Pooltemperatur"
           }
         },
         "2023_measure_temperature.i37_outside_avg": {
@@ -640,12 +707,6 @@
             "sv": "Frånluft normal"
           }
         },
-        "2023_measure_temperature.i27_pool": {
-          "title": {
-            "en": "Pool temperature",
-            "sv": "Pooltemperatur"
-          }
-        },
         "target_temperature.h687_pool_start": {
           "title": {
             "en": "Pool heat start",
@@ -664,7 +725,7 @@
             "sv": "Poolcirkulation på"
           }
         },
-        "onoff.h65_Periodic_hotwater": {
+        "onoff.h65_periodic_hotwater": {
           "title": {
             "en": "Periodic hotwater on",
             "sv": "Periodisk varmvatten på"
@@ -680,18 +741,6 @@
           "title": {
             "en": "Pool heating activated",
             "sv": "Poolvärme på"
-          }
-        },
-        "2023_curve_mode.h26_heat_curve": {
-          "title": {
-            "en": "Heatcurve 0-10",
-            "sv": "Värmekurva 0-10"
-          }
-        },
-        "2023_curve_displacement.h30_heat_curve_displacement": {
-          "title": {
-            "en": "Displacement -5 - +5",
-            "sv": "Kurvförskjutning -5 - +5"
           }
         }
       },
@@ -863,6 +912,207 @@
       "getable": true,
       "setable": true,
       "uiComponent": "picker"
+    },
+    "2023_hotwater_demand": {
+      "title": {
+        "en": "Hotwater demand set",
+        "sv": "Ställ in varmvattenbehov"
+      },
+      "type": "enum",
+      "values": [
+        {
+          "id": "0",
+          "title": {
+            "en": "0 = Small",
+            "sv": "0 = Litet"
+          }
+        },
+        {
+          "id": "1",
+          "title": {
+            "en": "1 = Medium",
+            "sv": "1 = Medel"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "2 = Large",
+            "sv": "2 = Stort"
+          }
+        },
+        {
+          "id": "4",
+          "title": {
+            "en": "4 = Smart control",
+            "sv": "4 = Smart kontroll"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker"
+    },
+    "2023_hotwater_increase": {
+      "title": {
+        "en": "Hotwater onetime increase set",
+        "sv": "Ställ in varmvatten engångshöjning"
+      },
+      "type": "enum",
+      "values": [
+        {
+          "id": "0",
+          "title": {
+            "en": "0 = Off",
+            "sv": "0 = Av"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "2 = Increase 1 h",
+            "sv": "2 = Höjning 1 h"
+          }
+        },
+        {
+          "id": "3",
+          "title": {
+            "en": "3 = Increase 3 h",
+            "sv": "3 = Höjning 3 h"
+          }
+        },
+        {
+          "id": "6",
+          "title": {
+            "en": "6 = Increase 6 h",
+            "sv": "6 = Höjning 6 h"
+          }
+        },
+        {
+          "id": "12",
+          "title": {
+            "en": "12 = Increase 12 h",
+            "sv": "12 = Höjning 12 h"
+          }
+        },
+        {
+          "id": "24",
+          "title": {
+            "en": "24 = Increase 24 h",
+            "sv": "24 = Höjning 24 h"
+          }
+        },
+        {
+          "id": "48",
+          "title": {
+            "en": "48= = Increase 48 h",
+            "sv": "48 = Höjning 48 h"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker"
+    },
+    "2023_hotwater_periodic_interval": {
+      "title": {
+        "en": "Periodic hotwater interval set",
+        "sv": "Ställ in intervall periodiskt varmvatten"
+      },
+      "type": "enum",
+      "values": [
+        {
+          "id": "7",
+          "title": {
+            "en": "7 = Days",
+            "sv": "7 = Dagar"
+          }
+        },
+        {
+          "id": "14",
+          "title": {
+            "en": "14 = Days",
+            "sv": "14 = Dagar"
+          }
+        },
+        {
+          "id": "21",
+          "title": {
+            "en": "21 = Days",
+            "sv": "21 = Dagar"
+          }
+        },
+        {
+          "id": "28",
+          "title": {
+            "en": "28 = Days",
+            "sv": "28 = Dagar"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker"
+    },
+    "2023_hotwater_periodtime": {
+      "title": {
+        "en": "Periodic hotwater length set",
+        "sv": "Ställ in längd periodiskt varmvatten"
+      },
+      "type": "enum",
+      "values": [
+        {
+          "id": "30",
+          "title": {
+            "en": "30 = Minutes",
+            "sv": "30 = Minuter"
+          }
+        },
+        {
+          "id": "45",
+          "title": {
+            "en": "45 = Minutes",
+            "sv": "45 = Minuter"
+          }
+        },
+        {
+          "id": "60",
+          "title": {
+            "en": "60 = Minutes",
+            "sv": "60 = Minuter"
+          }
+        },
+        {
+          "id": "120",
+          "title": {
+            "en": "120 = Minutes",
+            "sv": "120 = Minuter"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker"
+    },
+    "2023_measure_current": {
+      "type": "number",
+      "title": {
+        "en": "A"
+      },
+      "units": {
+        "en": "A"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Current in ampere (A)",
+        "sv": "Ström i ampere (A)"
+      },
+      "chartType": "stepLine",
+      "decimals": 1,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/images/power.svg"
     },
     "2023_measure_power": {
       "type": "number",
@@ -1119,6 +1369,72 @@
       "getable": true,
       "setable": true,
       "uiComponent": "slider"
+    },
+    "time_of_day": {
+      "title": {
+        "en": "Time of day",
+        "sv": "Klockslag"
+      },
+      "type": "enum",
+      "values": [
+        {
+          "id": "0",
+          "title": {
+            "en": "00:00"
+          }
+        },
+        {
+          "id": "900",
+          "title": {
+            "en": "00:15"
+          }
+        },
+        {
+          "id": "1800",
+          "title": {
+            "en": "00:30"
+          }
+        },
+        {
+          "id": "2700",
+          "title": {
+            "en": "00:45"
+          }
+        },
+        {
+          "id": "3600",
+          "title": {
+            "en": "01:00"
+          }
+        },
+        {
+          "id": "4500",
+          "title": {
+            "en": "01:15"
+          }
+        },
+        {
+          "id": "5400",
+          "title": {
+            "en": "01:35"
+          }
+        },
+        {
+          "id": "6300",
+          "title": {
+            "en": "01:45"
+          }
+        },
+        {
+          "id": "7200",
+          "title": {
+            "en": "02:00"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker"
     }
   }
 }
