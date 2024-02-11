@@ -1,0 +1,19 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Energy",
+    "sv": "Energi"
+  },
+  "units": {
+    "en": "kWh" },
+  "desc": {
+    "en": "Energy usage in kilowatt-hour (kWh)",
+    "sv": "Energianvändning i kilowattimmar (kWh)"
+  },
+  "chartType": "spline",
+  "insights": true,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/images/power.svg"
+}

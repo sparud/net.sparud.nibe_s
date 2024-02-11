@@ -137,24 +137,6 @@ const registers: Register[] = [
     {address: 237, name: "measure_enum.h237_operating_mode",                  direction: Dir.Out,  enum: modeMap}, // Driftläge
     {address:  27, name: "2023_measure_temperature.i27_pool",                 direction: Dir.In,   scale:  10},  // Pooltemperatur
 
-    // Statistics
-    {address: 2283, name: "meter_power.i2283_prod_heat_current_hour",         direction: Dir.In,  scale: 100}, // Energilogg - Producerad energi för värme under senaste timmen
-    {address: 2285, name: "meter_power.i2285_prod_water_current_hour",        direction: Dir.In,  scale: 100}, // Energilogg - Producerad energi för varmvatten under senaste timmen
-
-    {address: 2287, name: "meter_power.i2287_prod_pool_current_hour",         direction: Dir.In,  scale: 100}, //
-    {address: 2289, name: "meter_power.i2289_prod_cool_current_hour",         direction: Dir.In,  scale: 100}, //
-
-    {address: 2291, name: "meter_power.i2291_used_heat_current_hour",         direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi för värme under senaste timmen
-    {address: 2293, name: "meter_power.i2293_used_water_current_hour",        direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi för varmvatten under senaste timmen
-
-    {address: 2295, name: "meter_power.i2295_used_pool_current_hour",         direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi för pool under senaste timmen
-    {address: 2297, name: "meter_power.i2297_used_cool_current_hour",         direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi för kylning under senaste timmen
-
-    {address: 2299, name: "meter_power.i2299_extra_heat_current_hour",        direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi av tillsatsvärmaren för värme under senaste timmen
-    {address: 2301, name: "meter_power.i2301_extra_water_current_hour",       direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi av tillsatsvärmaren för varmvatten under senaste timmen
-
-    {address: 2303, name: "meter_power.i2303_extra_pool_current_hour",        direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi av tillsatsvärmaren för pool under senaste timmen
-
     // Ej på värdesdelen av appen
 
     // Poolvärme inställningar temp
@@ -180,12 +162,29 @@ const registers: Register[] = [
     {address:  697, name: "2023_hotwater_increase.h697_onetimeincrease_hotwater",direction: Dir.Out, picker: true}, // Mer varmvatten engångshöjning 0 = Från, 2 = Engångshöjning, 3 = 3 timmar, 6 = 6 timmar, 12 = 12 timmar, 24 = timmar, 48 = 48 Timmar
         // Inställning Periodiskt varmvatten
     {address:   66, name: "2023_hotwater_periodic_interval.h66_periodic_hw_interval", direction: Dir.Out, picker: true},  // Periodiskt varmvatten intervall i dagar
-    {address:   92, name: "2023_hotwater_periodtime.h92_periodtime hotwater", direction: Dir.Out, picker: true}  // Periodiskt varmvatten längd i minuter
-
+    {address:   92, name: "2023_hotwater_periodtime.h92_periodtime hotwater", direction: Dir.Out, picker: true},  // Periodiskt varmvatten längd i minuter
 
     // Systeminställningar
     // *** Lägg till h67 Periodiskt varmvatten startid
     //{address:   67, name: "time_of_day.h67_periodic_starttime",               direction: Dir.Out, picker: true}
+    // Statistics
+    {address: 2283, name: "meter_power.i2283_prod_heat_current_hour",         direction: Dir.In,  scale: 100}, // Energilogg - Producerad energi för värme under senaste timmen
+    {address: 2285, name: "meter_power.i2285_prod_water_current_hour",        direction: Dir.In,  scale: 100}, // Energilogg - Producerad energi för varmvatten under senaste timmen
+
+    {address: 2287, name: "meter_power.i2287_prod_pool_current_hour",         direction: Dir.In,  scale: 100}, //
+    {address: 2289, name: "meter_power.i2289_prod_cool_current_hour",         direction: Dir.In,  scale: 100}, //
+
+    {address: 2291, name: "meter_power.i2291_used_heat_current_hour",         direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi för värme under senaste timmen
+    {address: 2293, name: "meter_power.i2293_used_water_current_hour",        direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi för varmvatten under senaste timmen
+
+    {address: 2295, name: "meter_power.i2295_used_pool_current_hour",         direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi för pool under senaste timmen
+    {address: 2297, name: "meter_power.i2297_used_cool_current_hour",         direction: Dir.In,  scale: 100}, //Energilogg - Förbrukad energi för kylning under senaste timmen
+
+    {address: 2299, name: "meter_power.i2299_extra_heat_current_hour",        direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi av tillsatsvärmaren för värme under senaste timmen
+    {address: 2301, name: "meter_power.i2301_extra_water_current_hour",       direction: Dir.In,  scale: 100}, // Energilogg - Förbrukad energi av tillsatsvärmaren för varmvatten under senaste timmen
+
+    {address: 2303, name: "meter_power.i2303_extra_pool_current_hour",        direction: Dir.In,  scale: 100}  //Energilogg - Förbrukad energi av tillsatsvärmaren för pool under senaste timmen
+
 ];
 
 const registerByName =
