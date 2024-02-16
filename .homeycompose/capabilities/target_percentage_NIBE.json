@@ -1,0 +1,16 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Fanspeed",
+    "sv": "Fläkthastighet"
+  },
+  "chartType": "stepLine",
+  "min": 0,
+  "max": 100,
+  "decimals": 0,
+  "units": "%",
+  "getable": true,
+  "setable": true,
+  "uiComponent": "slider"
+ 
+}

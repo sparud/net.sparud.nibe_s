@@ -32,7 +32,7 @@
       "title": {
         "en":  "6 = Increase 6 h",
         "sv":  "6 = Höjning 6 h"
-
+      
       }
     },
     {
@@ -40,7 +40,7 @@
       "title": {
         "en":  "12 = Increase 12 h",
         "sv":  "12 = Höjning 12 h"
-
+      
       }
     },
     {
@@ -48,7 +48,7 @@
       "title": {
         "en":  "24 = Increase 24 h",
         "sv":  "24 = Höjning 24 h"
-
+      
       }
     },
     {
@@ -56,7 +56,7 @@
       "title": {
         "en":  "48= = Increase 48 h",
         "sv":  "48 = Höjning 48 h"
-
+      
       }
     }
   ],

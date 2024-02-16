@@ -45,126 +45,230 @@
   "flow": {
     "conditions": [
       {
-        "id": "nightchill_is_active",
+        "id": "numeric_value_comparison",
         "title": {
-          "en": "Night chill !{{On|Off}}",
-          "sv": "Nattsvalka !{{På|Av}}"
+          "en": "Value comparison",
+          "sv": "Värdejämförelse"
         },
-        "hint": {
-          "en": "Night chill is on",
-          "sv": "Om nattsvalka är på"
+        "titleFormatted": {
+          "en": "Value of [[register]] is [[comparison]] [[value]]",
+          "sv": "Värdet på [[register]] är [[comparison]] [[value]]"
         },
         "args": [
           {
             "type": "device",
             "name": "device",
             "filter": "driver_id=nibe_s"
+          },
+          {
+            "type": "autocomplete",
+            "name": "register",
+            "title": {
+              "en": "Register",
+              "sv": "Register"
+            }
+          },
+          {
+            "type": "dropdown",
+            "name": "comparison",
+            "title": {
+              "en": "Comparison",
+              "sv": "Jämförelse"
+            },
+            "values": [
+              {
+                "id": "<",
+                "title": {
+                  "en": "less than",
+                  "sv": "mindre än"
+                }
+              },
+              {
+                "id": ">",
+                "title": {
+                  "en": "greater than",
+                  "sv": "större än"
+                }
+              }
+            ]
+          },
+          {
+            "type": "number",
+            "name": "value",
+            "title": {
+              "en": "Value",
+              "sv": "Värde"
+            }
           }
         ]
       },
       {
-        "id": "poolheater_is_active",
+        "id": "feature_enabled",
         "title": {
-          "en": "Pool heating !{{On|Off}}",
-          "sv": "Poolvärme !{{På|Av}}"
+          "en": "Feature enabled",
+          "sv": "Egenskap påslagen"
         },
-        "hint": {
-          "en": "Pool heating is activated",
-          "sv": "Poolvärme aktiverad"
+        "titleFormatted": {
+          "en": "[[register]] is enabled",
+          "sv": "[[register]] är på"
         },
         "args": [
           {
             "type": "device",
             "name": "device",
             "filter": "driver_id=nibe_s"
+          },
+          {
+            "type": "autocomplete",
+            "name": "register",
+            "title": {
+              "en": "Register",
+              "sv": "Register"
+            }
           }
         ]
       },
       {
-        "id": "poolcirculation_is_active",
+        "id": "measure_enum_NIBE.h56_hotwater_demand_mode.enum",
         "title": {
-          "en": "Pool circulation !{{On|Off}}",
-          "sv": "Poolcirkulation !{{På|Av}}"
+          "en": "Increase warm water mode",
+          "sv": "Varmvattenbehov"
         },
-        "hint": {
-          "en": "Pool circulation is activated",
-          "sv": "Poolcirkulation aktiverad"
+        "titleFormatted": {
+          "en": "Hotwater demand mode is [[mode]]",
+          "sv": "Varmvattenbehov är [[mode]]"
         },
         "args": [
           {
             "type": "device",
             "name": "device",
             "filter": "driver_id=nibe_s"
+          },
+          {
+            "type": "autocomplete",
+            "name": "mode",
+            "title": {
+              "en": "Mode",
+              "sv": "Läge"
+            }
+          }
+        ]
+      },
+      {
+        "id": "measure_enum_NIBE.h237_operating_mode.enum",
+        "title": {
+          "en": "Operating mode",
+          "sv": "Driftläge"
+        },
+        "titleFormatted": {
+          "en": "Operating mode is [[mode]]",
+          "sv": "Driftläge är [[mode]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nibe_s"
+          },
+          {
+            "type": "autocomplete",
+            "name": "mode",
+            "title": {
+              "en": "Mode",
+              "sv": "Läge"
+            }
+          }
+        ]
+      },
+      {
+        "id": "measure_enum_NIBE.h697_onetimeincrease_hotwater.enum",
+        "title": {
+          "en": "Increase warm water mode",
+          "sv": "Tillstånd för ökat varmvatten"
+        },
+        "titleFormatted": {
+          "en": "Increase warm water mode is [[mode]]",
+          "sv": "Tillstånd för ökning av varmvatten är [[mode]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nibe_s"
+          },
+          {
+            "type": "autocomplete",
+            "name": "mode",
+            "title": {
+              "en": "Mode",
+              "sv": "Läge"
+            }
+          }
+        ]
+      },
+      {
+        "id": "measure_enum_NIBE.i1028_priority.enum",
+        "title": {
+          "en": "Priority",
+          "sv": "Prioritet"
+        },
+        "titleFormatted": {
+          "en": "Priority is [[mode]]",
+          "sv": "Prioritet är [[mode]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nibe_s"
+          },
+          {
+            "type": "autocomplete",
+            "name": "mode",
+            "title": {
+              "en": "Mode",
+              "sv": "Läge"
+            }
+          }
+        ]
+      },
+      {
+        "id": "measure_enum_NIBE.i1037_return_fan_step.enum",
+        "title": {
+          "en": "Fan mode",
+          "sv": "Fläktläge"
+        },
+        "titleFormatted": {
+          "en": "Fan mode is [[mode]]",
+          "sv": "Fläktläge är [[mode]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nibe_s"
+          },
+          {
+            "type": "autocomplete",
+            "name": "mode",
+            "title": {
+              "en": "Mode",
+              "sv": "Läge"
+            }
           }
         ]
       }
     ],
     "actions": [
       {
-        "id": "nightchill_activate",
+        "id": "measure_enum_NIBE.h56_hotwater_demand_mode.enum",
         "title": {
-          "en": "Enable night chill",
-          "sv": "Aktivera nattsvalka"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=nibe_s"
-          }
-        ]
-      },
-      {
-        "id": "nightchill_deactivate",
-        "title": {
-          "en": "Disable night chill",
-          "sv": "Stäng av nattsvalka"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=nibe_s"
-          }
-        ]
-      },
-      {
-        "id": "pool_activate",
-        "title": {
-          "en": "Enable pool heating",
-          "sv": "Aktivera poolvärme"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=nibe_s"
-          }
-        ]
-      },
-      {
-        "id": "pool_deactivate",
-        "title": {
-          "en": "Disable pool heating",
-          "sv": "Stäng av poolvärme"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=nibe_s"
-          }
-        ]
-      },
-      {
-        "id": "set_pool_start_temperature",
-        "title": {
-          "en": "Set start temperature for pool heating to ...",
-          "sv": "Ställ in starttemperatur för poolvärmning till ..."
+          "en": "Hotwater demand mode",
+          "sv": "Varmvattenbehov"
         },
         "titleFormatted": {
-          "en": "Set start temperature for pool heating to [[temp]]",
-          "sv": "Ställ in starttemperatur för poolvärmning till [[temp]]"
+          "en": "Hotwater demand mode [[mode]]",
+          "sv": "Varmvattenbehov [[mode]]"
         },
         "args": [
           {
@@ -173,30 +277,110 @@
             "filter": "driver_id=nibe_s"
           },
           {
-            "name": "temp",
+            "type": "autocomplete",
+            "name": "mode",
+            "title": {
+              "en": "Mode",
+              "sv": "Läge"
+            }
+          }
+        ]
+      },
+      {
+        "id": "measure_enum_NIBE.h237_operating_mode.enum",
+        "title": {
+          "en": "Set operating mode",
+          "sv": "Ställ in driftläge"
+        },
+        "titleFormatted": {
+          "en": "Set operating mode [[mode]]",
+          "sv": "Ställ in driftläge [[mode]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nibe_s"
+          },
+          {
+            "type": "autocomplete",
+            "name": "mode",
+            "title": {
+              "en": "Mode",
+              "sv": "Läge"
+            }
+          }
+        ]
+      },
+      {
+        "id": "measure_enum_NIBE.h697_onetimeincrease_hotwater.enum",
+        "title": {
+          "en": "Increase warm water ",
+          "sv": "Öka varmvatten"
+        },
+        "titleFormatted": {
+          "en": "Increase warm water [[mode]]",
+          "sv": "Ökning av varmvatten [[mode]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nibe_s"
+          },
+          {
+            "type": "autocomplete",
+            "name": "mode",
+            "title": {
+              "en": "Mode",
+              "sv": "Läge"
+            }
+          }
+        ]
+      },
+      {
+        "id": "set_numeric_value",
+        "title": {
+          "en": "Set value",
+          "sv": "Sätt värde"
+        },
+        "titleFormatted": {
+          "en": "Set value of [[register]] to [[value]]",
+          "sv": "Sätt värdet på [[register]] till [[value]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nibe_s"
+          },
+          {
+            "type": "autocomplete",
+            "name": "register",
+            "title": {
+              "en": "Register",
+              "sv": "Register"
+            }
+          },
+          {
             "type": "number",
+            "name": "value",
             "title": {
-              "en": "Temperature",
-              "sv": "Temperatur"
-            },
-            "placeholder": {
-              "en": "Celsius degrees",
-              "sv": "I grader Celsius"
-            },
-            "min": 10,
-            "max": 35
+              "en": "Value",
+              "sv": "Värde"
+            }
           }
         ]
       },
       {
-        "id": "set_returnair_normal_speed",
+        "id": "enable_feature",
         "title": {
-          "en": "Set normal fan speed to ...",
-          "sv": "Sätt normal fläkthastighet till ..."
+          "en": "Enable feature",
+          "sv": "Slå på egenskap"
         },
         "titleFormatted": {
-          "en": "Set normal fan speed to [[speed]]",
-          "sv": "Sätt normal fläkthastighet till [[speed]]"
+          "en": "Enable [[register]]",
+          "sv": "Slå på [[register]]"
         },
         "args": [
           {
@@ -205,33 +389,24 @@
             "filter": "driver_id=nibe_s"
           },
           {
-            "name": "speed",
-            "type": "range",
+            "type": "autocomplete",
+            "name": "register",
             "title": {
-              "en": "Speed",
-              "sv": "Hastighet"
-            },
-            "placeholder": {
-              "en": "%",
-              "sv": "%"
-            },
-            "min": 10,
-            "max": 100,
-            "step": 1,
-            "label": "%",
-            "labelDecimals": 0
+              "en": "Register",
+              "sv": "Register"
+            }
           }
         ]
       },
       {
-        "id": "set_pool_stop_temperature",
+        "id": "disable_feature",
         "title": {
-          "en": "Set stop temperature for pool heating to ...",
-          "sv": "Ställ in stopptemperatur för poolvärmning till..."
+          "en": "Disable feature",
+          "sv": "Stäng av egenskap"
         },
         "titleFormatted": {
-          "en": "Set stop temperature for pool heating to [[temp]]",
-          "sv": "Ställ in stopptemperatur för poolvärmning till [[temp]]"
+          "en": "Disable [[register]]",
+          "sv": "Stäng av [[register]]"
         },
         "args": [
           {
@@ -240,18 +415,12 @@
             "filter": "driver_id=nibe_s"
           },
           {
-            "name": "temp",
-            "type": "number",
+            "type": "autocomplete",
+            "name": "register",
             "title": {
-              "en": "Temperature",
-              "sv": "Temperatur"
-            },
-            "placeholder": {
-              "en": "Celsius degrees",
-              "sv": "Grader Celsius"
-            },
-            "min": 10,
-            "max": 35
+              "en": "Register",
+              "sv": "Register"
+            }
           }
         ]
       }
@@ -260,448 +429,479 @@
   "drivers": [
     {
       "name": {
-        "en": "Nibe S-series",
-        "sv": "Nibe S-serien"
+        "en": "Nibe S-series direct connection (Modbus)",
+        "sv": "Nibe S-serien direktkopplad (Modbus)"
       },
       "class": "other",
       "capabilities": [
-        "2023_measure_temperature.i1_outside",
-        "2023_measure_temperature.i26_inside",
-        "2023_measure_temperature.i1017_calculated_supply",
-        "2023_measure_temperature.i5_heating_supply",
-        "measure_degree_minutes.h11_degree_minutes",
-        "2023_measure_temperature.i7_heating_return",
-        "measure_percentage.i1102_heating_pump",
-        "measure_percentage.i1104_source_pump",
-        "2023_measure_temperature.i10_source_in",
-        "2023_measure_temperature.i11_source_out",
-        "measure_enum.i1028_priority",
-        "2023_measure_water.i40_flow_sensor",
-        "2023_measure_power.i1048_compressor_add_power",
-        "2023_measure_power.i2166_energy_usage",
-        "2023_measure_temperature.i1047_inverter",
-        "measure_frequency.i1046_compressor",
-        "2023_measure_temperature.i8_warmwater_top",
-        "2023_measure_temperature.i9_hot_water",
-        "2023_measure_temperature.i19_return_air",
-        "2023_measure_temperature.i20_supply_air",
-        "measure_percentage.h109_returnair_normal",
-        "measure_enum.i1037_return_fan_step",
-        "measure_count.i1029_additive_heat_steps",
-        "2023_meter_power.i1027_additive_effect",
-        "measure_hour.i1025_additive_usage_total",
-        "measure_hour.i1069_additive_usage_hotwater",
-        "measure_count.i1083_compressor_starts",
-        "2023_measure_temperature.i37_outside_avg",
-        "measure_hour.i1087_compressor_usage_total",
-        "measure_hour.i1091_compressor_usage_hotwater",
-        "measure_count.h26_heat_curve",
-        "measure_count.h30_heat_curve_displacement",
-        "measure_enum.h56_hotwater_demand_mode",
-        "measure_enum.h697_onetimeincrease_hotwater",
-        "measure_enum.h65_periodic_hotwater",
-        "measure_day.h66_periodic_hotwater_interval",
-        "measure_count.h67_periodic_hotwater_start",
-        "measure_minute.h92_periodtime hotwater",
-        "2023_measure_current.h103_fuse",
-        "2023_measure_current.i50_sensor",
-        "2023_measure_current.i48_sensor",
-        "2023_measure_current.i46_sensor",
-        "measure_enum.h237_operating_mode",
-        "2023_measure_temperature.i27_pool",
+        "measure_temperature_NIBE.i1_outside",
+        "measure_temperature_NIBE.i26_inside",
+        "measure_temperature_NIBE.i1017_calculated_supply",
+        "measure_temperature_NIBE.i5_heating_supply",
+        "measure_degree_minutes_NIBE.h11_degree_minutes",
+        "measure_temperature_NIBE.i7_heating_return",
+        "measure_percentage_NIBE.i1102_heating_pump",
+        "measure_percentage_NIBE.i1104_source_pump",
+        "measure_temperature_NIBE.i10_source_in",
+        "measure_temperature_NIBE.i11_source_out",
+        "measure_enum_NIBE.i1028_priority",
+        "measure_water_NIBE.i40_flow_sensor",
+        "measure_power_NIBE.i1048_compressor_add_power",
+        "measure_power_NIBE.i2166_energy_usage",
+        "measure_temperature_NIBE.i1047_inverter",
+        "measure_frequency_NIBE.i1046_compressor",
+        "measure_temperature_NIBE.i8_warmwater_top",
+        "measure_temperature_NIBE.i9_hot_water",
+        "measure_temperature_NIBE.i19_return_air",
+        "measure_temperature_NIBE.i20_supply_air",
+        "measure_percentage_NIBE.h109_returnair_normal",
+        "measure_enum_NIBE.i1037_return_fan_step",
+        "measure_count_NIBE.i1029_additive_heat_steps",
+        "meter_power_NIBE.i1027_additive_effect",
+        "measure_hour_NIBE.i1025_additive_usage_total",
+        "measure_hour_NIBE.i1069_additive_usage_hotwater",
+        "measure_count_NIBE.i1083_compressor_starts",
+        "measure_temperature_NIBE.i37_outside_avg",
+        "measure_hour_NIBE.i1087_compressor_usage_total",
+        "measure_hour_NIBE.i1091_compressor_usage_hotwater",
+        "measure_count_NIBE.h26_heat_curve",
+        "measure_count_NIBE.h30_heat_curve_displacement",
+        "measure_enum_NIBE.h56_hotwater_demand_mode",
+        "measure_enum_NIBE.h697_onetimeincrease_hotwater",
+        "measure_enum_NIBE.h65_periodic_hotwater",
+        "measure_day_NIBE.h66_periodic_hotwater_interval",
+        "measure_count_NIBE.h67_periodic_hotwater_start",
+        "measure_minute_NIBE.h92_periodtime_hotwater",
+        "measure_current_NIBE.h103_fuse",
+        "measure_current_NIBE.i50_sensor",
+        "measure_current_NIBE.i48_sensor",
+        "measure_current_NIBE.i46_sensor",
+        "measure_enum_NIBE.h237_operating_mode",
+        "measure_temperature_NIBE.i27_pool",
+        "measure_temperature_NIBE.i12_heating_supply",
+        "measure_temperature_NIBE.i13_discharge",
+        "measure_temperature_NIBE.i14_liquid_line",
+        "measure_temperature_NIBE.i16_suction_gas",
+        "meter_power_NIBE.i2283_prod_heat_current_hour",
+        "meter_power_NIBE.i2285_prod_water_current_hour",
+        "meter_power_NIBE.i2287_prod_pool_current_hour",
+        "meter_power_NIBE.i2289_prod_cool_current_hour",
+        "meter_power_NIBE.i2291_used_heat_current_hour",
+        "meter_power_NIBE.i2293_used_water_current_hour",
+        "meter_power_NIBE.i2295_used_pool_current_hour",
+        "meter_power_NIBE.i2297_used_cool_current_hour",
+        "meter_power_NIBE.i2299_extra_heat_current_hour",
+        "meter_power_NIBE.i2301_extra_water_current_hour",
+        "meter_power_NIBE.i2303_extra_pool_current_hour",
         "target_temperature.h687_pool_start",
         "target_temperature.h689_pool_stop",
         "onoff.h227_nightchill",
         "onoff.h65_periodic_hotwater",
         "onoff.i1828_pool_circulation",
         "onoff.h691_pool_active",
-        "target_percentage.h109_returnair_normal",
-        "2023_curve_mode.h26_heat_curve",
-        "2023_curve_displacement.h30_heat_curve_displacement",
-        "2023_hotwater_demand.h56_hotwater_demand_mode",
-        "2023_hotwater_increase.h697_onetimeincrease_hotwater",
-        "2023_hotwater_periodic_interval.h66_periodic_hw_interval",
-        "2023_hotwater_periodtime.h92_periodtime hotwater",
-        "meter_power.i2283_prod_heat_current_hour",
-        "meter_power.i2285_prod_water_current_hour",
-        "meter_power.i2287_prod_pool_current_hour",
-        "meter_power.i2289_prod_cool_current_hour",
-        "meter_power.i2291_used_heat_current_hour",
-        "meter_power.i2293_used_water_current_hour",
-        "meter_power.i2295_used_pool_current_hour",
-        "meter_power.i2297_used_cool_current_hour",
-        "meter_power.i2299_extra_heat_current_hour",
-        "meter_power.i2301_extra_water_current_hour",
-        "meter_power.i2303_extra_pool_current_hour"
+        "target_percentage_NIBE.h109_returnair_normal",
+        "curve_mode_NIBE.h26_heat_curve",
+        "curve_displacement_NIBE.h30_heat_curve_displacement",
+        "hotwater_demand_NIBE.h56_hotwater_demand_mode",
+        "hotwater_increase_NIBE.h697_onetimeincrease_hotwater",
+        "hotwater_periodic_interval_NIBE.h66_periodic_hw_interval",
+        "hotwater_periodtime_NIBE.h92_periodtime_hotwater",
+        "onoff.h180_enable_addition",
+        "onoff.h181_enable_heating",
+        "onoff.h182_enable_cooling"
       ],
       "capabilitiesOptions": {
-        "measure_count.i1029_additive_heat_steps": {
+        "measure_count_NIBE.i1029_additive_heat_steps": {
           "title": {
             "en": "N/A",
             "sv": "Driftläge tillsats"
           }
         },
-        "measure_count.i1083_compressor_starts": {
+        "measure_count_NIBE.i1083_compressor_starts": {
           "title": {
             "en": "Compressor starts",
             "sv": "Kompressorstarter"
           }
         },
-        "measure_count.h26_heat_curve": {
+        "measure_count_NIBE.h26_heat_curve": {
           "title": {
             "en": "Heatcurve",
             "sv": "Värmekurva"
           }
         },
-        "measure_count.h30_heat_curve_displacement": {
+        "measure_count_NIBE.h30_heat_curve_displacement": {
           "title": {
             "en": "Heatcurve displacement",
             "sv": "Värmeförskjutning"
           }
         },
-        "measure_count.h67_periodic_hotwater_start": {
+        "measure_count_NIBE.h67_periodic_hotwater_start": {
           "title": {
             "en": "Periodic hotwater start time",
             "sv": "Periodiskt varmvatten starttid"
           }
         },
-        "2023_measure_current.i46_sensor": {
+        "measure_current_NIBE.i46_sensor": {
           "title": {
             "en": "Current sensor BE3 -L3",
             "sv": "Strömsensor BE3 -L3"
           }
         },
-        "2023_measure_current.i48_sensor": {
+        "measure_current_NIBE.i48_sensor": {
           "title": {
             "en": "Current sensor BE2 -L2",
             "sv": "Strömsensor BE2 -L2"
           }
         },
-        "2023_measure_current.i50_sensor": {
+        "measure_current_NIBE.i50_sensor": {
           "title": {
             "en": "Current sensor BE1 -L1",
             "sv": "Strömsensor BE1 -L1"
           }
         },
-        "2023_measure_current.h103_fuse": {
+        "measure_current_NIBE.h103_fuse": {
           "title": {
             "en": "Fuse incoming",
             "sv": "Inkommande säkring"
           }
         },
-        "measure_day.h66_periodic_hotwater_interval": {
+        "measure_day_NIBE.h66_periodic_hotwater_interval": {
           "title": {
             "en": "Periodic hotwater interval",
             "sv": "Periodiskt varmvatten intervall"
           }
         },
-        "measure_degree_minutes.h11_degree_minutes": {
+        "measure_degree_minutes_NIBE.h11_degree_minutes": {
           "title": {
             "en": "Degree minutes",
             "sv": "Gradminuter"
           }
         },
-        "measure_enum.i1028_priority": {
+        "measure_enum_NIBE.i1028_priority": {
           "title": {
             "en": "Priority",
             "sv": "Driftprioritering"
           }
         },
-        "measure_enum.i1037_return_fan_step": {
+        "measure_enum_NIBE.i1037_return_fan_step": {
           "title": {
             "en": "Return fan step",
             "sv": "Frånluft fläkthastighet"
           }
         },
-        "measure_enum.h56_hotwater_demand_mode": {
+        "measure_enum_NIBE.h56_hotwater_demand_mode": {
           "title": {
             "en": "Hotwaterdemand",
             "sv": "Varmvattenbehov"
           }
         },
-        "measure_enum.h65_periodic_hotwater": {
+        "measure_enum_NIBE.h65_periodic_hotwater": {
           "title": {
             "en": "Periodic hot water",
             "sv": "Periodiskt varmvatten"
           }
         },
-        "measure_enum.h237_operating_mode": {
+        "measure_enum_NIBE.h237_operating_mode": {
           "title": {
             "en": "Operating mode",
             "sv": "Driftläge"
           }
         },
-        "measure_enum.h697_onetimeincrease_hotwater": {
+        "measure_enum_NIBE.h697_onetimeincrease_hotwater": {
           "title": {
             "en": "One-time increase h",
             "sv": "Engångshöjning h"
           }
         },
-        "measure_frequency.i1046_compressor": {
+        "measure_frequency_NIBE.i1046_compressor": {
           "title": {
             "en": "Compressor frequency",
             "sv": "Kompressorfrekvens"
           }
         },
-        "measure_hour.i1025_additive_usage_total": {
+        "measure_hour_NIBE.i1025_additive_usage_total": {
           "title": {
             "en": "Total additive duration",
             "sv": "Total drifttid tillsats"
           }
         },
-        "measure_hour.i1069_additive_usage_hotwater": {
+        "measure_hour_NIBE.i1069_additive_usage_hotwater": {
           "title": {
             "en": "N/A",
             "sv": "Varmvatten drifttid tillsats"
           }
         },
-        "measure_hour.i1087_compressor_usage_total": {
+        "measure_hour_NIBE.i1087_compressor_usage_total": {
           "title": {
             "en": "Total compressor duration",
             "sv": "Total drifttid kompressor"
           }
         },
-        "measure_hour.i1091_compressor_usage_hotwater": {
+        "measure_hour_NIBE.i1091_compressor_usage_hotwater": {
           "title": {
             "en": "Total compressor duration hotwater",
             "sv": "Total timmar värme"
           }
         },
-        "measure_minute.h92_periodtime hotwater": {
+        "measure_minute_NIBE.h92_periodtime_hotwater": {
           "title": {
             "en": "Period time hotwater",
             "sv": "Periodtid varmvatten"
           }
         },
-        "measure_percentage.i1102_heating_pump": {
+        "measure_percentage_NIBE.i1102_heating_pump": {
           "title": {
             "en": "Heating pump",
             "sv": "Värme-pumphastighet GP1"
           }
         },
-        "measure_percentage.i1104_source_pump": {
+        "measure_percentage_NIBE.i1104_source_pump": {
           "title": {
             "en": "Source pump",
             "sv": "Köld-pumphastighet GP2"
           }
         },
-        "measure_percentage.h109_returnair_normal": {
+        "measure_percentage_NIBE.h109_returnair_normal": {
           "title": {
             "en": "N/A",
             "sv": "Frånluft fläkthastighet normal"
           }
         },
-        "2023_curve_mode.h26_heat_curve": {
+        "curve_mode_NIBE.h26_heat_curve": {
           "title": {
             "en": "Heatcurve 0-10",
             "sv": "Värmekurva 0-10"
           }
         },
-        "2023_curve_displacement.h30_heat_curve_displacement": {
+        "curve_displacement_NIBE.h30_heat_curve_displacement": {
           "title": {
             "en": "Displacement -5 - +5",
             "sv": "Kurvförskjutning -5 - +5"
           }
         },
-        "2023_hotwater_demand.h56_hotwater_demand_mode": {
+        "hotwater_demand_NIBE.h56_hotwater_demand_mode": {
           "title": {
             "en": "Hotwater demand",
             "sv": "Varmvatten behov"
           }
         },
-        "2023_hotwater_increase.h697_onetimeincrease_hotwater": {
+        "hotwater_increase_NIBE.h697_onetimeincrease_hotwater": {
           "title": {
             "en": "Hotwater onetime increase",
             "sv": "Varmvatten engångshöjning"
           }
         },
-        "2023_hotwater_periodtime.h92_periodtime hotwater": {
+        "hotwater_periodtime_NIBE.h92_periodtime_hotwater": {
           "title": {
             "en": "Periodic hotwater length",
             "sv": "Periodiskt varmvatten längd"
           }
         },
-        "2023_hotwater_periodic_interval.h66_periodic_hw_interval": {
+        "hotwater_periodic_interval_NIBE.h66_periodic_hw_interval": {
           "title": {
             "en": "Periodic hotwater interval",
             "sv": "Periodiskt varmvatten intervall"
           }
         },
-        "2023_meter_power.i1027_additive_effect": {
+        "meter_power_NIBE.i1027_additive_effect": {
           "title": {
             "en": "Mode internal additive",
             "sv": "Effekt tillsats"
           }
         },
-        "2023_measure_power.i1048_compressor_add_power": {
+        "measure_power_NIBE.i1048_compressor_add_power": {
           "title": {
             "en": "Compressor supplied power",
             "sv": "Kompressor tillförd W"
           }
         },
-        "2023_measure_power.i2166_energy_usage": {
+        "measure_power_NIBE.i2166_energy_usage": {
           "title": {
             "en": "Current power",
             "sv": "Momentan effekt"
           }
         },
-        "2023_measure_temperature.i1_outside": {
+        "measure_temperature_NIBE.i1_outside": {
           "title": {
             "en": "Outside temperature",
             "sv": "Utetemperatur BT1"
           }
         },
-        "2023_measure_temperature.i5_heating_supply": {
+        "measure_temperature_NIBE.i5_heating_supply": {
           "title": {
             "en": "Heating supply",
             "sv": "Framledningstemp.BT2"
           }
         },
-        "2023_measure_temperature.i7_heating_return": {
+        "measure_temperature_NIBE.i7_heating_return": {
           "title": {
             "en": "Heating return",
             "sv": "Returledningstemp.BT3"
           }
         },
-        "2023_measure_temperature.i8_warmwater_top": {
+        "measure_temperature_NIBE.i8_warmwater_top": {
           "title": {
             "en": "Hotwater top BT7",
             "sv": "Varmvatten topp BT7"
           }
         },
-        "2023_measure_temperature.i9_hot_water": {
+        "measure_temperature_NIBE.i9_hot_water": {
           "title": {
             "en": "Hot water",
             "sv": "Varmvatten laddning BT6"
           }
         },
-        "2023_measure_temperature.i10_source_in": {
+        "measure_temperature_NIBE.i10_source_in": {
           "title": {
             "en": "Groundsource medium - in",
             "sv": "Köldbärare in BT10"
           }
         },
-        "2023_measure_temperature.i11_source_out": {
+        "measure_temperature_NIBE.i11_source_out": {
           "title": {
             "en": "Groundsource medium - out",
             "sv": "Köldbärare ut BT11"
           }
         },
-        "2023_measure_temperature.i19_return_air": {
+        "measure_temperature_NIBE.i19_return_air": {
           "title": {
             "en": "N/A",
             "sv": "Frånluft BT20"
           }
         },
-        "2023_measure_temperature.i20_supply_air": {
+        "measure_temperature_NIBE.i20_supply_air": {
           "title": {
             "en": "N/A",
             "sv": "Avluft BT21"
           }
         },
-        "2023_measure_temperature.i26_inside": {
+        "measure_temperature_NIBE.i26_inside": {
           "title": {
             "en": "Room sensor BT50",
             "sv": "Rumstemperatur 1 (BT50)"
           }
         },
-        "2023_measure_temperature.i27_pool": {
+        "measure_temperature_NIBE.i27_pool": {
           "title": {
             "en": "Pool temperature",
             "sv": "Pooltemperatur"
           }
         },
-        "2023_measure_temperature.i37_outside_avg": {
+        "measure_temperature_NIBE.i12_heating_supply": {
+          "title": {
+            "en": "Heating supply BT12",
+            "sv": "Framledning BT12"
+          }
+        },
+        "measure_temperature_NIBE.i13_discharge": {
+          "title": {
+            "en": "Discharge BT14",
+            "sv": "Hetgas BT14"
+          }
+        },
+        "measure_temperature_NIBE.i14_liquid_line": {
+          "title": {
+            "en": "Liquid line BT15",
+            "sv": "Vätskeledning BT15"
+          }
+        },
+        "measure_temperature_NIBE.i16_suction_gas": {
+          "title": {
+            "en": "Suction gas BT17",
+            "sv": "Suggas BT17"
+          }
+        },
+        "measure_temperature_NIBE.i37_outside_avg": {
           "title": {
             "en": "Average outside temperature",
             "sv": "Medeltemp.BT1"
           }
         },
-        "2023_measure_temperature.i1017_calculated_supply": {
+        "measure_temperature_NIBE.i1017_calculated_supply": {
           "title": {
             "en": "Calculated supply",
             "sv": "Beräknad framledning"
           }
         },
-        "2023_measure_temperature.i1047_inverter": {
+        "measure_temperature_NIBE.i1047_inverter": {
           "title": {
             "en": "Inverter temperature",
             "sv": "Invertertemperatur"
           }
         },
-        "2023_measure_water.i40_flow_sensor": {
+        "measure_water_NIBE.i40_flow_sensor": {
           "title": {
             "en": "Flow sensor BF1",
             "sv": "Flödesgivare BF1"
           }
         },
-        "meter_power.i2283_prod_heat_current_hour": {
+        "meter_power_NIBE.i2283_prod_heat_current_hour": {
           "title": {
             "en": "Energy produced for heat during current hour",
             "sv": "Producerad energi för värme senaste timmen"
           }
         },
-        "meter_power.i2285_prod_water_current_hour": {
+        "meter_power_NIBE.i2285_prod_water_current_hour": {
           "title": {
             "en": "Energy produced for hot water during current hour",
             "sv": "Producerad energi för varmvatten senaste timmen"
           }
         },
-        "meter_power.i2287_prod_pool_current_hour": {
+        "meter_power_NIBE.i2287_prod_pool_current_hour": {
           "title": {
             "en": "Energy produced for pool during current hour",
             "sv": "Producerad energi för pool senaste timmen"
           }
         },
-        "meter_power.i2289_prod_cool_current_hour": {
+        "meter_power_NIBE.i2289_prod_cool_current_hour": {
           "title": {
             "en": "Energy produced for cooling during current hour",
             "sv": "Producerad energi för kylning senaste timmen"
           }
         },
-        "meter_power.i2291_used_heat_current_hour": {
+        "meter_power_NIBE.i2291_used_heat_current_hour": {
           "title": {
             "en": "Energy used for heat during current hour",
             "sv": "Utnyttjad elenergi för värme senaste timmen"
           }
         },
-        "meter_power.i2293_used_water_current_hour": {
+        "meter_power_NIBE.i2293_used_water_current_hour": {
           "title": {
             "en": "Energy used for hot water during current hour",
             "sv": "Utnyttjad elenergi för varmvatten senaste timmen"
           }
         },
-        "meter_power.i2295_used_pool_current_hour": {
+        "meter_power_NIBE.i2295_used_pool_current_hour": {
           "title": {
             "en": "Energy used for pool during current hour",
             "sv": "Utnyttjad elenergi för pool senaste timmen"
           }
         },
-        "meter_power.i2297_used_cool_current_hour": {
+        "meter_power_NIBE.i2297_used_cool_current_hour": {
           "title": {
             "en": "Energy used for cooling during current hour",
             "sv": "Utnyttjad elenergi för kylning senaste timmen"
           }
         },
-        "meter_power.i2299_extra_heat_current_hour": {
+        "meter_power_NIBE.i2299_extra_heat_current_hour": {
           "title": {
             "en": "Energy used by additional heater for heat during current hour",
             "sv": "Utnyttjad elenergi för extra värme senaste timmen"
           }
         },
-        "meter_power.i2301_extra_water_current_hour": {
+        "meter_power_NIBE.i2301_extra_water_current_hour": {
           "title": {
             "en": "Energy used by additional heater for hot water during current hour",
             "sv": "Utnyttjad elenergi för extra varmvatten senaste timmen"
           }
         },
-        "meter_power.i2303_extra_pool_current_hour": {
+        "meter_power_NIBE.i2303_extra_pool_current_hour": {
           "title": {
             "en": "Energy used by additional heater for pool during current hour",
             "sv": "Utnyttjad elenergi för extra poolvärme senaste timmen"
           }
         },
-        "target_percentage.h109_returnair_normal": {
+        "target_percentage_NIBE.h109_returnair_normal": {
           "title": {
             "en": "Returnair normal",
             "sv": "Frånluft normal"
@@ -727,20 +927,38 @@
         },
         "onoff.h65_periodic_hotwater": {
           "title": {
-            "en": "Periodic hotwater on",
-            "sv": "Periodisk varmvatten på"
+            "en": "Periodic hotwater",
+            "sv": "Periodiskt varmvatten"
           }
         },
         "onoff.h227_nightchill": {
           "title": {
-            "en": "Nightchill on",
-            "sv": "Nattsvalka på"
+            "en": "Nightchill",
+            "sv": "Nattsvalka"
           }
         },
         "onoff.h691_pool_active": {
           "title": {
-            "en": "Pool heating activated",
-            "sv": "Poolvärme på"
+            "en": "Pool heating",
+            "sv": "Poolvärme"
+          }
+        },
+        "onoff.h180_enable_addition": {
+          "title": {
+            "en": "Allow additional heating",
+            "sv": "Tillåt elpatron"
+          }
+        },
+        "onoff.h181_enable_heating": {
+          "title": {
+            "en": "Allow heating",
+            "sv": "Tillåt värme"
+          }
+        },
+        "onoff.h182_enable_cooling": {
+          "title": {
+            "en": "Allow cooling",
+            "sv": "Tillåt kyla"
           }
         }
       },
@@ -757,7 +975,7 @@
     }
   ],
   "capabilities": {
-    "2023_curve_displacement": {
+    "curve_displacement_NIBE": {
       "title": {
         "en": "Heatcurve displacement",
         "sv": "Ställ in kurvförskjutning"
@@ -835,7 +1053,7 @@
       "setable": true,
       "uiComponent": "picker"
     },
-    "2023_curve_mode": {
+    "curve_mode_NIBE": {
       "title": {
         "en": "Heatcurve set",
         "sv": "Ställ in värmekurva"
@@ -913,7 +1131,7 @@
       "setable": true,
       "uiComponent": "picker"
     },
-    "2023_hotwater_demand": {
+    "hotwater_demand_NIBE": {
       "title": {
         "en": "Hotwater demand set",
         "sv": "Ställ in varmvattenbehov"
@@ -945,7 +1163,7 @@
           "id": "4",
           "title": {
             "en": "4 = Smart control",
-            "sv": "4 = Smart kontroll"
+            "sv": "4 = Smart kontrol"
           }
         }
       ],
@@ -953,7 +1171,7 @@
       "setable": true,
       "uiComponent": "picker"
     },
-    "2023_hotwater_increase": {
+    "hotwater_increase_NIBE": {
       "title": {
         "en": "Hotwater onetime increase set",
         "sv": "Ställ in varmvatten engångshöjning"
@@ -1014,7 +1232,7 @@
       "setable": true,
       "uiComponent": "picker"
     },
-    "2023_hotwater_periodic_interval": {
+    "hotwater_periodic_interval_NIBE": {
       "title": {
         "en": "Periodic hotwater interval set",
         "sv": "Ställ in intervall periodiskt varmvatten"
@@ -1054,7 +1272,7 @@
       "setable": true,
       "uiComponent": "picker"
     },
-    "2023_hotwater_periodtime": {
+    "hotwater_periodtime_NIBE": {
       "title": {
         "en": "Periodic hotwater length set",
         "sv": "Ställ in längd periodiskt varmvatten"
@@ -1094,7 +1312,22 @@
       "setable": true,
       "uiComponent": "picker"
     },
-    "2023_measure_current": {
+    "measure_count_NIBE": {
+      "type": "number",
+      "title": {
+        "en": "Measure Count"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": ""
+      },
+      "insights": true,
+      "chartType": "spline",
+      "icon": "/assets/images/counter.svg"
+    },
+    "measure_current_NIBE": {
       "type": "number",
       "title": {
         "en": "A"
@@ -1114,7 +1347,116 @@
       "uiComponent": "sensor",
       "icon": "/assets/images/power.svg"
     },
-    "2023_measure_power": {
+    "measure_day_NIBE": {
+      "type": "number",
+      "title": {
+        "en": "Measure Day"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "Days",
+        "sv": "Dagar"
+      },
+      "insights": true,
+      "chartType": "spline",
+      "icon": "/assets/images/time.svg"
+    },
+    "measure_degree_minutes_NIBE": {
+      "type": "number",
+      "title": {
+        "en": "Degree minutes",
+        "sv": "Gradminuter"
+      },
+      "uiComponent": "sensor",
+      "chartType": "spline",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "°Cmin"
+      },
+      "icon": "/assets/images/degree_minutes.svg",
+      "insights": true
+    },
+    "measure_enum_NIBE": {
+      "type": "string",
+      "title": {
+        "en": "Measure enum"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": ""
+      },
+      "insights": true,
+      "chartType": "spline",
+      "icon": "/assets/images/select.svg"
+    },
+    "measure_frequency_NIBE": {
+      "type": "number",
+      "title": {
+        "en": "Measure Frequency"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "Hz"
+      },
+      "insights": true,
+      "chartType": "spline",
+      "icon": "/assets/images/frequency.svg"
+    },
+    "measure_hour_NIBE": {
+      "type": "number",
+      "title": {
+        "en": "Measure Hour"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "Hours",
+        "sv": "Timmar"
+      },
+      "insights": true,
+      "chartType": "spline",
+      "icon": "/assets/images/time.svg"
+    },
+    "measure_minute_NIBE": {
+      "type": "number",
+      "title": {
+        "en": "Measure Minute"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "Minutes",
+        "sv": "Minuter"
+      },
+      "insights": true,
+      "chartType": "spline",
+      "icon": "/assets/images/time.svg"
+    },
+    "measure_percentage_NIBE": {
+      "type": "number",
+      "title": {
+        "en": "Measure percentage"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "%"
+      },
+      "insights": true,
+      "chartType": "spline",
+      "icon": "/assets/images/pump.svg"
+    },
+    "measure_power_NIBE": {
       "type": "number",
       "title": {
         "en": "Power"
@@ -1134,7 +1476,7 @@
       "uiComponent": "sensor",
       "icon": "/assets/images/power.svg"
     },
-    "2023_measure_temperature": {
+    "measure_temperature_NIBE": {
       "type": "number",
       "title": {
         "en": "Temperature",
@@ -1155,7 +1497,7 @@
       "uiComponent": "sensor",
       "icon": "/assets/images/temperature.svg"
     },
-    "2023_measure_water": {
+    "measure_water_NIBE": {
       "type": "number",
       "title": {
         "en": "Water flow",
@@ -1176,7 +1518,7 @@
       "uiComponent": "sensor",
       "icon": "/assets/images/water.svg"
     },
-    "2023_meter_power": {
+    "meter_power_NIBE": {
       "type": "number",
       "title": {
         "en": "Energy",
@@ -1197,168 +1539,10 @@
       "uiComponent": "sensor",
       "icon": "/assets/images/power.svg"
     },
-    "2023_picker": {
-      "type": "string",
-      "title": {
-        "en": "Energy",
-        "sv": "Energi"
-      },
-      "units": {
-        "en": "kWh"
-      },
-      "desc": {
-        "en": "Energy usage in kilowatt-hour (kWh)",
-        "sv": "Energianvändning i kilowattimmar (kWh)"
-      },
-      "chartType": "spline",
-      "insights": true,
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/images/power.svg"
-    },
-    "measure_count": {
+    "target_percentage_NIBE": {
       "type": "number",
       "title": {
-        "en": "Meter Count"
-      },
-      "uiComponent": "sensor",
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": ""
-      },
-      "insights": true,
-      "chartType": "spline",
-      "icon": "/assets/images/counter.svg"
-    },
-    "measure_day": {
-      "type": "number",
-      "title": {
-        "en": "Measure Day"
-      },
-      "uiComponent": "sensor",
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": "Days",
-        "sv": "Dagar"
-      },
-      "insights": true,
-      "chartType": "spline",
-      "icon": "/assets/images/time.svg"
-    },
-    "measure_degree_minutes": {
-      "type": "number",
-      "title": {
-        "en": "Degree minutes",
-        "sv": "Gradminuter"
-      },
-      "uiComponent": "sensor",
-      "chartType": "spline",
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": "°Cmin"
-      },
-      "icon": "/assets/images/degree_minutes.svg",
-      "insights": true
-    },
-    "measure_enum": {
-      "type": "string",
-      "title": {
-        "en": "Measure enum"
-      },
-      "uiComponent": "sensor",
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": ""
-      },
-      "insights": true,
-      "chartType": "spline",
-      "icon": "/assets/images/select.svg"
-    },
-    "measure_frequency": {
-      "type": "number",
-      "title": {
-        "en": "Measure Frequency"
-      },
-      "uiComponent": "sensor",
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": "Hz"
-      },
-      "insights": true,
-      "chartType": "spline",
-      "icon": "/assets/images/frequency.svg"
-    },
-    "measure_hour": {
-      "type": "number",
-      "title": {
-        "en": "Measure Hour"
-      },
-      "uiComponent": "sensor",
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": "Hours",
-        "sv": "Timmar"
-      },
-      "insights": true,
-      "chartType": "spline",
-      "icon": "/assets/images/time.svg"
-    },
-    "measure_minute": {
-      "type": "number",
-      "title": {
-        "en": "Measure Minute"
-      },
-      "uiComponent": "sensor",
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": "Minutes",
-        "sv": "Minuter"
-      },
-      "insights": true,
-      "chartType": "spline",
-      "icon": "/assets/images/time.svg"
-    },
-    "measure_percentage": {
-      "type": "number",
-      "title": {
-        "en": "Measure Percentage"
-      },
-      "uiComponent": "sensor",
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": "%"
-      },
-      "insights": true,
-      "chartType": "spline",
-      "icon": "/assets/images/pump.svg"
-    },
-    "measure_string": {
-      "type": "string",
-      "title": {
-        "en": "Measure String"
-      },
-      "uiComponent": "sensor",
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": ""
-      },
-      "insights": true,
-      "chartType": "spline"
-    },
-    "target_percentage": {
-      "type": "number",
-      "title": {
-        "en": "Dim level",
+        "en": "Fanspeed",
         "sv": "Fläkthastighet"
       },
       "chartType": "stepLine",
@@ -1370,7 +1554,7 @@
       "setable": true,
       "uiComponent": "slider"
     },
-    "time_of_day": {
+    "time_of_day_NIBE": {
       "title": {
         "en": "Time of day",
         "sv": "Klockslag"

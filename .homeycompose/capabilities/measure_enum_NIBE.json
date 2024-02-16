@@ -1,10 +1,11 @@
 {
     "type": "string",
-    "title": { "en": "Measure String" },
+    "title": { "en": "Measure enum" },
     "uiComponent": "sensor",
     "getable": true,
     "setable": false,
     "units": { "en": ""},
     "insights": true,
-    "chartType": "spline"
+    "chartType": "spline",
+    "icon": "/assets/images/select.svg"
   }

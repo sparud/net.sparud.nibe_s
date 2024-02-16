@@ -1,151 +1,260 @@
 {
+  "triggers": [],
   "actions": [
     {
-      "id": "nightchill_activate",
+      "id": "measure_enum_NIBE.h56_hotwater_demand_mode.enum",
       "title": {
-        "en": "Enable night chill",
-        "sv": "Aktivera nattsvalka"
-      }
-    },
-    {
-      "id": "nightchill_deactivate",
-      "title": {
-        "en": "Disable night chill",
-        "sv": "Stäng av nattsvalka"
-      }
-    },
-    {
-      "id": "pool_activate",
-      "title": {
-        "en": "Enable pool heating",
-        "sv": "Aktivera poolvärme"
-      }
-    },
-    {
-      "id": "pool_deactivate",
-      "title": {
-        "en": "Disable pool heating",
-        "sv": "Stäng av poolvärme"
-      }
-    },
-    {
-      "id": "set_pool_start_temperature",
-      "title": {
-        "en": "Set start temperature for pool heating to ...",
-        "sv": "Ställ in starttemperatur för poolvärmning till ..."
+        "en": "Hotwater demand mode",
+        "sv": "Varmvattenbehov"
       },
       "titleFormatted": {
-        "en": "Set start temperature for pool heating to [[temp]]",
-        "sv": "Ställ in starttemperatur för poolvärmning till [[temp]]"
+        "en": "Hotwater demand mode [[mode]]",
+        "sv": "Varmvattenbehov [[mode]]"
       },
       "args": [
         {
-          "name": "temp",
-          "type": "number",
-          "title": {
-            "en": "Temperature",
-            "sv": "Temperatur"
-          },
-          "placeholder": {
-            "en": "Celsius degrees",
-            "sv": "I grader Celsius"
-          },
-          "min": 10,
-          "max": 35
+          "type": "autocomplete",
+          "name": "mode",
+          "title": { "en": "Mode", "sv": "Läge" }
         }
       ]
     },
     {
-      "id": "set_returnair_normal_speed",
+      "id": "measure_enum_NIBE.h237_operating_mode.enum",
       "title": {
-        "en": "Set normal fan speed to ...",
-        "sv": "Sätt normal fläkthastighet till ..."
+        "en": "Set operating mode",
+        "sv": "Ställ in driftläge"
       },
       "titleFormatted": {
-        "en": "Set normal fan speed to [[speed]]",
-        "sv": "Sätt normal fläkthastighet till [[speed]]"
+        "en": "Set operating mode [[mode]]",
+        "sv": "Ställ in driftläge [[mode]]"
       },
       "args": [
         {
-          "name": "speed",
-          "type": "range",
-          "title": {
-            "en": "Speed",
-            "sv": "Hastighet"
-          },
-          "placeholder": {
-            "en": "%",
-            "sv": "%"
-          },
-          "min": 10,
-          "max": 100,
-          "step": 1,
-          "label": "%",
-          "labelDecimals": 0
+          "type": "autocomplete",
+          "name": "mode",
+          "title": { "en": "Mode", "sv": "Läge" }
         }
       ]
     },
     {
-      "id": "set_pool_stop_temperature",
+      "id": "measure_enum_NIBE.h697_onetimeincrease_hotwater.enum",
       "title": {
-        "en": "Set stop temperature for pool heating to ...",
-        "sv": "Ställ in stopptemperatur för poolvärmning till..."
+        "en": "Increase warm water ",
+        "sv": "Öka varmvatten"
       },
       "titleFormatted": {
-        "en": "Set stop temperature for pool heating to [[temp]]",
-        "sv": "Ställ in stopptemperatur för poolvärmning till [[temp]]"
+        "en": "Increase warm water [[mode]]",
+        "sv": "Ökning av varmvatten [[mode]]"
       },
       "args": [
         {
-          "name": "temp",
+          "type": "autocomplete",
+          "name": "mode",
+          "title": { "en": "Mode", "sv": "Läge" }
+        }
+      ]
+    },
+    {
+      "id": "set_numeric_value",
+      "title": {
+        "en": "Set value",
+        "sv": "Sätt värde"
+      },
+      "titleFormatted": {
+        "en": "Set value of [[register]] to [[value]]",
+        "sv": "Sätt värdet på [[register]] till [[value]]"
+      },
+      "args": [
+        {
+          "type": "autocomplete",
+          "name": "register",
+          "title": { "en": "Register", "sv": "Register" }
+        },
+        {
           "type": "number",
-          "title": {
-            "en": "Temperature",
-            "sv": "Temperatur"
-          },
-          "placeholder": {
-            "en": "Celsius degrees",
-            "sv": "Grader Celsius"
-          },
-          "min": 10,
-          "max": 35
+          "name": "value",
+          "title": { "en": "Value", "sv": "Värde" }
+        }
+      ]
+    },
+    {
+      "id": "enable_feature",
+      "title": {
+        "en": "Enable feature",
+        "sv": "Slå på egenskap"
+      },
+      "titleFormatted": {
+        "en": "Enable [[register]]",
+        "sv": "Slå på [[register]]"
+      },
+      "args": [
+        {
+          "type": "autocomplete",
+          "name": "register",
+          "title": { "en": "Register", "sv": "Register" }
+        }
+      ]
+    },
+    {
+      "id": "disable_feature",
+      "title": {
+        "en": "Disable feature",
+        "sv": "Stäng av egenskap"
+      },
+      "titleFormatted": {
+        "en": "Disable [[register]]",
+        "sv": "Stäng av [[register]]"
+      },
+      "args": [
+        {
+          "type": "autocomplete",
+          "name": "register",
+          "title": { "en": "Register", "sv": "Register" }
         }
       ]
     }
   ],
   "conditions": [
     {
-      "id": "nightchill_is_active",
+      "id": "numeric_value_comparison",
       "title": {
-        "en": "Night chill !{{On|Off}}",
-        "sv": "Nattsvalka !{{På|Av}}"
+        "en": "Value comparison",
+        "sv": "Värdejämförelse"
       },
-      "hint": {
-        "en": "Night chill is on",
-        "sv": "Om nattsvalka är på"
-      }
+      "titleFormatted": {
+        "en": "Value of [[register]] is [[comparison]] [[value]]",
+        "sv": "Värdet på [[register]] är [[comparison]] [[value]]"
+      },
+      "args": [
+        {
+          "type": "autocomplete",
+          "name": "register",
+          "title": { "en": "Register", "sv": "Register" }
+        },
+        {
+          "type": "dropdown",
+          "name": "comparison",
+          "title": { "en": "Comparison", "sv": "Jämförelse" },
+          "values": [
+            { "id": "<", "title": { "en": "less than", "sv": "mindre än" } },
+            { "id": ">", "title": { "en": "greater than", "sv": "större än" } }
+          ]
+        },
+        {
+          "type": "number",
+          "name": "value",
+          "title": { "en": "Value", "sv": "Värde" }
+        }
+      ]
     },
     {
-      "id": "poolheater_is_active",
+      "id": "feature_enabled",
       "title": {
-        "en": "Pool heating !{{On|Off}}",
-        "sv": "Poolvärme !{{På|Av}}"
+        "en": "Feature enabled",
+        "sv": "Egenskap påslagen"
       },
-      "hint": {
-        "en": "Pool heating is activated",
-        "sv": "Poolvärme aktiverad"
-      }
+      "titleFormatted": {
+        "en": "[[register]] is enabled",
+        "sv": "[[register]] är på"
+      },
+      "args": [
+        {
+          "type": "autocomplete",
+          "name": "register",
+          "title": { "en": "Register", "sv": "Register" }
+        }
+      ]
     },
     {
-      "id": "poolcirculation_is_active",
+      "id": "measure_enum_NIBE.h56_hotwater_demand_mode.enum",
       "title": {
-        "en": "Pool circulation !{{On|Off}}",
-        "sv": "Poolcirkulation !{{På|Av}}"
+        "en": "Increase warm water mode",
+        "sv": "Varmvattenbehov"
       },
-      "hint": {
-        "en": "Pool circulation is activated",
-        "sv": "Poolcirkulation aktiverad"
-      }
+      "titleFormatted": {
+        "en": "Hotwater demand mode is [[mode]]",
+        "sv": "Varmvattenbehov är [[mode]]"
+      },
+      "args": [
+        {
+          "type": "autocomplete",
+          "name": "mode",
+          "title": { "en": "Mode", "sv": "Läge" }
+        }
+      ]
+    },
+    {
+      "id": "measure_enum_NIBE.h237_operating_mode.enum",
+      "title": {
+        "en": "Operating mode",
+        "sv": "Driftläge"
+      },
+      "titleFormatted": {
+        "en": "Operating mode is [[mode]]",
+        "sv": "Driftläge är [[mode]]"
+      },
+      "args": [
+        {
+          "type": "autocomplete",
+          "name": "mode",
+          "title": { "en": "Mode", "sv": "Läge" }
+        }
+      ]
+    },
+    {
+      "id": "measure_enum_NIBE.h697_onetimeincrease_hotwater.enum",
+      "title": {
+        "en": "Increase warm water mode",
+        "sv": "Tillstånd för ökat varmvatten"
+      },
+      "titleFormatted": {
+        "en": "Increase warm water mode is [[mode]]",
+        "sv": "Tillstånd för ökning av varmvatten är [[mode]]"
+      },
+      "args": [
+        {
+          "type": "autocomplete",
+          "name": "mode",
+          "title": { "en": "Mode", "sv": "Läge" }
+        }
+      ]
+    },
+    {
+      "id": "measure_enum_NIBE.i1028_priority.enum",
+      "title": {
+        "en": "Priority",
+        "sv": "Prioritet"
+      },
+      "titleFormatted": {
+        "en": "Priority is [[mode]]",
+        "sv": "Prioritet är [[mode]]"
+      },
+      "args": [
+        {
+          "type": "autocomplete",
+          "name": "mode",
+          "title": { "en": "Mode", "sv": "Läge" }
+        }
+      ]
+    },
+    {
+      "id": "measure_enum_NIBE.i1037_return_fan_step.enum",
+      "title": {
+        "en": "Fan mode",
+        "sv": "Fläktläge"
+      },
+      "titleFormatted": {
+        "en": "Fan mode is [[mode]]",
+        "sv": "Fläktläge är [[mode]]"
+      },
+      "args": [
+        {
+          "type": "autocomplete",
+          "name": "mode",
+          "title": { "en": "Mode", "sv": "Läge" }
+        }
+      ]
     }
   ]
 }

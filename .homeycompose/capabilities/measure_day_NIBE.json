@@ -1,11 +1,14 @@
 {
     "type": "number",
-    "title": { "en": "Measure Percentage" },
+    "title": { "en": "Measure Day" },
     "uiComponent": "sensor",
     "getable": true,
     "setable": false,
-    "units": { "en": "%"},
+    "units": { 
+        "en": "Days",
+        "sv": "Dagar"
+    },
     "insights": true,
     "chartType": "spline",
-    "icon": "/assets/images/pump.svg"
+    "icon": "/assets/images/time.svg"
   }
