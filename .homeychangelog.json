@@ -1,5 +1,8 @@
 {
   "2.0.0": {
     "en": "Cleaned up code, added many more registers, added flow support."
+  },
+  "2.1.0": {
+    "en": "Many changes to flows, there are now conditions and actions for all relevant values. Old flows may need to be rewritten. The readme is now more informative regarding pre-requesites and installation."
   }
 }
