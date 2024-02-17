@@ -67,6 +67,9 @@ interface Register  {
     enum?: Record<number, string>
     bool?: boolean;
     picker?: boolean;
+    noAction?: boolean;
+    min?: number;
+    max?: number;
 }
 
 const registers: Register[] = [
@@ -77,7 +80,7 @@ const registers: Register[] = [
     {address: 1017, name: "measure_temperature_NIBE.i1017_calculated_supply", direction: Dir.In,  scale:  10}, // Beräknad framledning klimatsystem 1
     {address:    5, name: "measure_temperature_NIBE.i5_heating_supply",       direction: Dir.In,  scale:  10}, // Framledning (BT2) klimatsystem 1
     // Rad 3
-    {address:   11, name: "measure_degree_minutes_NIBE.h11_degree_minutes",   direction: Dir.Out, scale:  10}, // Gradminuter
+    {address:   11, name: "measure_degree_minutes_NIBE.h11_degree_minutes",   direction: Dir.Out, scale:  10, noAction: true}, // Gradminuter
     {address:    7, name: "measure_temperature_NIBE.i7_heating_return",       direction: Dir.In,  scale:  10}, // Returledning (BT3)
     // Rad 4
     {address: 1102, name: "measure_percentage_NIBE.i1102_heating_pump",       direction: Dir.In,  scale:   1}, // Värmebärarpumphastighet (GP1)
@@ -101,7 +104,7 @@ const registers: Register[] = [
     {address:   19, name: "measure_temperature_NIBE.i19_return_air",          direction: Dir.In,  scale:  10}, // Frånluft (AZ10-BT20)
     {address:   20, name: "measure_temperature_NIBE.i20_supply_air",          direction: Dir.In,  scale:  10}, // Avluft (AZ10-BT21)
     // Rad 11 Frånluft status
-    {address:  109, name: "measure_percentage_NIBE.h109_returnair_normal",    direction: Dir.Out, scale:   1}, // Frånluft fläkthastighet normal
+    {address:  109, name: "measure_percentage_NIBE.h109_returnair_normal",    direction: Dir.Out, scale:   1, min: 0, max: 100}, // Frånluft fläkthastighet normal
     {address: 1037, name: "measure_enum_NIBE.i1037_return_fan_step",          direction: Dir.In,  enum: returnairMap}, // Fläktläge 1 0-Normal Övrigt 1-4
     // Rad 12 Eltillsats
     {address: 1029, name: "measure_count_NIBE.i1029_additive_heat_steps",     direction: Dir.In,  scale:   1}, // Driftläge intern tillsats
@@ -116,19 +119,19 @@ const registers: Register[] = [
     {address: 1087, name: "measure_hour_NIBE.i1087_compressor_usage_total",   direction: Dir.In,  scale:   1}, // Total drifttid kompressor
     {address: 1091, name: "measure_hour_NIBE.i1091_compressor_usage_hotwater",direction: Dir.In,  scale:   1}, // Total drifttid kompressor varmvatten
     // Rad 16 Värmekurvor
-    {address:   26, name: "measure_count_NIBE.h26_heat_curve",                direction: Dir.Out, scale:   1}, // Värmekurva klimatsystem 1
-    {address:   30, name: "measure_count_NIBE.h30_heat_curve_displacement",   direction: Dir.Out, scale:   1}, // Värmeförskjutning klimatsystem 1 RW
+    {address:   26, name: "measure_count_NIBE.h26_heat_curve",                direction: Dir.Out, scale:   1, min: 0, max: 10}, // Värmekurva klimatsystem 1
+    {address:   30, name: "measure_count_NIBE.h30_heat_curve_displacement",   direction: Dir.Out, scale:   1, min: -10, max: 10}, // Värmeförskjutning klimatsystem 1 RW
     // Rad 17 Varmvatten
     {address:   56, name: "measure_enum_NIBE.h56_hotwater_demand_mode",       direction: Dir.Out, enum: hotwaterMap}, // Varmvatten behovsläge RW
     {address:  697, name: "measure_enum_NIBE.h697_onetimeincrease_hotwater",  direction: Dir.Out,  enum: onetimeincreaseMap}, // Mer varmvatten engångshöjning 
     // Rad 18 Periodisk varmvatten höjning
     {address:   65, name: "measure_enum_NIBE.h65_periodic_hotwater",          direction: Dir.Out,  enum: booleanMap}, // Periodisk varmvatten
-    {address:   66, name: "measure_day_NIBE.h66_periodic_hotwater_interval",  direction: Dir.Out,  scale:   1},  // Periodiskt varmvatten intervall i dagar
+    {address:   66, name: "measure_day_NIBE.h66_periodic_hotwater_interval",  direction: Dir.Out,  scale:   1, min: 1, max: 90},  // Periodiskt varmvatten intervall i dagar
     // Rad 19 Periodisk varmvatten höjning fortsättning
-    {address:   67, name: "measure_count_NIBE.h67_periodic_hotwater_start",   direction: Dir.Out,  scale:   1},  // Periodiskt varmvatten start klockan ** nu returneras sekunder från 00.00 hur visar man tid??
-    {address:   92, name: "measure_minute_NIBE.h92_periodtime_hotwater",      direction: Dir.Out,  scale:   1},  // Periodtid varmvatten minuter
+    {address:   67, name: "measure_count_NIBE.h67_periodic_hotwater_start",   direction: Dir.Out,  scale:   1, noAction: true},  // Periodiskt varmvatten start klockan ** nu returneras sekunder från 00.00 hur visar man tid??
+    {address:   92, name: "measure_minute_NIBE.h92_periodtime_hotwater",      direction: Dir.Out,  scale:   1, min: 0, max: 180},  // Periodtid varmvatten minuter
     // Rad 20 Strömförbrukning
-    {address:  103, name: "measure_current_NIBE.h103_fuse",                   direction: Dir.Out,  scale:   1},  // Säkring inkommande
+    {address:  103, name: "measure_current_NIBE.h103_fuse",                   direction: Dir.Out,  scale:   1, noAction: true},  // Säkring inkommande
     {address:   50, name: "measure_current_NIBE.i50_sensor",                  direction: Dir.In,   scale:  10},  // Strömavkänare BE1 -L1
     {address:   48, name: "measure_current_NIBE.i48_sensor",                  direction: Dir.In,   scale:  10},  // Strömavkänare BE2 -L2
     {address:   46, name: "measure_current_NIBE.i46_sensor",                  direction: Dir.In,   scale:  10},  // Strömavkänare BE3 -L3
@@ -163,8 +166,8 @@ const registers: Register[] = [
     // Ej på värdedelen av appen
 
     // Poolvärme inställningar temp
-    {address:  687, name: "target_temperature.h687_pool_start",               direction: Dir.Out, scale:  10}, //
-    {address:  689, name: "target_temperature.h689_pool_stop",                direction: Dir.Out, scale:  10}, //
+    {address:  687, name: "target_temperature.h687_pool_start",               direction: Dir.Out, scale:  10, min: 10, max: 35}, //
+    {address:  689, name: "target_temperature.h689_pool_stop",                direction: Dir.Out, scale:  10, min: 10, max: 35}, //
 
     // On / Off delar på kortet
     // On / Off Nattsvalka
@@ -251,12 +254,22 @@ class NibeSDevice extends Device {
     private async writeRegister(register: Register, value: any) {
         return await this.client!.writeSingleRegister(register.address, this.toRegisterValue(register, value))
             .then(result => {
-                this.log(JSON.stringify(result));
+                this.log("Wrote", JSON.stringify(result));
                 return true;
             }).catch((reason: any) => {
                 this.log("Error writing to register", reason);
                 return false;
             });
+    }
+
+    private setValue(register: Register, value: any) {
+        const oldValue = this.getCapabilityValue(register.name);
+        this.setCapabilityValue(register.name, value);
+        if (oldValue !== value) {
+            if (register.bool) {
+
+            }
+        }
     }
 
     private poll() {
@@ -351,14 +364,23 @@ class NibeSDevice extends Device {
                 "register",
                 async (query, args) =>
                     registers
-                        .filter((reg) => reg.direction == Dir.Out && reg.scale)
+                        .filter((reg) => reg.direction == Dir.Out && reg.scale  && !reg.noAction)
                         .map(regToAutofill)
                         .filter((result: any) => result.name.toLowerCase().includes(query.toLowerCase()))
             )
             .registerRunListener(async (args, state) => {
                 const register = registerByName[args.register.id];
-                if (await this.writeRegister(register, args.value))
-                    this.setCapabilityValue(register.name, args.value);
+                if (args.value < register.min! || args.value > register.max!)
+                    throw new Error("The value " + args.value + " is out of range. Value should be between " +
+                        register.min + " and " + register.max + ".");
+                if (await this.writeRegister(register, args.value)) {
+                    const newValue = await this.readRegister(register);
+                    if (newValue === args.value)
+                        this.setCapabilityValue(register.name, newValue);
+                    else
+                        throw new Error("Failed setting " + args.value + ", got back value " + newValue);
+                } else
+                    throw new Error("Could not set value " + args.value);
             });
 
         // Flow control for enabling boolean registers
@@ -374,7 +396,7 @@ class NibeSDevice extends Device {
             .registerRunListener(async (args, state) => {
                 const register = registerByName[args.register.id];
                 if (await this.writeRegister(register, true))
-                    this.setCapabilityValue(register.name, true);
+                    this.setCapabilityValue(register.name, await this.readRegister(register));
             });
 
         // Flow control for disabling boolean registers
@@ -390,7 +412,7 @@ class NibeSDevice extends Device {
             .registerRunListener(async (args, state) => {
                 const register = registerByName[args.register.id];
                 if (await this.writeRegister(register, false))
-                    this.setCapabilityValue(register.name, false);
+                    this.setCapabilityValue(register.name, await this.readRegister(register));
             });
 
         // Flow condition for numeric comparisons
@@ -469,3 +491,6 @@ class NibeSDevice extends Device {
 
 module.exports = NibeSDevice;
 
+const a = {"metrics":{"createdAt":"2024-02-17T15:08:45.174Z","startedAt":"2024-02-17T15:08:45.174Z","receivedAt":"2024-02-17T15:08:45.311Z","transferTime":137},"request":{"_id":303,"_protocol":0,"_length":6,"_unitId":1,"_body":{"_fc":6,"_address":30,"_value":11}},"response":{"_id":303,"_protocol":0,"_bodyLength":6,"_unitId":1,"_body":{"_fc":6,"_address":30,"_value":11}}}
+
+const b = {"metrics":{"createdAt":"2024-02-17T15:09:37.338Z","startedAt":"2024-02-17T15:09:37.338Z","receivedAt":"2024-02-17T15:09:37.566Z","transferTime":228},"request":{"_id":530,"_protocol":0,"_length":6,"_unitId":1,"_body":{"_fc":6,"_address":30,"_value":1}},"response":{"_id":530,"_protocol":0,"_bodyLength":6,"_unitId":1,"_body":{"_fc":6,"_address":30,"_value":1}}}

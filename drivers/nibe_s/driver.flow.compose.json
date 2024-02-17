@@ -155,8 +155,8 @@
         "sv": "Egenskap påslagen"
       },
       "titleFormatted": {
-        "en": "[[register]] is enabled",
-        "sv": "[[register]] är på"
+        "en": "[[register]] is !{{enabled|disabled}}",
+        "sv": "[[register]] är !{{på|av}}"
       },
       "args": [
         {
