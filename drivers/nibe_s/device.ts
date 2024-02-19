@@ -1,4 +1,4 @@
-import {Device, DiscoveryResult} from 'homey';
+import {Device, DiscoveryResult, FlowCard} from 'homey';
 import net, {SocketConnectOpts, TcpSocketConnectOpts} from 'net';
 import modbus, {ModbusTCPClient} from 'jsmodbus';
 import {capabilities, capabilitiesOptions} from './driver.compose.json';
@@ -144,6 +144,8 @@ const registers: Register[] = [
     // Rad 23
     {address:   14, name: "measure_temperature_NIBE.i14_liquid_line",         direction: Dir.In,   scale:  10},  // Vätskeledning BT15
     {address:   16, name: "measure_temperature_NIBE.i16_suction_gas",         direction: Dir.In,   scale:  10},  // Suggas BT17
+    // Rad 24
+    {address: 5351, name: "measure_percentage_NIBE.h5351_compressor_min_speed", direction: Dir.Out, scale: 1, min: 2, max: 50}, // Minsta tillåtna hastighet GP1
 
     // Statistics
     {address: 2283, name: "meter_power_NIBE.i2283_prod_heat_current_hour",    direction: Dir.In,  scale: 100}, // Energilogg - Producerad energi för värme under senaste timmen
@@ -179,7 +181,9 @@ const registers: Register[] = [
     {address:  691, name: "onoff.h691_pool_active",                           direction: Dir.Out, bool: true}, //
     
     // Inställning Frånluftshastighet
-    {address:  109, name: "target_percentage_NIBE.h109_returnair_normal",     direction: Dir.Out, scale:   1},    // Frånluft fläkthastighet normal
+    {address:  109, name: "target_percentage_NIBE.h109_returnair_normal",     direction: Dir.Out, scale: 1},    // Frånluft fläkthastighet normal
+    // Inställning minsta kompressor hastighet GP1
+    {address: 5351, name: "target_percentage_NIBE.h5351_compressor_min_speed", direction: Dir.Out, scale: 1, min: 2, max: 50}, // Minsta tillåtna hastighet GP1
     // Inställning värmekurva
     {address:   26, name: "curve_mode_NIBE.h26_heat_curve",                   direction: Dir.Out, picker: true},  // Värmekurva klimatsystem 1
     {address:   30, name: "curve_displacement_NIBE.h30_heat_curve_displacement", direction: Dir.Out, picker: true},  // Värmeförskjutning klimatsystem 1 RW
@@ -262,14 +266,47 @@ class NibeSDevice extends Device {
             });
     }
 
-    private setValue(register: Register, value: any) {
-        const oldValue = this.getCapabilityValue(register.name);
-        this.setCapabilityValue(register.name, value);
-        if (oldValue !== value) {
-            if (register.bool) {
+    // Create an autofill object for a register
+    private regToAutofill = (register: Register) => {
+        const option: any = (capabilitiesOptions as any)[register.name];
+        return {
+            id: register.name,
+            name: option.title[this.homey.i18n.getLanguage()] || option.title["en"]
+        };
+    };
 
-            }
+    private registerAutofillFlow(flow: FlowCard, registerFilter: (reg: Register) => boolean, cond: (args: any, state: any) => any) {
+        return flow
+            .registerArgumentAutocompleteListener(
+                "register",
+                async (query, args) =>
+                    registers
+                        .filter((reg) => registerFilter(reg))
+                        .map(this.regToAutofill)
+                        .filter((result: any) => result.name.toLowerCase().includes(query.toLowerCase()))
+            )
+            .registerRunListener(async (args, state) => cond(args, state));
+    }
+
+    private capabilityChangedTrigger = this.homey.flow.getDeviceTriggerCard("capability_changed");
+    private turnedOnTrigger = this.homey.flow.getDeviceTriggerCard("capability_turned_on");
+    private turnedOffTrigger = this.homey.flow.getDeviceTriggerCard("capability_turned_off");
+
+    private checkTrigger(register: Register, value: any) {
+        if (register.bool && value) {
+            this.turnedOnTrigger.trigger(this, {}, {register: { id: register.name}, value: value});
+        } else if (register.bool && !value) {
+            this.turnedOffTrigger.trigger(this, {}, {register: {id: register.name}, value: value});
+        } else if (register.enum) {
+            this.capabilityChangedTrigger.trigger(this, {}, {register: {id: register.name}, value: value});
         }
+    }
+
+    async setValue(register: Register, value: any) {
+        const oldValue = this.getCapabilityValue(register.name);
+        await this.setCapabilityValue(register.name, value);
+        if (oldValue !== value)
+            this.checkTrigger(register, value);
     }
 
     private poll() {
@@ -278,7 +315,7 @@ class NibeSDevice extends Device {
             this.log(`Got ${registers.length} results`);
             for (let i = 0; i < registers.length; ++i)
                 if (results[i] !== undefined) {
-                    this.setCapabilityValue(registers[i].name, results[i]);
+                    this.setValue(registers[i], results[i]);
                 }
         }).catch((error) => {
             this.log(error);
@@ -311,6 +348,7 @@ class NibeSDevice extends Device {
                 // Write capability value change to device
                 this.registerCapabilityListener(register.name, async (value) => {
                     await this.writeRegister(register, value);
+                    this.checkTrigger(register, value);
                 });
                 // Flow controls for enums
                 if (register.enum && actionSpecs[register.name + ".enum"]) {
@@ -327,7 +365,7 @@ class NibeSDevice extends Device {
                         )
                         .registerRunListener(async (args, state) => {""
                             if (await this.writeRegister(register, args.mode.id))
-                                this.setCapabilityValue(register.name, args.mode.id);
+                                await this.setValue(register, args.mode.id);
                         });
                 }
             }
@@ -349,26 +387,10 @@ class NibeSDevice extends Device {
             }
         }));
         
-        // Create an autofill object for a register
-        const regToAutofill = (register: Register) => {
-            const option: any = (capabilitiesOptions as any)[register.name];
-            return {
-                id: register.name,
-                name: option.title[this.homey.i18n.getLanguage()] || option.title["en"]
-            };   
-        };
-        
         // Flow control for setting values of numeric registers
-        this.homey.flow.getActionCard("set_numeric_value")
-            .registerArgumentAutocompleteListener(
-                "register",
-                async (query, args) =>
-                    registers
-                        .filter((reg) => reg.direction == Dir.Out && reg.scale  && !reg.noAction)
-                        .map(regToAutofill)
-                        .filter((result: any) => result.name.toLowerCase().includes(query.toLowerCase()))
-            )
-            .registerRunListener(async (args, state) => {
+        this.registerAutofillFlow(this.homey.flow.getActionCard("set_numeric_value"),
+            (reg) => reg.direction == Dir.Out && reg.scale! > 0  && !reg.noAction!,
+            async (args: any, state: any) => {
                 const register = registerByName[args.register.id];
                 if (args.value < register.min! || args.value > register.max!)
                     throw new Error("The value " + args.value + " is out of range. Value should be between " +
@@ -376,72 +398,62 @@ class NibeSDevice extends Device {
                 if (await this.writeRegister(register, args.value)) {
                     const newValue = await this.readRegister(register);
                     if (newValue === args.value)
-                        this.setCapabilityValue(register.name, newValue);
+                        await this.setValue(register, newValue);
                     else
                         throw new Error("Failed setting " + args.value + ", got back value " + newValue);
                 } else
                     throw new Error("Could not set value " + args.value);
-            });
+            }
+        );
 
         // Flow control for enabling boolean registers
-        this.homey.flow.getActionCard("enable_feature")
-            .registerArgumentAutocompleteListener(
-                "register",
-                async (query, args) =>
-                    registers
-                        .filter((reg) => reg.direction == Dir.Out && reg.bool)
-                        .map(regToAutofill)
-                        .filter((result: any) => result.name.toLowerCase().includes(query.toLowerCase()))
-            )
-            .registerRunListener(async (args, state) => {
+        this.registerAutofillFlow(this.homey.flow.getActionCard("enable_feature"),
+            (reg) => reg.direction == Dir.Out && reg.bool!,
+            async (args: any, state: any) => {
                 const register = registerByName[args.register.id];
                 if (await this.writeRegister(register, true))
-                    this.setCapabilityValue(register.name, await this.readRegister(register));
-            });
+                    await this.setValue(register, await this.readRegister(register));
+            }
+        );
 
         // Flow control for disabling boolean registers
-        this.homey.flow.getActionCard("disable_feature")
-            .registerArgumentAutocompleteListener(
-                "register",
-                async (query, args) =>
-                    registers
-                        .filter((reg) => reg.direction == Dir.Out && reg.bool)
-                        .map(regToAutofill)
-                        .filter((result: any) => result.name.toLowerCase().includes(query.toLowerCase()))
-            )
-            .registerRunListener(async (args, state) => {
+        this.registerAutofillFlow(this.homey.flow.getActionCard("disable_feature"),
+            (reg) => reg.direction == Dir.Out && reg.bool!,
+            async (args: any, state: any) => {
                 const register = registerByName[args.register.id];
                 if (await this.writeRegister(register, false))
-                    this.setCapabilityValue(register.name, await this.readRegister(register));
-            });
+                    await this.setValue(register, await this.readRegister(register));
+            }
+        );
 
         // Flow condition for numeric comparisons
-        this.homey.flow.getConditionCard("numeric_value_comparison")
-            .registerArgumentAutocompleteListener(
-                "register",
-                async (query, args) =>
-                    registers
-                        .filter((reg) => reg.scale)
-                        .map(regToAutofill)
-                        .filter((result: any) => result.name.toLowerCase().includes(query.toLowerCase()))
-            )
-            .registerRunListener(async (args, state) => {
+        this.registerAutofillFlow(this.homey.flow.getConditionCard("numeric_value_comparison"),
+            (reg) => reg.scale! > 0,
+            (args: any, state: any) => {
                 const capabilityValue = this.getCapabilityValue(args.register.id);
                 return args.comparison === "<" ? capabilityValue < args.value : capabilityValue > args.value;
-            });
+            }
+        );
 
-        this.homey.flow.getConditionCard("feature_enabled")
-            .registerArgumentAutocompleteListener(
-                "register",
-                async (query, args) =>
-                    registers
-                        .filter((reg) => reg.bool)
-                        .map(regToAutofill)
-                        .filter((result: any) => result.name.toLowerCase().includes(query.toLowerCase()))
-            )
-            .registerRunListener(async (args, state) => {
-                return this.getCapabilityValue(args.register.id);
-            });
+        this.registerAutofillFlow(this.homey.flow.getConditionCard("feature_enabled"),
+            (reg) => reg.bool!,
+            (args: any, state: any) => this.getCapabilityValue(args.register.id)
+        );
+
+        this.registerAutofillFlow(this.capabilityChangedTrigger,
+            (reg) => reg.enum != undefined,
+            (args: any, state: any) => args.device === this && args.register.id === state.register.id
+        );
+
+        this.registerAutofillFlow(this.turnedOnTrigger,
+            (reg) => reg.bool!,
+            (args: any, state: any) => args.device === this && args.register.id === state.register.id && state.value
+        );
+
+        this.registerAutofillFlow(this.turnedOffTrigger,
+            (reg) => reg.bool!,
+            (args: any, state: any) => args.device === this && args.register.id === state.register.id && !state.value
+        );
 
         this.client = new ModbusTCPClient(socket, 1, 5000);
         clearInterval(this.pollInterval!);
@@ -490,7 +502,3 @@ class NibeSDevice extends Device {
 }
 
 module.exports = NibeSDevice;
-
-const a = {"metrics":{"createdAt":"2024-02-17T15:08:45.174Z","startedAt":"2024-02-17T15:08:45.174Z","receivedAt":"2024-02-17T15:08:45.311Z","transferTime":137},"request":{"_id":303,"_protocol":0,"_length":6,"_unitId":1,"_body":{"_fc":6,"_address":30,"_value":11}},"response":{"_id":303,"_protocol":0,"_bodyLength":6,"_unitId":1,"_body":{"_fc":6,"_address":30,"_value":11}}}
-
-const b = {"metrics":{"createdAt":"2024-02-17T15:09:37.338Z","startedAt":"2024-02-17T15:09:37.338Z","receivedAt":"2024-02-17T15:09:37.566Z","transferTime":228},"request":{"_id":530,"_protocol":0,"_length":6,"_unitId":1,"_body":{"_fc":6,"_address":30,"_value":1}},"response":{"_id":530,"_protocol":0,"_bodyLength":6,"_unitId":1,"_body":{"_fc":6,"_address":30,"_value":1}}}

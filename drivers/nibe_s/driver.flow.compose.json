@@ -1,5 +1,60 @@
 {
-  "triggers": [],
+  "triggers": [
+    {
+      "id": "capability_changed",
+      "title": {
+        "en": "Register changed",
+        "sv": "Registervärde ändrades"
+      },
+      "titleFormatted": {
+        "en": "[[register]] changed",
+        "sv": "[[register]] ändrades"
+      },
+      "args": [
+        {
+          "type": "autocomplete",
+          "name": "register",
+          "title": { "en": "Register", "sv": "Register" }
+        }
+      ]
+    },
+    {
+      "id": "capability_turned_on",
+      "title": {
+        "en": "Register turned on",
+        "sv": "Registervärde sätts på"
+      },
+      "titleFormatted": {
+        "en": "[[register]] turned on",
+        "sv": "[[register]] sätts på"
+      },
+      "args": [
+        {
+          "type": "autocomplete",
+          "name": "register",
+          "title": { "en": "Register", "sv": "Register" }
+        }
+      ]
+    },
+    {
+      "id": "capability_turned_off",
+      "title": {
+        "en": "Register turned off",
+        "sv": "Registervärde stängs på"
+      },
+      "titleFormatted": {
+        "en": "[[register]] turned off",
+        "sv": "[[register]] stängs av"
+      },
+      "args": [
+        {
+          "type": "autocomplete",
+          "name": "register",
+          "title": { "en": "Register", "sv": "Register" }
+        }
+      ]
+    }
+  ],
   "actions": [
     {
       "id": "measure_enum_NIBE.h56_hotwater_demand_mode.enum",

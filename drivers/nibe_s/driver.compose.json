@@ -77,6 +77,8 @@
     "measure_temperature_NIBE.i14_liquid_line",
     "measure_temperature_NIBE.i16_suction_gas",
 
+    "measure_percentage_NIBE.h5351_compressor_min_speed",
+
     "meter_power_NIBE.i2283_prod_heat_current_hour",
     "meter_power_NIBE.i2285_prod_water_current_hour",
 
@@ -104,6 +106,7 @@
     "onoff.h691_pool_active",
 
     "target_percentage_NIBE.h109_returnair_normal",
+    "target_percentage_NIBE.h5351_compressor_min_speed",
 
     "curve_mode_NIBE.h26_heat_curve",
     "curve_displacement_NIBE.h30_heat_curve_displacement",
@@ -283,6 +286,12 @@
         "sv": "Frånluft fläkthastighet normal"
       }
     },
+    "measure_percentage_NIBE.h5351_compressor_min_speed": {
+      "title": {
+        "en": "Compressor min speed GP1",
+        "sv": "Minsta tillåtna hastighet GP1"
+      }
+    },
 
     "curve_mode_NIBE.h26_heat_curve": {
       "title": {
@@ -293,8 +302,8 @@
 
     "curve_displacement_NIBE.h30_heat_curve_displacement": {
       "title": {
-        "en": "Displacement -5 - +5",
-        "sv": "Kurvförskjutning -5 - +5"
+        "en": "Displacement -10 - +10",
+        "sv": "Kurvförskjutning -10 - +10"
       }
     },
 
@@ -531,6 +540,12 @@
       "title": {
         "en": "Returnair normal",
         "sv": "Frånluft normal"
+      }
+    },
+    "target_percentage_NIBE.h5351_compressor_min_speed": {
+      "title": {
+        "en": "Compressor min speed",
+        "sv": "Minsta tillåtna hastighet GP1 %"
       }
     },
 

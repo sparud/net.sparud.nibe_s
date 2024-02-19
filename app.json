@@ -43,6 +43,60 @@
     }
   },
   "flow": {
+    "triggers": [
+      {
+        "id": "capability_changed",
+        "title": {
+          "en": "Register changed",
+          "sv": "Registervärde ändrades"
+        },
+        "titleFormatted": {
+          "en": "[[register]] changed",
+          "sv": "[[register]] ändrades"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nibe_s"
+          },
+          {
+            "type": "autocomplete",
+            "name": "register",
+            "title": {
+              "en": "Register",
+              "sv": "Register"
+            }
+          }
+        ]
+      },
+      {
+        "id": "capability_turned_on",
+        "title": {
+          "en": "Register turned on",
+          "sv": "Registervärde sätts på"
+        },
+        "titleFormatted": {
+          "en": "[[register]] turned on",
+          "sv": "[[register]] sätts på"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nibe_s"
+          },
+          {
+            "type": "autocomplete",
+            "name": "register",
+            "title": {
+              "en": "Register",
+              "sv": "Register"
+            }
+          }
+        ]
+      }
+    ],
     "conditions": [
       {
         "id": "numeric_value_comparison",
