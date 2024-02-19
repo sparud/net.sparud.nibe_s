@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "net.sparud.nibe_s",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -79,6 +79,32 @@
         "titleFormatted": {
           "en": "[[register]] turned on",
           "sv": "[[register]] sätts på"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nibe_s"
+          },
+          {
+            "type": "autocomplete",
+            "name": "register",
+            "title": {
+              "en": "Register",
+              "sv": "Register"
+            }
+          }
+        ]
+      },
+      {
+        "id": "capability_turned_off",
+        "title": {
+          "en": "Register turned off",
+          "sv": "Registervärde stängs på"
+        },
+        "titleFormatted": {
+          "en": "[[register]] turned off",
+          "sv": "[[register]] stängs av"
         },
         "args": [
           {
@@ -536,6 +562,7 @@
         "measure_temperature_NIBE.i13_discharge",
         "measure_temperature_NIBE.i14_liquid_line",
         "measure_temperature_NIBE.i16_suction_gas",
+        "measure_percentage_NIBE.h5351_compressor_min_speed",
         "meter_power_NIBE.i2283_prod_heat_current_hour",
         "meter_power_NIBE.i2285_prod_water_current_hour",
         "meter_power_NIBE.i2287_prod_pool_current_hour",
@@ -554,6 +581,7 @@
         "onoff.i1828_pool_circulation",
         "onoff.h691_pool_active",
         "target_percentage_NIBE.h109_returnair_normal",
+        "target_percentage_NIBE.h5351_compressor_min_speed",
         "curve_mode_NIBE.h26_heat_curve",
         "curve_displacement_NIBE.h30_heat_curve_displacement",
         "hotwater_demand_NIBE.h56_hotwater_demand_mode",
@@ -721,6 +749,12 @@
             "sv": "Frånluft fläkthastighet normal"
           }
         },
+        "measure_percentage_NIBE.h5351_compressor_min_speed": {
+          "title": {
+            "en": "Compressor min speed GP1",
+            "sv": "Minsta tillåtna hastighet GP1"
+          }
+        },
         "curve_mode_NIBE.h26_heat_curve": {
           "title": {
             "en": "Heatcurve 0-10",
@@ -729,8 +763,8 @@
         },
         "curve_displacement_NIBE.h30_heat_curve_displacement": {
           "title": {
-            "en": "Displacement -5 - +5",
-            "sv": "Kurvförskjutning -5 - +5"
+            "en": "Displacement -10 - +10",
+            "sv": "Kurvförskjutning -10 - +10"
           }
         },
         "hotwater_demand_NIBE.h56_hotwater_demand_mode": {
@@ -959,6 +993,12 @@
           "title": {
             "en": "Returnair normal",
             "sv": "Frånluft normal"
+          }
+        },
+        "target_percentage_NIBE.h5351_compressor_min_speed": {
+          "title": {
+            "en": "Compressor min speed",
+            "sv": "Minsta tillåtna hastighet GP1 %"
           }
         },
         "target_temperature.h687_pool_start": {

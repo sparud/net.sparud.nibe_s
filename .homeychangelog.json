@@ -4,5 +4,8 @@
   },
   "2.1.0": {
     "en": "Many changes to flows, there are now conditions and actions for all relevant values. Old flows may need to be rewritten. The readme is now more informative regarding pre-requesites and installation."
+  },
+  "2.2.0": {
+    "en": "Added flow triggers, changed icon"
   }
 }
